@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item
+        android:id="@+id/item1"
+        android:orderInCategory="1"
+        android:title="title"
+        android:icon="@drawable/selector_chats_uncheck"
+        />
+    <item
+        android:id="@+id/item2"
+        android:orderInCategory="2"
+        android:title="title"
+        android:icon="@drawable/selector_calls_unchecked"
+        />
+    <item
+        android:id="@+id/item3"
+        android:orderInCategory="3"
+        android:title="title"
+        android:icon="@drawable/selector_contacts_unchecked"
+        />
+    <item
+        android:id="@+id/item4"
+        android:orderInCategory="4"
+        android:title="title"
+        android:icon="@drawable/selector_profile_unchecked"
+        />
+</menu>
