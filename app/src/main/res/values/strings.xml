@@ -40,4 +40,7 @@
     <!-- added from old -->
     <string name="chat_message_notification_send_a_file">Sent a file</string>
 
+    <!-- main -->
+    <string name="title">Title</string>
+
 </resources>

@@ -32,4 +32,21 @@
             android:defaultValue="false" />
 
     </fragment>
+
+    <fragment
+        android:id="@+id/mainContainerFragment"
+        android:name="space.dlsunity.arctour.presenter.screens.main_screen.MainContainerFragment"
+        android:label="MainContainer"
+        tools:layout="@layout/main_container_fragment">
+
+        <argument
+            android:name="user"
+            app:argType="string" />
+
+        <action
+            android:id="@+id/log_out"
+            app:destination="@id/welcomeFragment"
+            app:popUpTo="@id/startFragment"
+            app:popUpToInclusive="true"/>
+    </fragment>
 </navigation>
