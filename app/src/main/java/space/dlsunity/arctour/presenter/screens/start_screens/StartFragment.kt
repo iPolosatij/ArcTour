@@ -36,7 +36,8 @@ class StartFragment: NavMvvmFragment<AppDestination, StartViewModel>(R.layout.st
 
     override fun handlerDestination(destination: AppDestination) {
         val action: NavDirections? = when(destination){
-            AppDestination.ToWelcome -> StartFragmentDirections.openWelcomeFrag()
+            AppDestination.ToWelcome -> StartFragmentDirections.toWelcomeFrag()
+            AppDestination.ToMain -> StartFragmentDirections.toMain()
             else -> null
         }
         action?.let { findNavController().navigateSafe(it) }

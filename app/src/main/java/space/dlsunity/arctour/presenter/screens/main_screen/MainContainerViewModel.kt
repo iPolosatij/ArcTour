@@ -27,7 +27,6 @@ import space.dlsunity.arctour.utils.tools.ImagePiker
 
 
 class MainContainerViewModel(
-    var user: User,
     private val localContext: Context
 ) : BaseViewModel() {
 
@@ -90,6 +89,8 @@ class MainContainerViewModel(
 
     var changedAvatar = false
 
+    var user: User? = null
+
     private val _error: MutableSharedFlow<ErrorModel> = MutableSharedFlow()
     val error: Flow<ErrorModel> = _error.filterNotNull()
 
@@ -142,7 +143,9 @@ class MainContainerViewModel(
     fun saveUser() {
         CoroutineScope(Dispatchers.IO).launch {
             safeProgressHandler(error = _error) {
-                _userWasSaved.postValue(Event(user))
+                user?.let {
+                    _userWasSaved.postValue(Event(it))
+                }
             }
         }
     }
@@ -192,7 +195,7 @@ class MainContainerViewModel(
                     radius
                 )?.let { photo ->
                     photoMain = photo
-                    user.photo = bitMap.toByteArray()
+                    user?.photo = bitMap.toByteArray()
                     updateProfilePhoto()
                     setBottomMenuIc(photo)
                     Log.d("MainViewModel --------->", "SetProfilePhoto")

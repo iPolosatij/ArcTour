@@ -8,14 +8,10 @@ import androidx.activity.OnBackPressedCallback
 import androidx.core.view.get
 import androidx.navigation.NavDirections
 import androidx.navigation.fragment.findNavController
-import androidx.navigation.fragment.navArgs
 import by.kirich1409.viewbindingdelegate.viewBinding
 import org.koin.androidx.viewmodel.ext.android.sharedViewModel
-import org.koin.core.parameter.parametersOf
 import space.dlsunity.arctour.R
-import space.dlsunity.arctour.data.room.data.User
 import space.dlsunity.arctour.databinding.MainContainerFragmentBinding
-import space.dlsunity.arctour.domain.utils.deserialize
 import space.dlsunity.arctour.presenter.base.navigation.NavMvvmFragment
 import space.dlsunity.arctour.presenter.screens.errors.ErrorModel
 import space.dlsunity.arctour.utils.extensions.collectWhenStarted
@@ -26,21 +22,12 @@ import space.dlsunity.arctour.utils.tools.ImageManager
 class MainContainerFragment :
     NavMvvmFragment<MainDestination, MainContainerViewModel>(R.layout.main_container_fragment) {
 
-    private val args: MainContainerFragmentArgs by navArgs()
-
-    private val user: User by lazy {
-        args.user.deserialize()
-    }
-
-    override val viewModel: MainContainerViewModel by sharedViewModel { parametersOf(user) }
+    override val viewModel: MainContainerViewModel by sharedViewModel()
 
     private val binding: MainContainerFragmentBinding by viewBinding()
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        if (user.name != null) {
-            saveUser()
-        }
         setupBottomMenu()
         observeVm()
         setupBinding()
