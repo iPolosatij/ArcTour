@@ -37,7 +37,7 @@ class MainContainerFragment :
     private fun setupNavAppBar(screen: String) {
         binding.apply {
 
-            if (screen == PROFILE || screen == CALLS || screen == CHATS || screen == CONTACTS) {
+            if (screen == PROFILE || screen == WORKOUT || screen == NOTES || screen == TOURNAMENT) {
                 curtain.visibility = View.VISIBLE
             } else {
                 curtain.visibility = View.GONE
@@ -69,33 +69,37 @@ class MainContainerFragment :
 
             when (itemActual?.itemId) {
                 R.id.item1 -> {
-                    itemActual.icon = context.getDrawable(R.drawable.selector_chats_uncheck)
+                    itemActual.icon = context.getDrawable(R.drawable.ic_bottom_note_gray)
                 }
                 R.id.item2 -> {
-                    itemActual.icon = context.getDrawable(R.drawable.selector_calls_unchecked)
+                    itemActual.icon = context.getDrawable(R.drawable.ic_bottom_workout_gray)
                 }
                 R.id.item3 -> {
-                    itemActual.icon = context.getDrawable(R.drawable.selector_contacts_unchecked)
+                    itemActual.icon = context.getDrawable(R.drawable.ic_bottom_tournament_gray)
                 }
                 R.id.item4 -> {
                     if (viewModel.photoMain == viewModel.defaultPhotoProfile)
-                        itemActual.icon = context.getDrawable(R.drawable.selector_profile_unchecked)
+                        itemActual.icon = context.getDrawable(R.drawable.ic_bottom_profile_gray)
                 }
             }
 
             when (itemFuture?.itemId) {
                 R.id.item1 -> {
-                    itemFuture.icon = context.getDrawable(R.drawable.selector_chats_check)
+                    setTitle(NOTES)
+                    itemFuture.icon = context.getDrawable(R.drawable.ic_bottom_note_black)
                 }
                 R.id.item2 -> {
-                    itemFuture.icon = context.getDrawable(R.drawable.selector_calls_checked)
+                    setTitle(WORKOUT)
+                    itemFuture.icon = context.getDrawable(R.drawable.ic_bottom_worckout_black)
                 }
                 R.id.item3 -> {
-                    itemFuture.icon = context.getDrawable(R.drawable.selector_contacts_checked)
+                    setTitle(TOURNAMENT)
+                    itemFuture.icon = context.getDrawable(R.drawable.ic_bottom_tournament_black)
                 }
                 R.id.item4 -> {
+                    setTitle(PROFILE)
                     if (viewModel.photoMain == viewModel.defaultPhotoProfile)
-                        itemFuture.icon = context.getDrawable(R.drawable.selector_profile_checked)
+                        itemFuture.icon = context.getDrawable(R.drawable.ic_bottom_profile_black)
                 }
             }
         }
@@ -269,9 +273,9 @@ class MainContainerFragment :
     }
 
     companion object {
-        const val CHATS = "Chats"
-        const val CALLS = "Calls"
-        const val CONTACTS = "Contacts"
+        const val NOTES = "Notes"
+        const val WORKOUT = "Workout"
+        const val TOURNAMENT = "Tournament"
         const val PROFILE = "Profile"
     }
 }

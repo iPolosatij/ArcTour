@@ -3,25 +3,25 @@
     <item
         android:id="@+id/item1"
         android:orderInCategory="1"
-        android:title="title"
-        android:icon="@drawable/selector_chats_uncheck"
+        android:title= "@string/notes"
+        android:icon="@drawable/ic_bottom_note_gray"
         />
     <item
         android:id="@+id/item2"
         android:orderInCategory="2"
-        android:title="title"
-        android:icon="@drawable/selector_calls_unchecked"
+        android:title="@string/workout"
+        android:icon="@drawable/ic_bottom_workout_gray"
         />
     <item
         android:id="@+id/item3"
         android:orderInCategory="3"
-        android:title="title"
-        android:icon="@drawable/selector_contacts_unchecked"
+        android:title="@string/tournament"
+        android:icon="@drawable/ic_bottom_tournament_gray"
         />
     <item
         android:id="@+id/item4"
         android:orderInCategory="4"
-        android:title="title"
-        android:icon="@drawable/selector_profile_unchecked"
+        android:title="@string/profile"
+        android:icon="@drawable/ic_bottom_profile_gray"
         />
 </menu>
