@@ -14,6 +14,7 @@ import space.dlsunity.arctour.R
 import space.dlsunity.arctour.databinding.MainContainerFragmentBinding
 import space.dlsunity.arctour.presenter.base.navigation.NavMvvmFragment
 import space.dlsunity.arctour.presenter.screens.errors.ErrorModel
+import space.dlsunity.arctour.presenter.screens.main_screen.screens.ProfileFragment
 import space.dlsunity.arctour.utils.extensions.collectWhenStarted
 import space.dlsunity.arctour.utils.navigation.navigateSafe
 import space.dlsunity.arctour.utils.tools.DialogHelper
@@ -90,7 +91,7 @@ class MainContainerFragment :
                 }
                 R.id.item2 -> {
                     setTitle(WORKOUT)
-                    itemFuture.icon = context.getDrawable(R.drawable.ic_bottom_worckout_black)
+                    itemFuture.icon = context.getDrawable(R.drawable.ic_bottom_workout_black)
                 }
                 R.id.item3 -> {
                     setTitle(TOURNAMENT)
@@ -211,17 +212,10 @@ class MainContainerFragment :
     private fun setFragment(id: Int) {
         binding.apply {
             when (id) {
-//                R.id.profile -> {
-//                    childFragmentManager.beginTransaction()
-//                        .replace(fragmentContainer.id, ProfileFragment()).commit()
-//                }
-//
-//                R.id.profile_image -> {
-//                    viewModel.changedAvatar = true
-//                    activity?.let {
-//                        viewModel
-//                            .changeProfilePhoto(childFragmentManager, placeHolder.id, requireActivity() as MainActivity) }
-//                }
+                R.id.item4 -> {
+                    childFragmentManager.beginTransaction()
+                        .replace(fragmentContainer.id, ProfileFragment()).commit()
+                }
             }
         }
     }
