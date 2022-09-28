@@ -1,4 +1,4 @@
-package space.dlsunity.arctour.presenter.screens.main_screen
+package space.dlsunity.arctour.presenter.screens.main_container
 
 import android.content.Context
 import android.graphics.Bitmap
@@ -20,11 +20,11 @@ import space.dlsunity.arctour.R
 import space.dlsunity.arctour.data.room.data.User
 import space.dlsunity.arctour.presenter.base.mvvm.BaseViewModel
 import space.dlsunity.arctour.presenter.screens.errors.ErrorModel
+import space.dlsunity.arctour.presenter.screens.main_container.destinations.MainDestination
 import space.dlsunity.arctour.utils.auxiliary.Event
 import space.dlsunity.arctour.utils.extensions.toByteArray
 import space.dlsunity.arctour.utils.tools.ImageManager
 import space.dlsunity.arctour.utils.tools.ImagePiker
-
 
 class MainContainerViewModel(
     private val localContext: Context

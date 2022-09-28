@@ -1,4 +1,4 @@
-package space.dlsunity.arctour.presenter.screens.main_screen
+package space.dlsunity.arctour.presenter.screens.main_container.destinations
 
 import space.dlsunity.arctour.presenter.base.navigation.Destination
 

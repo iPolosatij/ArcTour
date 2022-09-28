@@ -1,4 +1,4 @@
-package space.dlsunity.arctour.presenter.screens.main_screen
+package space.dlsunity.arctour.presenter.screens.main_container
 
 import android.os.Bundle
 import android.util.Log
@@ -14,7 +14,8 @@ import space.dlsunity.arctour.R
 import space.dlsunity.arctour.databinding.MainContainerFragmentBinding
 import space.dlsunity.arctour.presenter.base.navigation.NavMvvmFragment
 import space.dlsunity.arctour.presenter.screens.errors.ErrorModel
-import space.dlsunity.arctour.presenter.screens.main_screen.screens.ProfileFragment
+import space.dlsunity.arctour.presenter.screens.main_container.destinations.MainDestination
+import space.dlsunity.arctour.presenter.screens.main_container.screens.profile.ProfileFragment
 import space.dlsunity.arctour.utils.extensions.collectWhenStarted
 import space.dlsunity.arctour.utils.navigation.navigateSafe
 import space.dlsunity.arctour.utils.tools.DialogHelper

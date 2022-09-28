@@ -1,4 +1,4 @@
-package space.dlsunity.arctour.presenter.screens.main_screen.screens
+package space.dlsunity.arctour.presenter.screens.main_container.screens.profile
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData

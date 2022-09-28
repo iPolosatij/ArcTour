@@ -1,4 +1,4 @@
-package space.dlsunity.arctour.presenter.screens.main_screen.screens
+package space.dlsunity.arctour.presenter.screens.main_container.screens.profile
 
 import android.os.Bundle
 import android.util.Log
@@ -9,8 +9,8 @@ import space.dlsunity.arctour.R
 import space.dlsunity.arctour.databinding.ProfileFragmentBinding
 import space.dlsunity.arctour.presenter.base.mvvm.BaseMvvmFragment
 import space.dlsunity.arctour.presenter.screens.errors.ErrorModel
-import space.dlsunity.arctour.presenter.screens.main_screen.MainContainerFragment
-import space.dlsunity.arctour.presenter.screens.main_screen.MainContainerViewModel
+import space.dlsunity.arctour.presenter.screens.main_container.MainContainerFragment
+import space.dlsunity.arctour.presenter.screens.main_container.MainContainerViewModel
 import space.dlsunity.arctour.utils.extensions.collectWhenStarted
 import space.dlsunity.arctour.utils.extensions.toByteArray
 

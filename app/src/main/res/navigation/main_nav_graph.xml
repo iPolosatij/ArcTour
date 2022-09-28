@@ -47,7 +47,7 @@
 
     <fragment
         android:id="@+id/mainContainerFragment"
-        android:name="space.dlsunity.arctour.presenter.screens.main_screen.MainContainerFragment"
+        android:name="space.dlsunity.arctour.presenter.screens.main_container.MainContainerFragment"
         android:label="MainContainer"
         tools:layout="@layout/main_container_fragment">
 
