@@ -1,4 +1,4 @@
-package space.dlsunity.arctour.presenter.screens.main_container.screens.tournaments
+package space.dlsunity.arctour.presenter.screens.main_container.screens.tournaments.tournament
 
 import android.os.Bundle
 import android.util.Log
@@ -19,10 +19,10 @@ import space.dlsunity.arctour.utils.extensions.collectWhenStarted
 import space.dlsunity.arctour.utils.navigation.navigateSafe
 import space.dlsunity.arctour.utils.tools.DialogHelper
 
-class TournamentsListFragment:
-    NavMvvmFragment<MainDestination, TournamentsListViewModel>(R.layout.tournaments_list) {
+class TournamentFragment:
+    NavMvvmFragment<MainDestination, TournamentViewModel>(R.layout.tournaments_list) {
 
-    override val viewModel: TournamentsListViewModel by sharedViewModel()
+    override val viewModel: TournamentViewModel by sharedViewModel()
 
     val mainContainerViewModel: MainContainerViewModel by sharedViewModel()
 
