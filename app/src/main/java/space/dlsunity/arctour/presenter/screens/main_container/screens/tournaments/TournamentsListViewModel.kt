@@ -9,7 +9,9 @@ import space.dlsunity.arctour.presenter.screens.errors.ErrorModel
 import space.dlsunity.arctour.presenter.screens.main_container.destinations.MainDestination
 import space.dlsunity.arctour.utils.auxiliary.Event
 
-class TournamentsListViewModel: BaseViewModel() {
+class TournamentsListViewModel(
+
+): BaseViewModel() {
 
     private val _navigateCommander = MutableSharedFlow<MainDestination>()
     val navigateCommander: SharedFlow<MainDestination> = _navigateCommander.asSharedFlow()

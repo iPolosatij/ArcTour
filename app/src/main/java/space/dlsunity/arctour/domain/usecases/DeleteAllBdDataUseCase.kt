@@ -6,6 +6,6 @@ class DeleteAllBdDataUseCase(
     private val bdDataRepository: BdDataRepository
 ) {
     suspend operator fun invoke(){
-        return bdDataRepository.deleteAllBdEntities()
+        bdDataRepository.deleteAllBdEntities()
     }
 }

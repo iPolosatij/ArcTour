@@ -5,12 +5,16 @@ import androidx.room.Database
 import androidx.room.Room
 import androidx.room.RoomDatabase
 import space.dlsunity.arctour.data.room.dao.BdDao
+import space.dlsunity.arctour.data.room.dao.TournamentDao
 import space.dlsunity.arctour.data.room.data.BdEntity
+import space.dlsunity.arctour.data.room.data.Tournament
 import space.dlsunity.arctour.data.room.db.AppDatabase.Companion.DATABASE_VERSION
 
-@Database(entities = [ BdEntity::class], version = DATABASE_VERSION, exportSchema = false)
+@Database(entities = [BdEntity::class, Tournament::class], version = DATABASE_VERSION, exportSchema = false)
 abstract class AppDatabase : RoomDatabase() {
+
     abstract fun bdDao(): BdDao
+    abstract fun tournamentDao(): TournamentDao
 
     companion object {
         internal const val DATABASE_VERSION = 1
