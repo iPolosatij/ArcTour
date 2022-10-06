@@ -113,6 +113,7 @@ class MainContainerFragment :
 
     private fun observeVm() {
         viewModel.apply {
+            downloadAllTournament()
             navigateCommander.collectWhenStarted(viewLifecycleOwner, ::handlerDestination)
             error.collectWhenStarted(viewLifecycleOwner, ::handlerError)
             needShowBottomMenu.observe(viewLifecycleOwner) {

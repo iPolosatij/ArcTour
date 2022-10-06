@@ -17,7 +17,9 @@ import kotlinx.coroutines.flow.*
 import kotlinx.coroutines.launch
 import space.dlsunity.arctour.MainActivity
 import space.dlsunity.arctour.R
+import space.dlsunity.arctour.data.room.data.Tournament
 import space.dlsunity.arctour.data.room.data.User
+import space.dlsunity.arctour.domain.usecases.*
 import space.dlsunity.arctour.presenter.base.mvvm.BaseViewModel
 import space.dlsunity.arctour.presenter.screens.errors.ErrorModel
 import space.dlsunity.arctour.presenter.screens.main_container.destinations.MainDestination
@@ -27,7 +29,12 @@ import space.dlsunity.arctour.utils.tools.ImageManager
 import space.dlsunity.arctour.utils.tools.ImagePiker
 
 class MainContainerViewModel(
-    private val localContext: Context
+    private val localContext: Context,
+    private val getAllTournamentsUseCase: GetAllTournamentsUseCase,
+    private val saveTournamentUseCase: SaveTournamentUseCase,
+    private val deleteTournamentUseCase: DeleteTournamentUseCase,
+    private val getTournamentByIdUseCase: GetTournamentByIdUseCase,
+    private val deleteAllTournamentsUseCase: DeleteAllTournamentsUseCase
 ) : BaseViewModel() {
 
     private val _navigateCommander = MutableSharedFlow<MainDestination>()
@@ -86,6 +93,14 @@ class MainContainerViewModel(
     private val _profilePhoto: MutableLiveData<Event<Bitmap>> = MutableLiveData<Event<Bitmap>>()
     val profilePhoto: LiveData<Event<Bitmap>>
         get() = _profilePhoto
+
+    private val _tournamentListDownloaded: MutableLiveData<Event<List<Tournament>>> = MutableLiveData<Event<List<Tournament>>>()
+    val tournamentListDownloaded: LiveData<Event<List<Tournament>>>
+        get() = _tournamentListDownloaded
+
+    private val _tournamentsListNeedUpdate: MutableLiveData<Event<Boolean>> = MutableLiveData<Event<Boolean>>()
+    val tournamentsListNeedUpdate: LiveData<Event<Boolean>>
+        get() = _tournamentsListNeedUpdate
 
     var changedAvatar = false
 
@@ -219,6 +234,45 @@ class MainContainerViewModel(
 
     fun stopTimer() {
         counter = -1
+    }
+
+    fun saveTournament(tournament: Tournament){
+        CoroutineScope(Dispatchers.Default).launch {
+            safeProgressHandler(error = _error) {
+                saveTournamentUseCase.invoke(tournament).let {
+                    _tournamentsListNeedUpdate.postValue(Event(true))
+                }
+            }
+        }
+    }
+
+    fun deleteTournament(tournament: Tournament){
+        CoroutineScope(Dispatchers.Default).launch {
+            safeProgressHandler(error = _error) {
+                deleteTournamentUseCase.invoke(tournament).let {
+                    _tournamentsListNeedUpdate.postValue(Event(true))
+                }
+            }
+        }
+    }
+
+    fun deleteAllTournament(){
+        CoroutineScope(Dispatchers.Default).launch {
+            safeProgressHandler(error = _error) {
+                deleteAllTournamentsUseCase.invoke()
+            }
+        }
+    }
+
+    fun downloadAllTournament(){
+        CoroutineScope(Dispatchers.Default).launch {
+            safeProgressHandler(error = _error) {
+                getAllTournamentsUseCase.invoke().let {
+                    if (it.isNotEmpty())
+                        _tournamentListDownloaded.postValue(Event(it))
+                }
+            }
+        }
     }
 
     companion object {}

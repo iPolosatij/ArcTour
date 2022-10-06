@@ -48,6 +48,16 @@ class TournamentsListFragment:
         }
     }
 
+    private fun observeContainerVm() {
+        mainContainerViewModel.apply {
+            tournamentListDownloaded.observe(viewLifecycleOwner) {
+                it.getFirstOrNull()?.let { list ->
+
+                }
+            }
+        }
+    }
+
     private fun setupBinding() {
         binding.apply {
             viewModel.apply {
