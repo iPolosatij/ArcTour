@@ -9,6 +9,7 @@ import androidx.navigation.fragment.findNavController
 import by.kirich1409.viewbindingdelegate.viewBinding
 import org.koin.androidx.viewmodel.ext.android.sharedViewModel
 import space.dlsunity.arctour.R
+import space.dlsunity.arctour.data.room.data.Tournament
 import space.dlsunity.arctour.databinding.TournamentsListBinding
 import space.dlsunity.arctour.presenter.base.navigation.NavMvvmFragment
 import space.dlsunity.arctour.presenter.screens.errors.ErrorModel
@@ -84,4 +85,8 @@ class TournamentFragment:
         }
         activity?.onBackPressedDispatcher?.addCallback(viewLifecycleOwner, callback)
     }
+
+    private fun shortTap(item: Tournament){}
+    private fun longTap(item: Tournament){}
+
 }

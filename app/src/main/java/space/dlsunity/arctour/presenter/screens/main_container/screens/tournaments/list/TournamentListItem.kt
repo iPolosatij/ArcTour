@@ -4,15 +4,19 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
 import space.dlsunity.arctour.R
 import space.dlsunity.arctour.data.room.data.Tournament
 import space.dlsunity.arctour.databinding.ItemTournamentsListBinding
 import space.dlsunity.arctour.domain.model.Item
 import space.dlsunity.arctour.presenter.base.adapter.BaseItem
 import space.dlsunity.arctour.presenter.base.adapter.BaseViewHolder
+import space.dlsunity.arctour.utils.tools.ImageManager
 
-class TournamentListItem (private val onOpenItem: (Tournament) -> Unit,
-                          private val onRemoveItem: (Tournament) -> Unit
+class TournamentListItem (private val shortTap: (Tournament) -> Unit,
+                          private val longTap: (Tournament) -> Unit
 ) : BaseItem<ItemTournamentsListBinding, Tournament>
 {
 
@@ -26,7 +30,7 @@ class TournamentListItem (private val onOpenItem: (Tournament) -> Unit,
         parent: ViewGroup,
     ): BaseViewHolder<ItemTournamentsListBinding, Tournament> {
         val binding = ItemTournamentsListBinding.inflate(layoutInflater, parent, false)
-        return ItemContactListViewHolder(binding, onOpenItem, onRemoveItem)
+        return ItemContactListViewHolder(binding, shortTap, longTap)
     }
 
     override fun getDiffUtil(): DiffUtil.ItemCallback<Tournament>  = diffUtil
@@ -41,19 +45,19 @@ class TournamentListItem (private val onOpenItem: (Tournament) -> Unit,
 
     private class ItemContactListViewHolder(
         binding: ItemTournamentsListBinding,
-        onOpenItem: (Tournament) -> Unit,
-        onRemoveItem: (Tournament) -> Unit
+        shortTap: (Tournament) -> Unit,
+        longTap: (Tournament) -> Unit
     ) : BaseViewHolder<ItemTournamentsListBinding, Tournament>(binding) {
 
         init {
             binding.clicker.setOnClickListener {
                 if (bindingAdapterPosition == RecyclerView.NO_POSITION) return@setOnClickListener
-                onOpenItem(item)
+                shortTap(item)
             }
 
             binding.clicker.setOnLongClickListener {
                 if (bindingAdapterPosition == RecyclerView.NO_POSITION) return@setOnLongClickListener true
-                onRemoveItem(item)
+                longTap(item)
                 return@setOnLongClickListener true
             }
         }
@@ -61,8 +65,10 @@ class TournamentListItem (private val onOpenItem: (Tournament) -> Unit,
         override fun onBind(item: Tournament) {
             super.onBind(item)
             binding.apply {
-                item.photo?.let {
-
+                CoroutineScope(Dispatchers.IO).launch {
+                    item.photo?.let {
+                        binding.avatar.setImageBitmap(ImageManager.getBitmapsFromUris(listOf(it))[0])
+                    }
                 }
                 title.text = item.name
                 description.text = item.description

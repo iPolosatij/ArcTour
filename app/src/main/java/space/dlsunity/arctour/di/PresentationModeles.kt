@@ -48,11 +48,18 @@ val presentationModule = module {
 
     viewModel {
        TournamentsListViewModel(
+           localContext = get<Context>(),
+           getAllTournamentsUseCase = get<GetAllTournamentsUseCase>(),
+           getTournamentByIdUseCase = get<GetTournamentByIdUseCase>(),
+           saveTournamentUseCase = get<SaveTournamentUseCase>(),
+           deleteAllTournamentsUseCase = get<DeleteAllTournamentsUseCase>(),
+           deleteTournamentUseCase = get<DeleteTournamentUseCase>()
         )
     }
 
     viewModel {
        TournamentViewModel(
+
         )
     }
 

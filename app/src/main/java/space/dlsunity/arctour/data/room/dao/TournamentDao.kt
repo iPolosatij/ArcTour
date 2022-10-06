@@ -1,11 +1,9 @@
 package space.dlsunity.arctour.data.room.dao
 
-import androidx.room.Delete
-import androidx.room.Insert
-import androidx.room.OnConflictStrategy
-import androidx.room.Query
+import androidx.room.*
 import space.dlsunity.arctour.data.room.data.Tournament
 
+@Dao
 interface TournamentDao {
     @Query("SELECT * FROM tournament")
     fun getAll(): List<Tournament>
