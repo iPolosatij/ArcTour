@@ -115,8 +115,6 @@ class MainContainerViewModel(
 
     var webViewIsOpen = false
 
-    var mode: Mode = Mode.Read
-
     val defaultPhotoProfile = localContext.getDrawable(R.drawable.ic_profile_image)?.toBitmap()
 
     var photoMain: Bitmap? = defaultPhotoProfile
@@ -278,6 +276,5 @@ class MainContainerViewModel(
     companion object {}
 }
 
-enum class Mode{ Read, Edit }
 
 

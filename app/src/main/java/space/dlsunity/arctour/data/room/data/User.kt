@@ -13,6 +13,7 @@ import space.dlsunity.arctour.domain.model.Item
 @Serializable
 data class User(
     @ColumnInfo(name = "photo") var photo: ByteArray?,
+    @ColumnInfo(name = "photo_url") var photoUrl: String = "",
     @PrimaryKey var memberId: String,
     @ColumnInfo(name = "name") var name: String?,
     @ColumnInfo(name = "last_name") var last_name: String?,

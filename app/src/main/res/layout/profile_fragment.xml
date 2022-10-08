@@ -14,8 +14,10 @@
         app:layout_constraintTop_toTopOf="parent">
 
         <LinearLayout
+            android:id="@+id/field_container"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:background="@color/white"
             android:orientation="vertical" >
 
             <FrameLayout
@@ -37,6 +39,14 @@
                     android:layout_gravity="center"
                     android:clickable="false"/>
 
+                <FrameLayout
+                    android:id="@+id/photoSafety"
+                    android:clickable="true"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent">
+
+                </FrameLayout>
+
             </FrameLayout>
 
             <androidx.constraintlayout.widget.ConstraintLayout
@@ -57,33 +67,32 @@
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent" />
 
-                <TextView
+                <androidx.appcompat.widget.AppCompatEditText
                     android:id="@+id/nameValue"
-                    android:layout_width="wrap_content"
+                    android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="18dp"
-                    android:layout_marginEnd="13dp"
-                    android:layout_marginBottom="18dp"
-                    android:text=""
-                    android:textSize="16sp"
-                    app:layout_constraintBottom_toTopOf="@+id/nameDeliver"
-                    app:layout_constraintEnd_toStartOf="@+id/nameButton"
-                    app:layout_constraintHorizontal_bias="1.0"
-                    app:layout_constraintStart_toEndOf="@+id/nameTitle"
-                    app:layout_constraintTop_toTopOf="parent" />
-
-                <ImageButton
-                    android:id="@+id/nameButton"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
+                    android:layout_marginStart="16dp"
                     android:layout_marginTop="18dp"
                     android:layout_marginEnd="16dp"
                     android:layout_marginBottom="18dp"
-                    android:background="@android:color/transparent"
+                    android:background="@color/transparent"
+                    android:text=""
+                    android:textSize="16sp"
+                    android:gravity="end"
                     app:layout_constraintBottom_toTopOf="@+id/nameDeliver"
                     app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintTop_toTopOf="parent"
-                    app:srcCompat="@drawable/ic_right_angle" />
+                    app:layout_constraintStart_toEndOf="@+id/nameTitle"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <FrameLayout
+                    android:id="@+id/name_safety"
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp"
+                    android:clickable="true"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"/>
 
                 <LinearLayout
                     android:id="@+id/nameDeliver"
@@ -97,17 +106,6 @@
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"/>
 
-                <FrameLayout
-                    android:id="@+id/name_click"
-                    android:layout_width="0dp"
-                    android:layout_height="0dp"
-                    android:layout_marginBottom="2dp"
-                    app:layout_constraintBottom_toTopOf="@+id/nameDeliver"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toEndOf="@+id/nameTitle"
-                    app:layout_constraintTop_toTopOf="parent">
-
-                </FrameLayout>
             </androidx.constraintlayout.widget.ConstraintLayout>
 
             <androidx.constraintlayout.widget.ConstraintLayout
@@ -128,33 +126,33 @@
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent" />
 
-                <TextView
+                <androidx.appcompat.widget.AppCompatEditText
                     android:id="@+id/lastnameValue"
-                    android:layout_width="wrap_content"
+                    android:layout_width="0dp"
                     android:layout_height="wrap_content"
+                    android:layout_marginStart="16dp"
                     android:layout_marginTop="18dp"
-                    android:layout_marginEnd="13dp"
+                    android:layout_marginEnd="16dp"
                     android:layout_marginBottom="18dp"
+                    android:background="@color/transparent"
                     android:text=""
                     android:textSize="16sp"
+                    android:gravity="end"
                     app:layout_constraintBottom_toTopOf="@+id/lastnameDeliver"
-                    app:layout_constraintEnd_toStartOf="@+id/lastnameButton"
+                    app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintHorizontal_bias="1.0"
                     app:layout_constraintStart_toEndOf="@+id/lastnameTitle"
                     app:layout_constraintTop_toTopOf="parent" />
 
-                <ImageButton
-                    android:id="@+id/lastnameButton"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="18dp"
-                    android:layout_marginEnd="16dp"
-                    android:layout_marginBottom="18dp"
-                    android:background="@android:color/transparent"
-                    app:layout_constraintBottom_toTopOf="@+id/lastnameDeliver"
+                <FrameLayout
+                    android:id="@+id/lastname_safety"
+                    android:layout_width="0dp"
+                    android:layout_height="0dp"
+                    android:clickable="true"
+                    app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintTop_toTopOf="parent"
-                    app:srcCompat="@drawable/ic_right_angle" />
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"/>
 
                 <LinearLayout
                     android:id="@+id/lastnameDeliver"
@@ -168,18 +166,6 @@
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"/>
 
-                <FrameLayout
-                    android:id="@+id/lastname_click"
-                    android:layout_width="0dp"
-                    android:layout_height="0dp"
-                    android:layout_marginTop="1dp"
-                    android:layout_marginBottom="1dp"
-                    app:layout_constraintBottom_toTopOf="@+id/lastnameDeliver"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toEndOf="@+id/lastnameTitle"
-                    app:layout_constraintTop_toTopOf="parent">
-
-                </FrameLayout>
             </androidx.constraintlayout.widget.ConstraintLayout>
 
             <androidx.constraintlayout.widget.ConstraintLayout
@@ -200,33 +186,33 @@
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent" />
 
-                <TextView
+                <androidx.appcompat.widget.AppCompatEditText
                     android:id="@+id/nickValue"
-                    android:layout_width="wrap_content"
+                    android:layout_width="0dp"
                     android:layout_height="wrap_content"
+                    android:layout_marginStart="16dp"
                     android:layout_marginTop="18dp"
-                    android:layout_marginEnd="13dp"
+                    android:layout_marginEnd="16dp"
                     android:layout_marginBottom="18dp"
+                    android:background="@color/transparent"
                     android:text=""
                     android:textSize="16sp"
+                    android:gravity="end"
                     app:layout_constraintBottom_toTopOf="@+id/nickDeliver"
-                    app:layout_constraintEnd_toStartOf="@+id/nickButton"
+                    app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintHorizontal_bias="1.0"
                     app:layout_constraintStart_toEndOf="@+id/nickTitle"
                     app:layout_constraintTop_toTopOf="parent" />
 
-                <ImageButton
-                    android:id="@+id/nickButton"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="18dp"
-                    android:layout_marginEnd="16dp"
-                    android:layout_marginBottom="18dp"
-                    android:background="@android:color/transparent"
-                    app:layout_constraintBottom_toTopOf="@+id/nickDeliver"
+                <FrameLayout
+                    android:id="@+id/nick_safety"
+                    android:layout_width="0dp"
+                    android:layout_height="0dp"
+                    android:clickable="true"
+                    app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintTop_toTopOf="parent"
-                    app:srcCompat="@drawable/ic_right_angle" />
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"/>
 
                 <LinearLayout
                     android:id="@+id/nickDeliver"
@@ -240,18 +226,6 @@
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"/>
 
-                <FrameLayout
-                    android:id="@+id/nick_click"
-                    android:layout_width="0dp"
-                    android:layout_height="0dp"
-                    android:layout_marginTop="1dp"
-                    android:layout_marginBottom="1dp"
-                    app:layout_constraintBottom_toTopOf="@+id/nickDeliver"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toEndOf="@+id/nickTitle"
-                    app:layout_constraintTop_toTopOf="parent">
-
-                </FrameLayout>
             </androidx.constraintlayout.widget.ConstraintLayout>
 
             <androidx.constraintlayout.widget.ConstraintLayout
@@ -272,33 +246,35 @@
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent" />
 
-                <TextView
+                <androidx.appcompat.widget.AppCompatEditText
                     android:id="@+id/phoneValue"
-                    android:layout_width="wrap_content"
+                    android:layout_width="0dp"
                     android:layout_height="wrap_content"
+                    android:layout_marginStart="16dp"
                     android:layout_marginTop="18dp"
-                    android:layout_marginEnd="13dp"
+                    android:layout_marginEnd="16dp"
                     android:layout_marginBottom="18dp"
+                    android:background="@color/transparent"
                     android:text=" "
                     android:textSize="16sp"
+                    android:inputType="phone"
+                    android:gravity="end"
                     app:layout_constraintBottom_toTopOf="@+id/phoneDeliver"
-                    app:layout_constraintEnd_toStartOf="@+id/phoneButton"
+                    app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintHorizontal_bias="1.0"
                     app:layout_constraintStart_toEndOf="@+id/phoneTitle"
                     app:layout_constraintTop_toTopOf="parent" />
 
-                <ImageButton
-                    android:id="@+id/phoneButton"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="18dp"
-                    android:layout_marginEnd="16dp"
-                    android:layout_marginBottom="18dp"
-                    android:background="@android:color/transparent"
-                    app:layout_constraintBottom_toTopOf="@+id/phoneDeliver"
+                <FrameLayout
+                    android:id="@+id/phone_safety"
+                    android:layout_width="0dp"
+                    android:layout_height="0dp"
+                    android:clickable="true"
+                    android:gravity="end"
+                    app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintTop_toTopOf="parent"
-                    app:srcCompat="@drawable/ic_right_angle" />
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"/>
 
                 <LinearLayout
                     android:id="@+id/phoneDeliver"
@@ -311,17 +287,6 @@
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"/>
-
-                <FrameLayout
-                    android:id="@+id/phone_click"
-                    android:layout_width="0dp"
-                    android:layout_height="0dp"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintEnd_toEndOf="@+id/phoneButton"
-                    app:layout_constraintStart_toStartOf="@+id/phoneTitle"
-                    app:layout_constraintTop_toTopOf="parent">
-
-                </FrameLayout>
 
             </androidx.constraintlayout.widget.ConstraintLayout>
 
@@ -343,33 +308,35 @@
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent" />
 
-                <TextView
+                <androidx.appcompat.widget.AppCompatEditText
                     android:id="@+id/emailValue"
-                    android:layout_width="wrap_content"
+                    android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="18dp"
-                    android:layout_marginEnd="13dp"
-                    android:layout_marginBottom="18dp"
-                    android:text=""
-                    app:layout_constraintBottom_toTopOf="@+id/emailDeliver"
-                    app:layout_constraintEnd_toStartOf="@+id/emailButton"
-                    app:layout_constraintHorizontal_bias="1.0"
-                    app:layout_constraintStart_toEndOf="@+id/emailTitle"
-                    app:layout_constraintTop_toTopOf="parent"
-                    android:textSize="16sp" />
-
-                <ImageButton
-                    android:id="@+id/emailButton"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
+                    android:layout_marginStart="16dp"
                     android:layout_marginTop="18dp"
                     android:layout_marginEnd="16dp"
                     android:layout_marginBottom="18dp"
-                    android:background="@android:color/transparent"
+                    android:background="@color/transparent"
+                    android:text=""
+                    android:textSize="16sp"
+                    android:gravity="end"
+                    android:inputType="textEmailAddress"
                     app:layout_constraintBottom_toTopOf="@+id/emailDeliver"
                     app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintTop_toTopOf="parent"
-                    app:srcCompat="@drawable/ic_right_angle" />
+                    app:layout_constraintHorizontal_bias="1.0"
+                    app:layout_constraintStart_toEndOf="@+id/emailTitle"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <FrameLayout
+                    android:id="@+id/email_safety"
+                    android:layout_width="0dp"
+                    android:layout_height="0dp"
+                    android:clickable="true"
+                    android:gravity="end"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"/>
 
                 <LinearLayout
                     android:id="@+id/emailDeliver"
@@ -383,33 +350,140 @@
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"/>
 
-                <FrameLayout
-                    android:id="@+id/email_click"
-                    android:layout_width="0dp"
-                    android:layout_height="0dp"
-                    android:layout_marginTop="1dp"
-                    android:layout_marginBottom="1dp"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toEndOf="@+id/emailTitle"
-                    app:layout_constraintTop_toTopOf="parent">
-
-                </FrameLayout>
             </androidx.constraintlayout.widget.ConstraintLayout>
 
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/classFrame"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <TextView
+                    android:id="@+id/classTitle"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="16dp"
+                    android:layout_marginTop="18dp"
+                    android:layout_marginBottom="18dp"
+                    android:text="class"
+                    android:textSize="16sp"
+                    app:layout_constraintBottom_toTopOf="@+id/classDeliver"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <androidx.appcompat.widget.AppCompatSpinner
+                    android:id="@+id/classValue"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="16dp"
+                    android:layout_marginTop="18dp"
+                    android:layout_marginEnd="16dp"
+                    android:layout_marginBottom="18dp"
+                    android:text=""
+                    android:textSize="16sp"
+                    android:gravity="end"
+                    app:layout_constraintBottom_toTopOf="@+id/classDeliver"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintHorizontal_bias="1.0"
+                    app:layout_constraintStart_toEndOf="@+id/classTitle"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <FrameLayout
+                    android:id="@+id/class_safety"
+                    android:layout_width="0dp"
+                    android:layout_height="0dp"
+                    android:clickable="true"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"/>
+
+                <LinearLayout
+                    android:id="@+id/classDeliver"
+                    android:layout_width="0dp"
+                    android:layout_height="1dp"
+                    android:layout_marginStart="16dp"
+                    android:layout_marginEnd="16dp"
+                    android:background="@color/lite_gray"
+                    android:orientation="horizontal"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"/>
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/bornDateFrame"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <TextView
+                    android:id="@+id/bornDateTitle"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="16dp"
+                    android:layout_marginTop="18dp"
+                    android:layout_marginBottom="18dp"
+                    android:text="born date"
+                    android:textSize="16sp"
+                    app:layout_constraintBottom_toTopOf="@+id/bornDateDeliver"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <androidx.appcompat.widget.AppCompatEditText
+                    android:id="@+id/bornDateValue"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="16dp"
+                    android:layout_marginTop="18dp"
+                    android:layout_marginEnd="16dp"
+                    android:layout_marginBottom="18dp"
+                    android:background="@color/transparent"
+                    android:text=""
+                    android:textSize="16sp"
+                    android:inputType="date"
+                    android:gravity="end"
+                    app:layout_constraintBottom_toTopOf="@+id/bornDateDeliver"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintHorizontal_bias="1.0"
+                    app:layout_constraintStart_toEndOf="@+id/bornDateTitle"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <FrameLayout
+                    android:id="@+id/bornDate_safety"
+                    android:layout_width="0dp"
+                    android:layout_height="0dp"
+                    android:clickable="true"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"/>
+
+                <LinearLayout
+                    android:id="@+id/bornDateDeliver"
+                    android:layout_width="0dp"
+                    android:layout_height="1dp"
+                    android:layout_marginStart="16dp"
+                    android:layout_marginEnd="16dp"
+                    android:background="@color/lite_gray"
+                    android:orientation="horizontal"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"/>
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
 
             <androidx.appcompat.widget.AppCompatButton
                 android:id="@+id/edit_save"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Edit profile"
-                android:textColor="@color/white"
-                android:textAllCaps="false"
-                android:background="@drawable/black_action_button"
-                android:layout_marginTop="32dp"
                 android:layout_marginStart="32dp"
-                android:layout_marginEnd="32dp"/>
-
+                android:layout_marginTop="32dp"
+                android:layout_marginEnd="32dp"
+                android:layout_marginBottom="32dp"
+                android:background="@drawable/black_action_button"
+                android:text="Edit profile"
+                android:textAllCaps="false"
+                android:textColor="@color/white" />
         </LinearLayout>
     </ScrollView>
 </androidx.constraintlayout.widget.ConstraintLayout>

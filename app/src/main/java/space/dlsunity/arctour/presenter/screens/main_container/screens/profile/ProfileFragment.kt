@@ -3,6 +3,7 @@ package space.dlsunity.arctour.presenter.screens.main_container.screens.profile
 import android.os.Bundle
 import android.util.Log
 import android.view.View
+import android.widget.ArrayAdapter
 import by.kirich1409.viewbindingdelegate.viewBinding
 import org.koin.androidx.viewmodel.ext.android.sharedViewModel
 import space.dlsunity.arctour.R
@@ -40,24 +41,48 @@ class ProfileFragment : BaseMvvmFragment<ProfileViewModel>(R.layout.profile_frag
                 }
             }
 
-            nameClick.setOnClickListener {
-                mainContainerViewModel.setScreen(0)
-            }
-
-            lastnameClick.setOnClickListener {
-                mainContainerViewModel.setScreen(0)
-            }
-
-            phoneClick.setOnClickListener {
-                mainContainerViewModel.setScreen(0)
-            }
-
-            emailClick.setOnClickListener {
-                mainContainerViewModel.setScreen(0)
-            }
-
             addPhoto.setOnClickListener {
                     mainContainerViewModel.setScreen(R.id.profile_image)
+            }
+
+            ArrayAdapter.createFromResource(
+                requireContext(),
+                R.array.class_array,
+                android.R.layout.simple_spinner_item
+            ).also { adapter ->
+                // Specify the layout to use when the list of choices appears
+                adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
+                // Apply the adapter to the spinner
+                classValue.adapter = adapter
+            }
+            editSave.setOnClickListener {
+                if(viewModel.mode == Mode.Read){
+                    editSave.text = "Save"
+                    fieldContainer.background = requireContext().getDrawable(R.color.lite_red)
+                    editSave.background = requireContext().getDrawable(R.drawable.white_action_button)
+                    viewModel.mode = Mode.Edit
+                    nameSafety.isClickable = false
+                    lastnameSafety.isClickable = false
+                    nickSafety.isClickable = false
+                    classSafety.isClickable = false
+                    emailSafety.isClickable = false
+                    phoneSafety.isClickable = false
+                    bornDateSafety.isClickable = false
+                    phoneSafety.isClickable = false
+                }else{
+                    editSave.text = "Edit profile"
+                    fieldContainer.background = requireContext().getDrawable(R.color.white)
+                    editSave.background = requireContext().getDrawable(R.drawable.black_action_button)
+                    viewModel.mode = Mode.Read
+                    nameSafety.isClickable = true
+                    lastnameSafety.isClickable = true
+                    nickSafety.isClickable = true
+                    classSafety.isClickable = true
+                    emailSafety.isClickable = true
+                    phoneSafety.isClickable = true
+                    bornDateSafety.isClickable = true
+                    phoneSafety.isClickable = true
+                }
             }
         }
     }
@@ -98,7 +123,7 @@ class ProfileFragment : BaseMvvmFragment<ProfileViewModel>(R.layout.profile_frag
                     user?.photo = bitmap.toByteArray()
                     viewModel.needSaveUser()
                     saveUser()
-                    setScreen(R.id.profile)
+                    setScreen(R.id.item4)
                 }
             }
         }
@@ -109,15 +134,7 @@ class ProfileFragment : BaseMvvmFragment<ProfileViewModel>(R.layout.profile_frag
             mainContainerViewModel.user.let { user ->
                 viewModel.apply {
                     user?.photo?.let { mainContainerViewModel.setProfilePhoto(it) }
-                    user?.name?.let {
-                        nameValue.text = it
-                    }
-                    user?.phone?.let {
-                        phoneValue.text = it
-                    }
-                    user?.email?.let {
-                        emailValue.text = it
-                    }
+
                 }
             }
         }

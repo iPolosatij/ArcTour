@@ -27,6 +27,8 @@ class ProfileViewModel(
     private val _error: MutableSharedFlow<ErrorModel> = MutableSharedFlow()
     val error: Flow<ErrorModel> = _error.filterNotNull()
 
+    var mode = Mode.Read
+
     fun saveUser(user: User){
         CoroutineScope(Dispatchers.Default).launch {
             safeProgressHandler(error = _error) {
@@ -39,3 +41,5 @@ class ProfileViewModel(
 
     }
 }
+
+enum class Mode{ Read, Edit }

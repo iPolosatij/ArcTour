@@ -16,6 +16,7 @@ import space.dlsunity.arctour.presenter.base.navigation.NavMvvmFragment
 import space.dlsunity.arctour.presenter.screens.errors.ErrorModel
 import space.dlsunity.arctour.presenter.screens.main_container.destinations.MainDestination
 import space.dlsunity.arctour.presenter.screens.main_container.screens.profile.ProfileFragment
+import space.dlsunity.arctour.presenter.screens.main_container.screens.tournaments.TournamentsListFragment
 import space.dlsunity.arctour.utils.extensions.collectWhenStarted
 import space.dlsunity.arctour.utils.navigation.navigateSafe
 import space.dlsunity.arctour.utils.tools.DialogHelper
@@ -39,12 +40,19 @@ class MainContainerFragment :
     private fun setupNavAppBar(screen: String) {
         binding.apply {
 
-            if (screen == PROFILE || screen == WORKOUT || screen == NOTES || screen == TOURNAMENT) {
+            if (screen == PROFILE || screen == WORKOUTS || screen == NOTES || screen == TOURNAMENTS) {
                 curtain.visibility = View.VISIBLE
             } else {
                 curtain.visibility = View.GONE
             }
-
+            if (screen == WORKOUTS || screen == NOTES || screen == TOURNAMENTS) {
+                addBtn.visibility = View.VISIBLE
+                addBtn.setOnClickListener {
+                    if (screen == TOURNAMENTS) { }
+                    if (screen == NOTES) { }
+                    if (screen == WORKOUTS) { }
+                }
+            }
             toolbar.setOnClickListener {
                 when (screen) {
                     //TO_DO back button toolbar actions
@@ -91,11 +99,11 @@ class MainContainerFragment :
                     itemFuture.icon = context.getDrawable(R.drawable.ic_bottom_note_black)
                 }
                 R.id.item2 -> {
-                    setTitle(WORKOUT)
+                    setTitle(WORKOUTS)
                     itemFuture.icon = context.getDrawable(R.drawable.ic_bottom_workout_black)
                 }
                 R.id.item3 -> {
-                    setTitle(TOURNAMENT)
+                    setTitle(TOURNAMENTS)
                     itemFuture.icon = context.getDrawable(R.drawable.ic_bottom_tournament_black)
                 }
                 R.id.item4 -> {
@@ -218,6 +226,16 @@ class MainContainerFragment :
                     childFragmentManager.beginTransaction()
                         .replace(fragmentContainer.id, ProfileFragment()).commit()
                 }
+                R.id.item3 -> {
+                    childFragmentManager.beginTransaction()
+                        .replace(fragmentContainer.id, TournamentsListFragment()).commit()
+                }
+                R.id.item2 -> {
+
+                }
+                R.id.item1 -> {
+
+                }
             }
         }
     }
@@ -270,8 +288,8 @@ class MainContainerFragment :
 
     companion object {
         const val NOTES = "Notes"
-        const val WORKOUT = "Workout"
-        const val TOURNAMENT = "Tournament"
+        const val WORKOUTS = "Workouts"
+        const val TOURNAMENTS = "Tournaments"
         const val PROFILE = "Profile"
     }
 }
