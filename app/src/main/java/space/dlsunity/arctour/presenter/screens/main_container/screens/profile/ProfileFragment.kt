@@ -14,6 +14,7 @@ import space.dlsunity.arctour.presenter.screens.main_container.MainContainerFrag
 import space.dlsunity.arctour.presenter.screens.main_container.MainContainerViewModel
 import space.dlsunity.arctour.utils.extensions.collectWhenStarted
 import space.dlsunity.arctour.utils.extensions.toByteArray
+import java.util.*
 
 class ProfileFragment : BaseMvvmFragment<ProfileViewModel>(R.layout.profile_fragment) {
 
@@ -60,6 +61,7 @@ class ProfileFragment : BaseMvvmFragment<ProfileViewModel>(R.layout.profile_frag
                     editSave.text = "Save"
                     fieldContainer.background = requireContext().getDrawable(R.color.lite_red)
                     editSave.background = requireContext().getDrawable(R.drawable.white_action_button)
+                    logOut.visibility = View.GONE
                     viewModel.mode = Mode.Edit
                     nameSafety.isClickable = false
                     lastnameSafety.isClickable = false
@@ -70,18 +72,15 @@ class ProfileFragment : BaseMvvmFragment<ProfileViewModel>(R.layout.profile_frag
                     bornDateSafety.isClickable = false
                     phoneSafety.isClickable = false
                 }else{
-                    editSave.text = "Edit profile"
-                    fieldContainer.background = requireContext().getDrawable(R.color.white)
-                    editSave.background = requireContext().getDrawable(R.drawable.black_action_button)
-                    viewModel.mode = Mode.Read
-                    nameSafety.isClickable = true
-                    lastnameSafety.isClickable = true
-                    nickSafety.isClickable = true
-                    classSafety.isClickable = true
-                    emailSafety.isClickable = true
-                    phoneSafety.isClickable = true
-                    bornDateSafety.isClickable = true
-                    phoneSafety.isClickable = true
+                    mainContainerViewModel.user?.apply {
+                        memberId = UUID.randomUUID().toString()
+                        name = nameValue.text.toString()
+                        last_name = lastnameValue.text.toString()
+                        nick = nickValue.text.toString()
+                        phone = phoneValue.text.toString()
+                        email = emailValue.text.toString()
+                        viewModel.saveUser(this)
+                    }
                 }
             }
         }
@@ -94,6 +93,26 @@ class ProfileFragment : BaseMvvmFragment<ProfileViewModel>(R.layout.profile_frag
                 it.getFirstOrNull()?.let {
                     mainContainerViewModel.user?.let { it1 -> saveUser(it1) }
                     updateFields()
+                }
+            }
+
+            userWasSaved.observe(viewLifecycleOwner) {
+                it.getFirstOrNull()?.let {
+                    binding.apply {
+                        editSave.text = "Edit profile"
+                        fieldContainer.background = requireContext().getDrawable(R.color.white)
+                        editSave.background = requireContext().getDrawable(R.drawable.black_action_button)
+                        logOut.visibility = View.VISIBLE
+                        viewModel.mode = Mode.Read
+                        nameSafety.isClickable = true
+                        lastnameSafety.isClickable = true
+                        nickSafety.isClickable = true
+                        classSafety.isClickable = true
+                        emailSafety.isClickable = true
+                        phoneSafety.isClickable = true
+                        bornDateSafety.isClickable = true
+                        phoneSafety.isClickable = true
+                    }
                 }
             }
         }
@@ -134,7 +153,6 @@ class ProfileFragment : BaseMvvmFragment<ProfileViewModel>(R.layout.profile_frag
             mainContainerViewModel.user.let { user ->
                 viewModel.apply {
                     user?.photo?.let { mainContainerViewModel.setProfilePhoto(it) }
-
                 }
             }
         }

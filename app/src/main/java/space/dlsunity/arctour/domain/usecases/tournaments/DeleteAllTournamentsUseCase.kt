@@ -1,4 +1,4 @@
-package space.dlsunity.arctour.domain.usecases
+package space.dlsunity.arctour.domain.usecases.tournaments
 
 import space.dlsunity.arctour.data.room.repositories.TournamentRepository
 

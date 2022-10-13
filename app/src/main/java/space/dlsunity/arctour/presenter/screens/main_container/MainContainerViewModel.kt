@@ -19,7 +19,7 @@ import space.dlsunity.arctour.MainActivity
 import space.dlsunity.arctour.R
 import space.dlsunity.arctour.data.room.data.Tournament
 import space.dlsunity.arctour.data.room.data.User
-import space.dlsunity.arctour.domain.usecases.*
+import space.dlsunity.arctour.domain.usecases.tournaments.*
 import space.dlsunity.arctour.presenter.base.mvvm.BaseViewModel
 import space.dlsunity.arctour.presenter.screens.errors.ErrorModel
 import space.dlsunity.arctour.presenter.screens.main_container.destinations.MainDestination
