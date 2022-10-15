@@ -10,6 +10,7 @@ import org.koin.androidx.viewmodel.ext.android.sharedViewModel
 import space.dlsunity.arctour.R
 import space.dlsunity.arctour.databinding.WelcomeFragmentBinding
 import space.dlsunity.arctour.presenter.base.navigation.NavMvvmFragment
+import space.dlsunity.arctour.presenter.screens.errors.ErrorModel
 import space.dlsunity.arctour.utils.extensions.collectWhenStarted
 import space.dlsunity.arctour.utils.navigation.navigateSafe
 
@@ -42,6 +43,7 @@ class WelcomeFragment: NavMvvmFragment<AppDestination, WelcomeViewModel>(R.layou
     private fun observeVm() {
         viewModel.apply {
             navigateCommander.collectWhenStarted(viewLifecycleOwner, ::handlerDestination)
+            error.collectWhenStarted(viewLifecycleOwner, ::handlerError)
         }
     }
 
@@ -53,6 +55,12 @@ class WelcomeFragment: NavMvvmFragment<AppDestination, WelcomeViewModel>(R.layou
             registration.setOnClickListener {
 
             }
+        }
+    }
+
+    private fun handlerError(ex: ErrorModel) {
+        when (ex.exception) {
+
         }
     }
 }

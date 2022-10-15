@@ -10,6 +10,7 @@ import space.dlsunity.arctour.domain.usecases.user.*
 import space.dlsunity.arctour.presenter.screens.main_container.MainContainerViewModel
 import space.dlsunity.arctour.presenter.screens.main_container.screens.profile.ProfileViewModel
 import space.dlsunity.arctour.presenter.screens.main_container.screens.tournaments.TournamentsListViewModel
+import space.dlsunity.arctour.presenter.screens.main_container.screens.tournaments.create.CreateTournamentViewModel
 import space.dlsunity.arctour.presenter.screens.main_container.screens.tournaments.tournament.TournamentViewModel
 import space.dlsunity.arctour.presenter.screens.start_screens.StartViewModel
 import space.dlsunity.arctour.presenter.screens.start_screens.WelcomeViewModel
@@ -60,7 +61,16 @@ val presentationModule = module {
 
     viewModel {
        TournamentViewModel(
+           localContext = get<Context>(),
+           saveTournamentUseCase = get<SaveTournamentUseCase>(),
+           deleteTournamentUseCase = get<DeleteTournamentUseCase>()
+        )
+    }
 
+    viewModel {
+       CreateTournamentViewModel(
+           localContext = get<Context>(),
+           saveTournamentUseCase = get<SaveTournamentUseCase>(),
         )
     }
 

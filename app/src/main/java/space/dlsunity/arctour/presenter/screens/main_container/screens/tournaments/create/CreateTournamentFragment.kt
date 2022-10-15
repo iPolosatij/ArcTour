@@ -1,4 +1,4 @@
-package space.dlsunity.arctour.presenter.screens.main_container.screens.tournaments.tournament
+package space.dlsunity.arctour.presenter.screens.main_container.screens.tournaments.create
 
 import android.os.Bundle
 import android.util.Log
@@ -14,9 +14,9 @@ import space.dlsunity.arctour.presenter.screens.errors.ErrorModel
 import space.dlsunity.arctour.utils.extensions.collectWhenStarted
 import space.dlsunity.arctour.utils.tools.DialogHelper
 
-class TournamentFragment: BaseMvvmFragment<TournamentViewModel>(R.layout.tournament_fragment) {
+class CreateTournamentFragment : BaseMvvmFragment<CreateTournamentViewModel>(R.layout.create_tournament_fragment) {
 
-    override val viewModel: TournamentViewModel by sharedViewModel()
+    override val viewModel: CreateTournamentViewModel by sharedViewModel()
 
     private val binding: TournamentsListBinding by viewBinding()
 

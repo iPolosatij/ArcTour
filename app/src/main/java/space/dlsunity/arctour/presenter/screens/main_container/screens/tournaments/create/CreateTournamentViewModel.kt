@@ -1,4 +1,4 @@
-package space.dlsunity.arctour.presenter.screens.main_container.screens.tournaments.tournament
+package space.dlsunity.arctour.presenter.screens.main_container.screens.tournaments.create
 
 import android.content.Context
 import androidx.lifecycle.LiveData
@@ -7,17 +7,15 @@ import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.MutableSharedFlow
 import kotlinx.coroutines.flow.filterNotNull
 import space.dlsunity.arctour.data.room.data.Tournament
-import space.dlsunity.arctour.domain.usecases.tournaments.DeleteTournamentUseCase
 import space.dlsunity.arctour.domain.usecases.tournaments.SaveTournamentUseCase
 import space.dlsunity.arctour.presenter.base.mvvm.BaseViewModel
 import space.dlsunity.arctour.presenter.screens.errors.ErrorModel
 import space.dlsunity.arctour.utils.auxiliary.Event
 
-class TournamentViewModel(
+class CreateTournamentViewModel(
     private val localContext: Context,
-    private val saveTournamentUseCase: SaveTournamentUseCase,
-    private val deleteTournamentUseCase: DeleteTournamentUseCase
-) : BaseViewModel() {
+    private val saveTournamentUseCase: SaveTournamentUseCase
+    ) : BaseViewModel() {
 
     private val _showAlert: MutableLiveData<Event<String>> = MutableLiveData<Event<String>>()
     val showAlert: LiveData<Event<String>>
