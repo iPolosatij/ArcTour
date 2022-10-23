@@ -94,10 +94,6 @@ class MainContainerViewModel(
     val profilePhoto: LiveData<Event<Bitmap>>
         get() = _profilePhoto
 
-    private val _tournamentListDownloaded: MutableLiveData<Event<List<Tournament>>> = MutableLiveData<Event<List<Tournament>>>()
-    val tournamentListDownloaded: LiveData<Event<List<Tournament>>>
-        get() = _tournamentListDownloaded
-
     private val _tournamentsListNeedUpdate: MutableLiveData<Event<Boolean>> = MutableLiveData<Event<Boolean>>()
     val tournamentsListNeedUpdate: LiveData<Event<Boolean>>
         get() = _tournamentsListNeedUpdate
@@ -110,6 +106,8 @@ class MainContainerViewModel(
     val error: Flow<ErrorModel> = _error.filterNotNull()
 
     var loaderMessage = ""
+
+    var presenterPosition = 0
 
     var menuItemActual: MenuItem? = null
 
@@ -124,7 +122,10 @@ class MainContainerViewModel(
     var new = ""
 
     fun setScreen(id: Int) {
-        _activeScreen.postValue(Event(id))
+        if (presenterPosition != id) {
+            _activeScreen.postValue(Event(id))
+            presenterPosition = id
+        }
     }
 
     private fun updateProfilePhoto(){
@@ -258,17 +259,6 @@ class MainContainerViewModel(
         CoroutineScope(Dispatchers.Default).launch {
             safeProgressHandler(error = _error) {
                 deleteAllTournamentsUseCase.invoke()
-            }
-        }
-    }
-
-    fun downloadAllTournament(){
-        CoroutineScope(Dispatchers.Default).launch {
-            safeProgressHandler(error = _error) {
-                getAllTournamentsUseCase.invoke().let {
-                    if (it.isNotEmpty())
-                        _tournamentListDownloaded.postValue(Event(it))
-                }
             }
         }
     }

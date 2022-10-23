@@ -8,21 +8,25 @@ import by.kirich1409.viewbindingdelegate.viewBinding
 import org.koin.androidx.viewmodel.ext.android.sharedViewModel
 import space.dlsunity.arctour.R
 import space.dlsunity.arctour.data.room.data.Tournament
-import space.dlsunity.arctour.databinding.TournamentsListBinding
+import space.dlsunity.arctour.databinding.CreateTournamentFragmentBinding
 import space.dlsunity.arctour.presenter.base.mvvm.BaseMvvmFragment
 import space.dlsunity.arctour.presenter.screens.errors.ErrorModel
+import space.dlsunity.arctour.presenter.screens.main_container.MainContainerFragment
+import space.dlsunity.arctour.presenter.screens.main_container.MainContainerViewModel
 import space.dlsunity.arctour.utils.extensions.collectWhenStarted
 import space.dlsunity.arctour.utils.tools.DialogHelper
 
 class CreateTournamentFragment : BaseMvvmFragment<CreateTournamentViewModel>(R.layout.create_tournament_fragment) {
 
     override val viewModel: CreateTournamentViewModel by sharedViewModel()
+    val containerViewModel: MainContainerViewModel by sharedViewModel()
 
-    private val binding: TournamentsListBinding by viewBinding()
+    private val binding: CreateTournamentFragmentBinding by viewBinding()
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         observeVm()
+        observeContainerVm()
         setupBinding()
         setUpBackPressed()
     }
@@ -35,6 +39,15 @@ class CreateTournamentFragment : BaseMvvmFragment<CreateTournamentViewModel>(R.l
                     showAlert(message)
                 }
             }
+        }
+    }
+
+    private fun observeContainerVm() {
+        containerViewModel.apply {
+            error.collectWhenStarted(viewLifecycleOwner, ::handlerError)
+            setScreenTitle(MainContainerFragment.CREATE_TOURNAMENT)
+            needShowBottomMenu(false)
+            showAddBtn(false, "")
         }
     }
 
@@ -59,7 +72,7 @@ class CreateTournamentFragment : BaseMvvmFragment<CreateTournamentViewModel>(R.l
     private fun setUpBackPressed() {
         val callback = object : OnBackPressedCallback(true) {
             override fun handleOnBackPressed() {
-
+                containerViewModel.setScreen(R.id.item3)
             }
         }
         activity?.onBackPressedDispatcher?.addCallback(viewLifecycleOwner, callback)

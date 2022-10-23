@@ -14,6 +14,7 @@ import space.dlsunity.arctour.databinding.TournamentsListBinding
 import space.dlsunity.arctour.presenter.base.adapter.MultiItemsAdapter
 import space.dlsunity.arctour.presenter.base.navigation.NavMvvmFragment
 import space.dlsunity.arctour.presenter.screens.errors.ErrorModel
+import space.dlsunity.arctour.presenter.screens.main_container.MainContainerFragment
 import space.dlsunity.arctour.presenter.screens.main_container.MainContainerFragmentDirections
 import space.dlsunity.arctour.presenter.screens.main_container.MainContainerViewModel
 import space.dlsunity.arctour.presenter.screens.main_container.destinations.MainDestination
@@ -43,12 +44,14 @@ class TournamentsListFragment:
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         observeVm()
+        observeContainerVm()
         setupBinding()
         setUpBackPressed()
     }
 
     private fun observeVm() {
         viewModel.apply {
+            downloadAllTournament()
             navigateCommander.collectWhenStarted(viewLifecycleOwner, ::handlerDestination)
             error.collectWhenStarted(viewLifecycleOwner, ::handlerError)
 
@@ -63,16 +66,21 @@ class TournamentsListFragment:
                     tournamentsListAdapter.submitList(viewList as List<Tournament>)
                 }
             }
+
+            tournamentListDownloaded.observe(viewLifecycleOwner) {
+                it.getFirstOrNull()?.let { list ->
+                    viewList = list as ArrayList<Tournament>
+                    tournamentsListAdapter.notifyDataSetChanged()
+                }
+            }
         }
     }
 
     private fun observeContainerVm() {
         mainContainerViewModel.apply {
-            tournamentListDownloaded.observe(viewLifecycleOwner) {
-                it.getFirstOrNull()?.let { list ->
-
-                }
-            }
+            setScreenTitle(MainContainerFragment.TOURNAMENTS)
+            showAddBtn(true, "")
+            needShowBottomMenu(true)
         }
     }
 

@@ -26,32 +26,27 @@ class TournamentsListViewModel(
     private val _navigateCommander = MutableSharedFlow<MainDestination>()
     val navigateCommander: SharedFlow<MainDestination> = _navigateCommander.asSharedFlow()
 
+    private val _tournamentListDownloaded: MutableLiveData<Event<List<Tournament>>> = MutableLiveData<Event<List<Tournament>>>()
+    val tournamentListDownloaded: LiveData<Event<List<Tournament>>>
+        get() = _tournamentListDownloaded
 
     private val _showAlert: MutableLiveData<Event<String>> = MutableLiveData<Event<String>>()
     val showAlert: LiveData<Event<String>>
         get() = _showAlert
-
-    private val _finishLoadTournaments: MutableLiveData<Event<Boolean>> = MutableLiveData<Event<Boolean>>()
-    val finishLoadTournaments: LiveData<Event<Boolean>>
-        get() = _finishLoadTournaments
 
     var viewList: ArrayList<Tournament> = arrayListOf()
 
     private val _error: MutableSharedFlow<ErrorModel> = MutableSharedFlow()
     val error: Flow<ErrorModel> = _error.filterNotNull()
 
-    fun loadTournamentFromDB(){
+    fun downloadAllTournament(){
         CoroutineScope(Dispatchers.Default).launch {
-            safeProgressHandler(error = _error){
+            safeProgressHandler(error = _error) {
                 getAllTournamentsUseCase.invoke().let {
-                    viewList.clear()
-                    for (tournament in it){
-                        viewList.add(tournament)
-                    }
-                    _finishLoadTournaments.postValue(Event(true))
+                    if (it.isNotEmpty())
+                        _tournamentListDownloaded.postValue(Event(it))
                 }
             }
         }
     }
-
 }

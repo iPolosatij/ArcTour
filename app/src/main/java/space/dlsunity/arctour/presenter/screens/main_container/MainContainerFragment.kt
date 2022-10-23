@@ -17,6 +17,7 @@ import space.dlsunity.arctour.presenter.screens.errors.ErrorModel
 import space.dlsunity.arctour.presenter.screens.main_container.destinations.MainDestination
 import space.dlsunity.arctour.presenter.screens.main_container.screens.profile.ProfileFragment
 import space.dlsunity.arctour.presenter.screens.main_container.screens.tournaments.TournamentsListFragment
+import space.dlsunity.arctour.presenter.screens.main_container.screens.tournaments.create.CreateTournamentFragment
 import space.dlsunity.arctour.utils.extensions.collectWhenStarted
 import space.dlsunity.arctour.utils.navigation.navigateSafe
 import space.dlsunity.arctour.utils.tools.DialogHelper
@@ -47,15 +48,22 @@ class MainContainerFragment :
             }
             if (screen == WORKOUTS || screen == NOTES || screen == TOURNAMENTS) {
                 addBtn.visibility = View.VISIBLE
+
                 addBtn.setOnClickListener {
-                    if (screen == TOURNAMENTS) { }
+                    if (screen == TOURNAMENTS) {
+                        viewModel.setScreen(R.id.create_tournament)
+                    }
                     if (screen == NOTES) { }
                     if (screen == WORKOUTS) { }
                 }
+            }else{
+                addBtn.visibility = View.GONE
             }
             toolbar.setOnClickListener {
                 when (screen) {
-                    //TO_DO back button toolbar actions
+                    CREATE_TOURNAMENT ->{
+                        viewModel.setScreen(R.id.item3)
+                    }
                 }
             }
         }
@@ -121,7 +129,6 @@ class MainContainerFragment :
 
     private fun observeVm() {
         viewModel.apply {
-            downloadAllTournament()
             navigateCommander.collectWhenStarted(viewLifecycleOwner, ::handlerDestination)
             error.collectWhenStarted(viewLifecycleOwner, ::handlerError)
             needShowBottomMenu.observe(viewLifecycleOwner) {
@@ -211,11 +218,7 @@ class MainContainerFragment :
     private fun setupBinding() {
         binding.apply {
             viewModel.apply {
-                addBtn.setOnClickListener {
-                    when (new) {
-                        //TO_DO add logic to select a specific action
-                    }
-                }
+
             }
         }
     }
@@ -235,6 +238,10 @@ class MainContainerFragment :
                 }
                 R.id.item1 -> {
 
+                }
+                R.id.create_tournament-> {
+                    childFragmentManager.beginTransaction()
+                        .replace(fragmentContainer.id, CreateTournamentFragment()).commit()
                 }
             }
         }
@@ -291,5 +298,10 @@ class MainContainerFragment :
         const val WORKOUTS = "Workouts"
         const val TOURNAMENTS = "Tournaments"
         const val PROFILE = "Profile"
+        const val CREATE_TOURNAMENT = "Создать турнир"
+
+        //
+        const val TOURNAMENT = "Tournament"
+        const val WORKOUT = "Workout"
     }
 }

@@ -14,12 +14,14 @@ import space.dlsunity.arctour.utils.auxiliary.Event
 
 class CreateTournamentViewModel(
     private val localContext: Context,
-    private val saveTournamentUseCase: SaveTournamentUseCase
+    private val saveTournamentUseCase: SaveTournamentUseCase,
     ) : BaseViewModel() {
 
     private val _showAlert: MutableLiveData<Event<String>> = MutableLiveData<Event<String>>()
     val showAlert: LiveData<Event<String>>
         get() = _showAlert
+
+
 
     var viewListTarget: ArrayList<Tournament>? = null
     var viewListLaps: ArrayList<Tournament>? = null
