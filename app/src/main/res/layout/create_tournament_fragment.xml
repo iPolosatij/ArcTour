@@ -7,12 +7,14 @@
     android:id="@+id/create_tournament">
 
     <ScrollView
+        android:id="@+id/scrollView2"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
+
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -39,137 +41,140 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:orientation="vertical"
-                android:layout_marginTop="8dp">
+                android:layout_marginTop="8dp"
+                android:orientation="vertical">
 
                 <TextView
                     android:id="@+id/tournament_name_title"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:textSize="16sp"
                     android:gravity="center"
-                    android:text="Название турнира" />
+                    android:text="Название турнира"
+                    android:textSize="16sp" />
 
                 <EditText
                     android:id="@+id/tournament_name"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:hint="Укажите название"
                     android:inputType="textPersonName"
-                    android:textSize="16sp"
 
-                    android:hint="Укажите название" />
+                    android:textSize="16sp" />
             </LinearLayout>
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:orientation="vertical"
-                android:layout_marginTop="8dp">
+                android:layout_marginTop="8dp"
+                android:orientation="vertical">
 
                 <TextView
                     android:id="@+id/tournament_date_title"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:textSize="16sp"
                     android:gravity="center"
-                    android:text="Дата проведения" />
+                    android:text="Дата проведения"
+                    android:textSize="16sp" />
 
                 <EditText
                     android:id="@+id/tournament_date"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:hint="Укажите название"
                     android:inputType="datetime"
-                    android:textSize="16sp"
-                    android:hint="Укажите название" />
+                    android:textSize="16sp" />
             </LinearLayout>
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:orientation="vertical"
-                android:layout_marginTop="8dp">
+                android:layout_marginTop="8dp"
+                android:orientation="vertical">
 
                 <TextView
                     android:id="@+id/tournament_country_title"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:textSize="16sp"
                     android:gravity="center"
-                    android:text="Страна" />
+                    android:text="Страна"
+                    android:textSize="16sp" />
 
                 <EditText
                     android:id="@+id/tournament_country"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:hint="Укажите страну"
                     android:inputType="textMultiLine"
-                    android:textSize="16sp"
-                    android:hint="Укажите страну" />
+                    android:textSize="16sp" />
             </LinearLayout>
+
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:orientation="vertical"
-                android:layout_marginTop="8dp">
+                android:layout_marginTop="8dp"
+                android:orientation="vertical">
 
                 <TextView
                     android:id="@+id/tournament_region_title"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:textSize="16sp"
                     android:gravity="center"
-                    android:text="Регион" />
+                    android:text="Регион"
+                    android:textSize="16sp" />
 
                 <EditText
                     android:id="@+id/tournament_region"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:hint="Укажите регион"
                     android:inputType="textPersonName"
-                    android:textSize="16sp"
-                    android:hint="Укажите регион" />
+                    android:textSize="16sp" />
             </LinearLayout>
+
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:orientation="vertical"
-                android:layout_marginTop="8dp">
+                android:layout_marginTop="8dp"
+                android:orientation="vertical">
 
                 <TextView
                     android:id="@+id/tournament_address_title"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:textSize="16sp"
                     android:gravity="center"
-                    android:text="Адрес" />
+                    android:text="Адрес"
+                    android:textSize="16sp" />
 
                 <EditText
                     android:id="@+id/tournament_address"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:hint="Укажите адрес"
                     android:inputType="textPersonName|textMultiLine"
-                    android:textSize="16sp"
-                    android:hint="Укажите адрес" />
+                    android:textSize="16sp" />
             </LinearLayout>
+
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:orientation="vertical"
-                android:layout_marginTop="8dp">
+                android:layout_marginTop="8dp"
+                android:orientation="vertical">
 
                 <TextView
                     android:id="@+id/tournament_description_title"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:textSize="16sp"
                     android:gravity="center"
-                    android:text="Описание турнира" />
+                    android:text="Описание турнира"
+                    android:textSize="16sp" />
 
                 <EditText
                     android:id="@+id/tournament_description"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:hint="Укажите описание"
                     android:inputType="textPersonName|textMultiLine"
-                    android:textSize="16sp"
-                    android:hint="Укажите описание" />
+                    android:textSize="16sp" />
             </LinearLayout>
 
             <androidx.appcompat.widget.AppCompatTextView
@@ -178,8 +183,8 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
                 android:layout_marginTop="12dp"
+                android:background="@drawable/blue_action_button"
                 android:gravity="center"
-                android:background="@drawable/gray_button"
                 android:padding="8dp"
                 android:text="Добавить этап"
                 android:textColor="@color/white"
@@ -189,23 +194,74 @@
                 android:id="@+id/part_list"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
-                android:layout_marginTop="8dp" >
+                android:layout_marginTop="8dp"
+                app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager">
 
             </androidx.recyclerview.widget.RecyclerView>
 
             <androidx.appcompat.widget.AppCompatButton
                 android:id="@+id/create"
                 android:layout_width="wrap_content"
-                android:padding="8dp"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
                 android:layout_marginTop="12dp"
                 android:layout_marginBottom="12dp"
                 android:background="@drawable/gray_button"
+                android:padding="8dp"
                 android:text="Создать"
                 android:textAllCaps="false"
                 android:textColor="@color/white" />
         </LinearLayout>
     </ScrollView>
+
+    <androidx.cardview.widget.CardView
+        android:id="@+id/enter_lap_name"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        android:visibility="gone"
+        app:cardCornerRadius="12dp">
+        <androidx.appcompat.widget.LinearLayoutCompat
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@drawable/gray_frame_12_all_corner_radius"
+            android:orientation="vertical"
+            android:gravity="center"
+            android:padding="12dp">
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/lap_title"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Укажите имя этапа"/>
+            <androidx.appcompat.widget.AppCompatEditText
+                android:id="@+id/lap_name"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="Имя этапа"/>
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/targets_title"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Количество мишеней"/>
+
+            <androidx.appcompat.widget.AppCompatEditText
+                android:id="@+id/target_count"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="Укажите количество"
+                android:inputType="number"/>
+            <androidx.appcompat.widget.AppCompatButton
+                android:id="@+id/create_part"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@drawable/blue_action_button"
+                android:text="Добавить этап"
+                android:textColor="@color/white"/>
+        </androidx.appcompat.widget.LinearLayoutCompat>
+    </androidx.cardview.widget.CardView>
+
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -13,12 +13,13 @@ import space.dlsunity.arctour.domain.model.Item
 @TypeConverters(Converters::class)
 @Serializable
 data class Tournament(
-    @ColumnInfo(name = "photo") var photo: String?,
+    @ColumnInfo(name = "photo") var photo: String,
     @PrimaryKey var tournamentId: String,
     @ColumnInfo(name = "name") var name: String,
     @ColumnInfo(name = "country") var country: String,
     @ColumnInfo(name = "description") var description: String,
     @ColumnInfo(name = "region") var region: String,
+    @ColumnInfo(name = "address") var address: String,
     @ColumnInfo(name = "date") var date: String,
     @ColumnInfo(name = "laps") var laps: List<Lap>,
     @ColumnInfo(name = "participants") var participants: List<Participant>,

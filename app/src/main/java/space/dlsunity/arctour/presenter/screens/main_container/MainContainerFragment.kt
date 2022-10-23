@@ -286,7 +286,7 @@ class MainContainerFragment :
                                 .commit()
                     }
                     viewModel.changedAvatar = false
-                  //  viewModel.setScreen(R.id.profile)
+                  //viewModel.setScreen(R.id.profile)
                 }
             }
         }

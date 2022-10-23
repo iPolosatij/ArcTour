@@ -4,9 +4,12 @@ import android.os.Bundle
 import android.util.Log
 import android.view.View
 import androidx.activity.OnBackPressedCallback
+import androidx.core.widget.addTextChangedListener
 import by.kirich1409.viewbindingdelegate.viewBinding
 import org.koin.androidx.viewmodel.ext.android.sharedViewModel
 import space.dlsunity.arctour.R
+import space.dlsunity.arctour.data.room.data.Lap
+import space.dlsunity.arctour.data.room.data.Target
 import space.dlsunity.arctour.data.room.data.Tournament
 import space.dlsunity.arctour.databinding.CreateTournamentFragmentBinding
 import space.dlsunity.arctour.presenter.base.mvvm.BaseMvvmFragment
@@ -15,6 +18,7 @@ import space.dlsunity.arctour.presenter.screens.main_container.MainContainerFrag
 import space.dlsunity.arctour.presenter.screens.main_container.MainContainerViewModel
 import space.dlsunity.arctour.utils.extensions.collectWhenStarted
 import space.dlsunity.arctour.utils.tools.DialogHelper
+import java.util.*
 
 class CreateTournamentFragment : BaseMvvmFragment<CreateTournamentViewModel>(R.layout.create_tournament_fragment) {
 
@@ -39,6 +43,12 @@ class CreateTournamentFragment : BaseMvvmFragment<CreateTournamentViewModel>(R.l
                     showAlert(message)
                 }
             }
+
+            tournamentWasSaved.observe(viewLifecycleOwner) {
+                it.getFirstOrNull()?.let {
+                    containerViewModel.setScreen(R.id.item3)
+                }
+            }
         }
     }
 
@@ -54,7 +64,92 @@ class CreateTournamentFragment : BaseMvvmFragment<CreateTournamentViewModel>(R.l
     private fun setupBinding() {
         binding.apply {
             viewModel.apply {
+                tournamentAddress.addTextChangedListener {
+                    if(isPossibleCreate())
+                        create.background = requireContext().getDrawable(R.drawable.blue_action_button)
+                    else
+                        create.background = requireContext().getDrawable(R.drawable.gray_button)
+                }
+                tournamentCountry.addTextChangedListener {
+                    if(isPossibleCreate())
+                        create.background = requireContext().getDrawable(R.drawable.blue_action_button)
+                    else
+                        create.background = requireContext().getDrawable(R.drawable.gray_button)
+                }
+                tournamentRegion.addTextChangedListener {
+                    if(isPossibleCreate())
+                        create.background = requireContext().getDrawable(R.drawable.blue_action_button)
+                    else
+                        create.background = requireContext().getDrawable(R.drawable.gray_button)
+                }
+                tournamentAddress.addTextChangedListener {
+                    if(isPossibleCreate())
+                        create.background = requireContext().getDrawable(R.drawable.blue_action_button)
+                    else
+                        create.background = requireContext().getDrawable(R.drawable.gray_button)
+                }
+                tournamentName.addTextChangedListener {
+                    if(isPossibleCreate())
+                        create.background = requireContext().getDrawable(R.drawable.blue_action_button)
+                    else
+                        create.background = requireContext().getDrawable(R.drawable.gray_button)
+                }
+                tournamentDescription.addTextChangedListener {
+                    if(isPossibleCreate())
+                        create.background = requireContext().getDrawable(R.drawable.blue_action_button)
+                    else
+                        create.background = requireContext().getDrawable(R.drawable.gray_button)
+                }
 
+                addPart.setOnClickListener {
+                    enterLapName.visibility = View.VISIBLE
+                }
+
+                createPart.setOnClickListener {
+                    if (lapName.text.toString().isNotEmpty() && targetCount.text.toString().isNotEmpty()){
+                        val targetCount = targetCount.text.toString().toInt()
+                        val targets = arrayListOf<Target>()
+                        if (targetCount>0){
+                            for(i in 1..targetCount)
+                            targets.add(Target(i, null))
+                        }
+                        viewListLaps.add(Lap(name = lapName.text.toString(), targets = targets))
+                        enterLapName.visibility = View.GONE
+
+                    }
+                }
+
+                create.setOnClickListener {
+                    if (isPossibleCreate()) {
+                        saveTournament(
+                            Tournament(
+                                address = tournamentAddress.text.toString(),
+                                region = tournamentRegion.text.toString(),
+                                country = tournamentCountry.text.toString(),
+                                name = tournamentName.text.toString(),
+                                description = tournamentDescription.text.toString(),
+                                tournamentId = UUID.randomUUID().toString(),
+                                date = tournamentDate.text.toString(),
+                                laps = viewListLaps,
+                                participants = viewListParticipant,
+                                photo = photo
+                            )
+                        )
+                    }
+                }
+            }
+        }
+    }
+
+    private fun isPossibleCreate(): Boolean {
+        binding.apply {
+            viewModel.apply {
+              return (tournamentAddress.text.isNotEmpty()
+                      && tournamentCountry.text.isNotEmpty()
+                      && tournamentDate.text.isNotEmpty()
+                      && tournamentName.text.isNotEmpty()
+                      && tournamentRegion.text.isNotEmpty()
+                      && tournamentDescription.text.isNotEmpty())
             }
         }
     }

@@ -6,5 +6,5 @@ import kotlinx.serialization.Serializable
 data class Target(
     val number: Int,
     var photo: String?,
-    val participants: ArrayList<Participant>
+    val participants: ArrayList<Participant> = arrayListOf()
 )
