@@ -21,6 +21,6 @@ data class Tournament(
     @ColumnInfo(name = "region") var region: String,
     @ColumnInfo(name = "address") var address: String,
     @ColumnInfo(name = "date") var date: String,
-    @ColumnInfo(name = "laps") var laps: List<Lap>,
+    @ColumnInfo(name = "laps") var parts: List<Part>,
     @ColumnInfo(name = "participants") var participants: List<Participant>,
 ): Item

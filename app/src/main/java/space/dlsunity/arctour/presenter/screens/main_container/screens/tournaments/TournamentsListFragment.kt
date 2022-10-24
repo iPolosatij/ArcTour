@@ -61,15 +61,9 @@ class TournamentsListFragment:
                 }
             }
 
-            showAlert.observe(viewLifecycleOwner) {
-                it.getFirstOrNull()?.let {
-                    tournamentsListAdapter.submitList(viewList as List<Tournament>)
-                }
-            }
-
             tournamentListDownloaded.observe(viewLifecycleOwner) {
                 it.getFirstOrNull()?.let { list ->
-                    viewList = list as ArrayList<Tournament>
+                    tournamentsListAdapter.submitList(viewList as List<Tournament>)
                     tournamentsListAdapter.notifyDataSetChanged()
                 }
             }
@@ -89,7 +83,6 @@ class TournamentsListFragment:
             viewModel.apply {
                 tournamentsList.adapter = tournamentsListAdapter
                 tournamentsListAdapter.submitList(viewList as List<Tournament>)
-
             }
         }
     }

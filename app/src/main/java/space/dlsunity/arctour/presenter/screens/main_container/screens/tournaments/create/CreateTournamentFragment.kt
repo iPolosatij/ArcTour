@@ -8,14 +8,17 @@ import androidx.core.widget.addTextChangedListener
 import by.kirich1409.viewbindingdelegate.viewBinding
 import org.koin.androidx.viewmodel.ext.android.sharedViewModel
 import space.dlsunity.arctour.R
-import space.dlsunity.arctour.data.room.data.Lap
+import space.dlsunity.arctour.data.room.data.Part
 import space.dlsunity.arctour.data.room.data.Target
 import space.dlsunity.arctour.data.room.data.Tournament
 import space.dlsunity.arctour.databinding.CreateTournamentFragmentBinding
+import space.dlsunity.arctour.domain.model.Item
+import space.dlsunity.arctour.presenter.base.adapter.MultiItemsAdapter
 import space.dlsunity.arctour.presenter.base.mvvm.BaseMvvmFragment
 import space.dlsunity.arctour.presenter.screens.errors.ErrorModel
 import space.dlsunity.arctour.presenter.screens.main_container.MainContainerFragment
 import space.dlsunity.arctour.presenter.screens.main_container.MainContainerViewModel
+import space.dlsunity.arctour.presenter.screens.main_container.screens.tournaments.create.list.PartListItem
 import space.dlsunity.arctour.utils.extensions.collectWhenStarted
 import space.dlsunity.arctour.utils.tools.DialogHelper
 import java.util.*
@@ -26,6 +29,14 @@ class CreateTournamentFragment : BaseMvvmFragment<CreateTournamentViewModel>(R.l
     val containerViewModel: MainContainerViewModel by sharedViewModel()
 
     private val binding: CreateTournamentFragmentBinding by viewBinding()
+
+    private val partListAdapter: MultiItemsAdapter by lazy {
+        MultiItemsAdapter(
+            listOf(
+                PartListItem(::shortTap, ::longTap, ::deleteTap, true)
+            )
+        )
+    }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -105,6 +116,9 @@ class CreateTournamentFragment : BaseMvvmFragment<CreateTournamentViewModel>(R.l
                     enterLapName.visibility = View.VISIBLE
                 }
 
+                partList.adapter = partListAdapter
+                partListAdapter.submitList(viewListParts as List<Item>)
+
                 createPart.setOnClickListener {
                     if (lapName.text.toString().isNotEmpty() && targetCount.text.toString().isNotEmpty()){
                         val targetCount = targetCount.text.toString().toInt()
@@ -113,9 +127,12 @@ class CreateTournamentFragment : BaseMvvmFragment<CreateTournamentViewModel>(R.l
                             for(i in 1..targetCount)
                             targets.add(Target(i, null))
                         }
-                        viewListLaps.add(Lap(name = lapName.text.toString(), targets = targets))
+                        viewListParts.add(
+                            Part(UUID.randomUUID().toString(),
+                            name = lapName.text.toString(),
+                            targets = targets))
                         enterLapName.visibility = View.GONE
-
+                        partListAdapter.notifyDataSetChanged()
                     }
                 }
 
@@ -130,7 +147,7 @@ class CreateTournamentFragment : BaseMvvmFragment<CreateTournamentViewModel>(R.l
                                 description = tournamentDescription.text.toString(),
                                 tournamentId = UUID.randomUUID().toString(),
                                 date = tournamentDate.text.toString(),
-                                laps = viewListLaps,
+                                parts = viewListParts,
                                 participants = viewListParticipant,
                                 photo = photo
                             )
@@ -149,7 +166,8 @@ class CreateTournamentFragment : BaseMvvmFragment<CreateTournamentViewModel>(R.l
                       && tournamentDate.text.isNotEmpty()
                       && tournamentName.text.isNotEmpty()
                       && tournamentRegion.text.isNotEmpty()
-                      && tournamentDescription.text.isNotEmpty())
+                      && tournamentDescription.text.isNotEmpty()
+                      && viewListParts.isNotEmpty())
             }
         }
     }
@@ -173,7 +191,11 @@ class CreateTournamentFragment : BaseMvvmFragment<CreateTournamentViewModel>(R.l
         activity?.onBackPressedDispatcher?.addCallback(viewLifecycleOwner, callback)
     }
 
-    private fun shortTap(item: Tournament){}
-    private fun longTap(item: Tournament){}
+    private fun shortTap(item: Part){}
+    private fun longTap(item: Part){}
+    private fun deleteTap(item: Part){
+        viewModel.viewListParts.remove(item)
+        partListAdapter.notifyDataSetChanged()
+    }
 
 }

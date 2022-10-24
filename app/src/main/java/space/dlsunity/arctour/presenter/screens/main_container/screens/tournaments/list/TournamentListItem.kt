@@ -66,9 +66,7 @@ class TournamentListItem (private val shortTap: (Tournament) -> Unit,
             super.onBind(item)
             binding.apply {
                 CoroutineScope(Dispatchers.IO).launch {
-                    item.photo?.let {
-                        binding.avatar.setImageBitmap(ImageManager.getBitmapsFromUris(listOf(it))[0])
-                    }
+                    if(item.photo.isNotEmpty()) avatar.setImageBitmap(ImageManager.getBitmapsFromUris(listOf(item.photo))[0])
                 }
                 title.text = item.name
                 description.text = item.description

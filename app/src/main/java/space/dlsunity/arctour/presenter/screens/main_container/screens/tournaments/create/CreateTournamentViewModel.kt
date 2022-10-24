@@ -9,7 +9,7 @@ import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.MutableSharedFlow
 import kotlinx.coroutines.flow.filterNotNull
 import kotlinx.coroutines.launch
-import space.dlsunity.arctour.data.room.data.Lap
+import space.dlsunity.arctour.data.room.data.Part
 import space.dlsunity.arctour.data.room.data.Participant
 import space.dlsunity.arctour.data.room.data.Target
 import space.dlsunity.arctour.data.room.data.Tournament
@@ -34,7 +34,7 @@ private val _tournamentWasSaved: MutableLiveData<Event<Boolean>> = MutableLiveDa
 
 
     var viewListTarget: ArrayList<Target> = arrayListOf()
-    var viewListLaps: ArrayList<Lap> = arrayListOf()
+    var viewListParts: ArrayList<Part> = arrayListOf()
     var viewListParticipant: ArrayList<Participant> = arrayListOf()
     var photo: String = ""
 

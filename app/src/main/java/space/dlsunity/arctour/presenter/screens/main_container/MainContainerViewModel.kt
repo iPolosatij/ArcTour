@@ -113,7 +113,7 @@ class MainContainerViewModel(
 
     var webViewIsOpen = false
 
-    val defaultPhotoProfile = localContext.getDrawable(R.drawable.ic_profile_image)?.toBitmap()
+    val defaultPhotoProfile = localContext.getDrawable(R.drawable.ic_account_stock)?.toBitmap()
 
     var photoMain: Bitmap? = defaultPhotoProfile
 
