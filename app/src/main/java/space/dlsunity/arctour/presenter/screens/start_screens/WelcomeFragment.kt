@@ -2,12 +2,15 @@ package space.dlsunity.arctour.presenter.screens.start_screens
 
 import android.os.Bundle
 import android.view.View
+import android.widget.Toast
+import androidx.activity.OnBackPressedCallback
 import androidx.navigation.NavDirections
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import by.kirich1409.viewbindingdelegate.viewBinding
 import org.koin.androidx.viewmodel.ext.android.sharedViewModel
 import space.dlsunity.arctour.R
+import space.dlsunity.arctour.data.room.data.User
 import space.dlsunity.arctour.databinding.WelcomeFragmentBinding
 import space.dlsunity.arctour.presenter.base.navigation.NavMvvmFragment
 import space.dlsunity.arctour.presenter.screens.errors.ErrorModel
@@ -30,6 +33,7 @@ class WelcomeFragment: NavMvvmFragment<AppDestination, WelcomeViewModel>(R.layou
         super.onViewCreated(view, savedInstanceState)
         observeVm()
         setUpButtons()
+        setUpBackPressed()
     }
 
     override fun handlerDestination(destination: AppDestination) {
@@ -44,16 +48,99 @@ class WelcomeFragment: NavMvvmFragment<AppDestination, WelcomeViewModel>(R.layou
         viewModel.apply {
             navigateCommander.collectWhenStarted(viewLifecycleOwner, ::handlerDestination)
             error.collectWhenStarted(viewLifecycleOwner, ::handlerError)
+
+            message.observe(viewLifecycleOwner) {
+                it.getFirstOrNull()?.let { message ->
+                    if (message.isEmpty()){
+                        toMain()
+                    }else{
+                        Toast.makeText(requireContext(), message, Toast.LENGTH_LONG).show()
+                    }
+                }
+            }
         }
     }
 
     private fun setUpButtons(){
         binding.apply {
             login.setOnClickListener {
-                viewModel.toMain()
+                nameValue.visibility = View.GONE
+                lastnameValue.visibility = View.GONE
+                accept.text = "Login"
+                changedOrAccepted(false)
+                viewModel.state = WelcomeState.Login
             }
             registration.setOnClickListener {
+                changedOrAccepted(false)
+                nameValue.visibility = View.VISIBLE
+                lastnameValue.visibility = View.VISIBLE
+                accept.text = "Registration"
+                viewModel.state = WelcomeState.Registration
+            }
+            accept.setOnClickListener {
+                if (
+                    loginValue.text?.isNotEmpty() == true
+                    && passwordValue.text?.isNotEmpty() == true
+                    && viewModel.state == WelcomeState.Login){
+                    viewModel.defaultPhotoProfile?.let { photo ->
+                        User(
+                            photo = photo,
+                            memberId = loginValue.text.toString(),
+                            password = passwordValue.text.toString(),
+                            email = loginValue.text.toString()
+                        )
+                    }?.let { user ->
+                        viewModel.acceptUser(
+                            user
+                        )
+                    }
+                }else if (
+                    loginValue.text?.isNotEmpty() == true
+                    && passwordValue.text?.isNotEmpty() == true
+                    && nameValue.text?.isNotEmpty() == true
+                    && lastnameValue.text?.isNotEmpty() == true
+                    && viewModel.state == WelcomeState.Registration){
+                    viewModel.defaultPhotoProfile?.let { photo ->
+                        User(
+                            photo = photo,
+                            memberId = loginValue.text.toString(),
+                            password = passwordValue.text.toString(),
+                            name = nameValue.text.toString(),
+                            last_name = lastnameValue.text.toString(),
+                            email = loginValue.text.toString()
+                        )
+                    }?.let { user ->
+                        viewModel.acceptUser(
+                            user
+                        )
+                    }
+                }else{
+                    Toast.makeText(requireContext(), " Все поля необходимо заполнить ", Toast.LENGTH_LONG).show()
+                }
+            }
+        }
+    }
 
+    private fun setUpBackPressed() {
+        val callback = object : OnBackPressedCallback(true) {
+            override fun handleOnBackPressed() {
+                if(viewModel.state != null){
+                    changedOrAccepted(true)
+                }
+            }
+        }
+        activity?.onBackPressedDispatcher?.addCallback(viewLifecycleOwner, callback)
+    }
+
+    private fun changedOrAccepted(changed: Boolean){
+        binding.apply {
+            if (changed){
+                viewModel.state = null
+                changedFrame.visibility = View.VISIBLE
+                loginFrame.visibility = View.GONE
+            }else{
+                changedFrame.visibility = View.GONE
+                loginFrame.visibility = View.VISIBLE
             }
         }
     }
@@ -64,3 +151,4 @@ class WelcomeFragment: NavMvvmFragment<AppDestination, WelcomeViewModel>(R.layou
         }
     }
 }
+enum class WelcomeState{ Login, Registration}

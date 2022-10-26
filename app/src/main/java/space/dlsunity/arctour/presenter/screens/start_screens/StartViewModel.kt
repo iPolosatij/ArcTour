@@ -22,7 +22,7 @@ class StartViewModel(): BaseViewModel() {
     private fun navigateToWelcome() {
         viewModelScope.launch {
             delay(3000)
-            _navigateCommander.emit(AppDestination.ToMain)
+            _navigateCommander.emit(AppDestination.ToWelcome)
         }
     }
 }

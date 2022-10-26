@@ -20,6 +20,8 @@ import space.dlsunity.arctour.R
 import space.dlsunity.arctour.data.room.data.Tournament
 import space.dlsunity.arctour.data.room.data.User
 import space.dlsunity.arctour.domain.usecases.tournaments.*
+import space.dlsunity.arctour.domain.usecases.user.GetAllUsersUseCase
+import space.dlsunity.arctour.domain.usecases.user.SaveUserUseCase
 import space.dlsunity.arctour.presenter.base.mvvm.BaseViewModel
 import space.dlsunity.arctour.presenter.screens.errors.ErrorModel
 import space.dlsunity.arctour.presenter.screens.main_container.destinations.MainDestination
@@ -34,7 +36,10 @@ class MainContainerViewModel(
     private val saveTournamentUseCase: SaveTournamentUseCase,
     private val deleteTournamentUseCase: DeleteTournamentUseCase,
     private val getTournamentByIdUseCase: GetTournamentByIdUseCase,
-    private val deleteAllTournamentsUseCase: DeleteAllTournamentsUseCase
+    private val deleteAllTournamentsUseCase: DeleteAllTournamentsUseCase,
+    private val getAllUsersUseCase: GetAllUsersUseCase,
+    private val saveUserUseCase: SaveUserUseCase,
+
 ) : BaseViewModel() {
 
     private val _navigateCommander = MutableSharedFlow<MainDestination>()
@@ -157,8 +162,10 @@ class MainContainerViewModel(
     fun saveUser() {
         CoroutineScope(Dispatchers.IO).launch {
             safeProgressHandler(error = _error) {
-                user?.let {
-                    _userWasSaved.postValue(Event(it))
+                user?.let {user->
+                    saveUserUseCase.invoke(user).let {
+                        _userWasSaved.postValue(Event(user))
+                    }
                 }
             }
         }
@@ -200,21 +207,22 @@ class MainContainerViewModel(
     fun setProfilePhoto(byteArray: ByteArray) {
         CoroutineScope(Dispatchers.Default).launch {
             safeProgressHandler(error = _error) {
-                val bitMap = BitmapFactory.decodeByteArray(byteArray, 0, byteArray.size)
-                val radius = if (bitMap.width < bitMap.height) bitMap.width / 2 else bitMap.height / 2
-                ImageManager.getCroppedBitmap(
-                    bitMap,
-                    bitMap.width / 2,
-                    bitMap.height / 2,
-                    radius
-                )?.let { photo ->
-                    photoMain = photo
-                    user?.photo = bitMap.toByteArray()
-                    updateProfilePhoto()
-                    setBottomMenuIc(photo)
-                    Log.d("MainViewModel --------->", "SetProfilePhoto")
+                if (byteArray.isNotEmpty()){
+                    val bitMap = BitmapFactory.decodeByteArray(byteArray, 0, byteArray.size)
+                    val radius = if (bitMap.width < bitMap.height) bitMap.width / 2 else bitMap.height / 2
+                    ImageManager.getCroppedBitmap(
+                        bitMap,
+                        bitMap.width / 2,
+                        bitMap.height / 2,
+                        radius
+                    )?.let { photo ->
+                        photoMain = photo
+                        user?.photo = bitMap.toByteArray()
+                        updateProfilePhoto()
+                        setBottomMenuIc(photo)
+                        Log.d("MainViewModel --------->", "SetProfilePhoto")
+                    }
                 }
-
             }
         }
     }
@@ -259,6 +267,17 @@ class MainContainerViewModel(
         CoroutineScope(Dispatchers.Default).launch {
             safeProgressHandler(error = _error) {
                 deleteAllTournamentsUseCase.invoke()
+            }
+        }
+    }
+
+    fun downloadUser(){
+        CoroutineScope(Dispatchers.Default).launch {
+            safeProgressHandler(error = _error) {
+                getAllUsersUseCase.invoke().let {
+                    user = it[0]
+                    _userDownloaded.postValue(Event(it[0]))
+                }
             }
         }
     }

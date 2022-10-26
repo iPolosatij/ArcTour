@@ -131,6 +131,7 @@ class MainContainerFragment :
         viewModel.apply {
             navigateCommander.collectWhenStarted(viewLifecycleOwner, ::handlerDestination)
             error.collectWhenStarted(viewLifecycleOwner, ::handlerError)
+            downloadUser()
             needShowBottomMenu.observe(viewLifecycleOwner) {
                 it.getFirstOrNull()?.let { needShow ->
                     setShowBottomMenu(needShow)

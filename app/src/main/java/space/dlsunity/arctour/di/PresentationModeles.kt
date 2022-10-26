@@ -34,7 +34,14 @@ val presentationModule = module {
     }
 
     viewModel {
-        WelcomeViewModel()
+        WelcomeViewModel(
+            localContext = get<Context>(),
+            getAllUsersUseCase = get<GetAllUsersUseCase>(),
+            saveUserUseCase = get<SaveUserUseCase>(),
+            getUserByIdUseCase = get<GetUserByIdUseCase>(),
+            deleteAllTournamentsUseCase = get<DeleteAllTournamentsUseCase>(),
+            deleteAllUsersUseCase = get<DeleteAllUsersUseCase>()
+        )
     }
 
     viewModel {
@@ -44,7 +51,9 @@ val presentationModule = module {
             getTournamentByIdUseCase = get<GetTournamentByIdUseCase>(),
             saveTournamentUseCase = get<SaveTournamentUseCase>(),
             deleteAllTournamentsUseCase = get<DeleteAllTournamentsUseCase>(),
-            deleteTournamentUseCase = get<DeleteTournamentUseCase>()
+            deleteTournamentUseCase = get<DeleteTournamentUseCase>(),
+            getAllUsersUseCase = get<GetAllUsersUseCase>(),
+            saveUserUseCase = get<SaveUserUseCase>()
         )
     }
 

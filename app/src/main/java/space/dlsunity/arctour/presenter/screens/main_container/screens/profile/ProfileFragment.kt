@@ -4,9 +4,11 @@ import android.os.Bundle
 import android.util.Log
 import android.view.View
 import android.widget.ArrayAdapter
+import android.widget.TextView
 import by.kirich1409.viewbindingdelegate.viewBinding
 import org.koin.androidx.viewmodel.ext.android.sharedViewModel
 import space.dlsunity.arctour.R
+import space.dlsunity.arctour.data.room.data.User
 import space.dlsunity.arctour.databinding.ProfileFragmentBinding
 import space.dlsunity.arctour.presenter.base.mvvm.BaseMvvmFragment
 import space.dlsunity.arctour.presenter.screens.errors.ErrorModel
@@ -14,7 +16,6 @@ import space.dlsunity.arctour.presenter.screens.main_container.MainContainerFrag
 import space.dlsunity.arctour.presenter.screens.main_container.MainContainerViewModel
 import space.dlsunity.arctour.utils.extensions.collectWhenStarted
 import space.dlsunity.arctour.utils.extensions.toByteArray
-import java.util.*
 
 class ProfileFragment : BaseMvvmFragment<ProfileViewModel>(R.layout.profile_fragment) {
 
@@ -24,7 +25,6 @@ class ProfileFragment : BaseMvvmFragment<ProfileViewModel>(R.layout.profile_frag
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        updateFields()
         setUpBinding()
         observeVM()
         observeContainerVM()
@@ -32,7 +32,6 @@ class ProfileFragment : BaseMvvmFragment<ProfileViewModel>(R.layout.profile_frag
 
     private fun setUpBinding() {
         binding.apply {
-
             mainContainerViewModel.photoMain?.let { bitmap ->
                 if (bitmap == mainContainerViewModel.defaultPhotoProfile) {
                     profileImage.setImageBitmap(bitmap)
@@ -43,7 +42,7 @@ class ProfileFragment : BaseMvvmFragment<ProfileViewModel>(R.layout.profile_frag
             }
 
             addPhoto.setOnClickListener {
-                    mainContainerViewModel.setScreen(R.id.profile_image)
+                mainContainerViewModel.setScreen(R.id.profile_image)
             }
 
             ArrayAdapter.createFromResource(
@@ -57,10 +56,11 @@ class ProfileFragment : BaseMvvmFragment<ProfileViewModel>(R.layout.profile_frag
                 classValue.adapter = adapter
             }
             editSave.setOnClickListener {
-                if(viewModel.mode == Mode.Read){
+                if (viewModel.mode == Mode.Read) {
                     editSave.text = "Save"
                     fieldContainer.background = requireContext().getDrawable(R.color.lite_red)
-                    editSave.background = requireContext().getDrawable(R.drawable.white_action_button)
+                    editSave.background =
+                        requireContext().getDrawable(R.drawable.white_action_button)
                     logOut.visibility = View.GONE
                     viewModel.mode = Mode.Edit
                     nameSafety.isClickable = false
@@ -71,9 +71,9 @@ class ProfileFragment : BaseMvvmFragment<ProfileViewModel>(R.layout.profile_frag
                     phoneSafety.isClickable = false
                     bornDateSafety.isClickable = false
                     phoneSafety.isClickable = false
-                }else{
+                } else {
                     mainContainerViewModel.user?.apply {
-                        memberId = UUID.randomUUID().toString()
+                        memberId = emailValue.text.toString()
                         name = nameValue.text.toString()
                         last_name = lastnameValue.text.toString()
                         nick = nickValue.text.toString()
@@ -83,6 +83,9 @@ class ProfileFragment : BaseMvvmFragment<ProfileViewModel>(R.layout.profile_frag
                     }
                 }
             }
+            logOut.setOnClickListener {
+                mainContainerViewModel.logOut()
+            }
         }
     }
 
@@ -90,9 +93,9 @@ class ProfileFragment : BaseMvvmFragment<ProfileViewModel>(R.layout.profile_frag
         viewModel.apply {
             error.collectWhenStarted(viewLifecycleOwner, ::handlerError)
             needSaveUser.observe(viewLifecycleOwner) {
-                it.getFirstOrNull()?.let {
-                    mainContainerViewModel.user?.let { it1 -> saveUser(it1) }
-                    updateFields()
+                it.getFirstOrNull()?.let {user->
+                    saveUser(user)
+                    updateFields(user)
                 }
             }
 
@@ -101,7 +104,8 @@ class ProfileFragment : BaseMvvmFragment<ProfileViewModel>(R.layout.profile_frag
                     binding.apply {
                         editSave.text = "Edit profile"
                         fieldContainer.background = requireContext().getDrawable(R.color.white)
-                        editSave.background = requireContext().getDrawable(R.drawable.black_action_button)
+                        editSave.background =
+                            requireContext().getDrawable(R.drawable.black_action_button)
                         logOut.visibility = View.VISIBLE
                         viewModel.mode = Mode.Read
                         nameSafety.isClickable = true
@@ -124,8 +128,8 @@ class ProfileFragment : BaseMvvmFragment<ProfileViewModel>(R.layout.profile_frag
             showAddBtn(false, "")
             showFindBtn(false)
             userDownloaded.observe(viewLifecycleOwner) {
-                it.getFirstOrNull()?.let {
-                    updateFields()
+                it.getFirstOrNull()?.let {user->
+                    updateFields(user)
                 }
             }
             needUpdateProfilePhoto.observe(viewLifecycleOwner) {
@@ -148,12 +152,15 @@ class ProfileFragment : BaseMvvmFragment<ProfileViewModel>(R.layout.profile_frag
         }
     }
 
-    private fun updateFields() {
+    private fun updateFields(user: User) {
         binding.apply {
-            mainContainerViewModel.user.let { user ->
-                viewModel.apply {
-                    user?.photo?.let { mainContainerViewModel.setProfilePhoto(it) }
-                }
+            user.apply {
+                mainContainerViewModel.setProfilePhoto(photo)
+                nameValue.setText(name, TextView.BufferType.EDITABLE)
+                lastnameValue.setText(last_name, TextView.BufferType.EDITABLE)
+                nickValue.setText(nick, TextView.BufferType.EDITABLE)
+                phoneValue.setText(phone, TextView.BufferType.EDITABLE)
+                emailValue.setText(email, TextView.BufferType.EDITABLE)
             }
         }
     }

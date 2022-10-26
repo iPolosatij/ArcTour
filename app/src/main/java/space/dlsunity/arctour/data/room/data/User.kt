@@ -12,9 +12,10 @@ import space.dlsunity.arctour.domain.model.Item
 @TypeConverters(Converters::class)
 @Serializable
 data class User(
-    @ColumnInfo(name = "photo") var photo: ByteArray = byteArrayOf(0),
+    @ColumnInfo(name = "photo") var photo: ByteArray,
     @ColumnInfo(name = "photo_url") var photoUrl: String = "",
-    @PrimaryKey var memberId: String,
+    @PrimaryKey var memberId: String = "",
+    @ColumnInfo(name = "password") var password: String = "",
     @ColumnInfo(name = "name") var name: String = "",
     @ColumnInfo(name = "last_name") var last_name: String = "",
     @ColumnInfo(name = "nick") var nick: String = "",

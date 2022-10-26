@@ -12,7 +12,13 @@ class UserRepositoryImpl(
     }
 
     override suspend fun getAllUsers(): List<User> {
-        return userDao.getAll()
+        var userList = listOf<User>()
+        try {
+            userList = userDao.getAll()
+        }catch (e:Exception){
+
+        }
+        return userList
     }
 
     override suspend fun deleteUser(user: User) {

@@ -25,8 +25,8 @@ class ProfileViewModel(
 
     var vCard: VCard? = null
 
-    private val _needSaveUser: MutableLiveData<Event<Boolean>> = MutableLiveData<Event<Boolean>>()
-    val needSaveUser: LiveData<Event<Boolean>>
+    private val _needSaveUser: MutableLiveData<Event<User>> = MutableLiveData<Event<User>>()
+    val needSaveUser: LiveData<Event<User>>
         get() = _needSaveUser
 
     private val _userWasSaved: MutableLiveData<Event<Boolean>> = MutableLiveData<Event<Boolean>>()
@@ -81,7 +81,9 @@ class ProfileViewModel(
     fun getAllUsers(){
         CoroutineScope(Dispatchers.Default).launch {
             safeProgressHandler(error = _error) {
-               getAllUsersUseCase.invoke()
+               getAllUsersUseCase.invoke().let {
+                   _userWasLoaded.postValue(Event(it[0]))
+               }
             }
         }
     }
