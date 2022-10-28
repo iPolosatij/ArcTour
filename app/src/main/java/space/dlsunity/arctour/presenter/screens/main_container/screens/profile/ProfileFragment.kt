@@ -3,17 +3,20 @@ package space.dlsunity.arctour.presenter.screens.main_container.screens.profile
 import android.os.Bundle
 import android.util.Log
 import android.view.View
-import android.widget.ArrayAdapter
 import android.widget.TextView
 import by.kirich1409.viewbindingdelegate.viewBinding
 import org.koin.androidx.viewmodel.ext.android.sharedViewModel
 import space.dlsunity.arctour.R
+import space.dlsunity.arctour.data.models.BowClass
 import space.dlsunity.arctour.data.room.data.User
 import space.dlsunity.arctour.databinding.ProfileFragmentBinding
+import space.dlsunity.arctour.domain.model.Item
+import space.dlsunity.arctour.presenter.base.adapter.MultiItemsAdapter
 import space.dlsunity.arctour.presenter.base.mvvm.BaseMvvmFragment
 import space.dlsunity.arctour.presenter.screens.errors.ErrorModel
 import space.dlsunity.arctour.presenter.screens.main_container.MainContainerFragment
 import space.dlsunity.arctour.presenter.screens.main_container.MainContainerViewModel
+import space.dlsunity.arctour.presenter.screens.main_container.screens.profile.list.BowClassItem
 import space.dlsunity.arctour.utils.extensions.collectWhenStarted
 import space.dlsunity.arctour.utils.extensions.toByteArray
 
@@ -28,10 +31,21 @@ class ProfileFragment : BaseMvvmFragment<ProfileViewModel>(R.layout.profile_frag
         setUpBinding()
         observeVM()
         observeContainerVM()
+        updateFields()
+    }
+
+    private val bowClassListAdapter: MultiItemsAdapter by lazy {
+        MultiItemsAdapter(
+            listOf(
+                BowClassItem(::onSelectItem)
+            )
+        )
     }
 
     private fun setUpBinding() {
         binding.apply {
+
+            classesList.adapter = bowClassListAdapter
             mainContainerViewModel.photoMain?.let { bitmap ->
                 if (bitmap == mainContainerViewModel.defaultPhotoProfile) {
                     profileImage.setImageBitmap(bitmap)
@@ -41,20 +55,39 @@ class ProfileFragment : BaseMvvmFragment<ProfileViewModel>(R.layout.profile_frag
                 }
             }
 
+            classValue.setOnClickListener {
+                viewModel.selectList.clear()
+                mainContainerViewModel.user?.let {
+                    val tempList = arrayListOf<BowClass>()
+                    for(classBow in requireContext().resources.getStringArray(R.array.class_array)){
+                       val bowClassItem =  BowClass(
+                            className = classBow,
+                            selected = it.bow_class.contains(classBow))
+                        tempList.add(bowClassItem)
+                        if (bowClassItem.selected)
+                            viewModel.selectList.add(bowClassItem)
+                    }
+                    bowClassListAdapter.submitList(tempList as List<Item>)
+                }
+                classesChanged.visibility = View.VISIBLE
+            }
+
             addPhoto.setOnClickListener {
                 mainContainerViewModel.setScreen(R.id.profile_image)
             }
 
-            ArrayAdapter.createFromResource(
-                requireContext(),
-                R.array.class_array,
-                android.R.layout.simple_spinner_item
-            ).also { adapter ->
-                // Specify the layout to use when the list of choices appears
-                adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
-                // Apply the adapter to the spinner
-                classValue.adapter = adapter
+            saveClasses.setOnClickListener {
+                classesChanged.visibility = View.GONE
+                val tempList = arrayListOf<String>()
+                for(bowClass in viewModel.selectList){
+                    tempList.add(bowClass.className)
+                }
+                viewModel.selectList.clear()
+
+                mainContainerViewModel.user?.bow_class = tempList
+                updateFields()
             }
+
             editSave.setOnClickListener {
                 if (viewModel.mode == Mode.Read) {
                     editSave.text = "Save"
@@ -85,6 +118,30 @@ class ProfileFragment : BaseMvvmFragment<ProfileViewModel>(R.layout.profile_frag
             }
             logOut.setOnClickListener {
                 mainContainerViewModel.logOut()
+            }
+        }
+    }
+
+    private fun updateFields(){
+        binding.apply {
+            mainContainerViewModel.user?.apply {
+                var classes = ""
+                var first = true
+                for (bowClass in bow_class){
+                    if (first) {
+                        classes = bowClass
+                        first = false
+                    }
+                    else
+                        classes = "$classes, $bowClass"
+                }
+                emailValue.setText(memberId)
+                nameValue.setText(name)
+                lastnameValue.setText(last_name)
+                nickValue.setText(nick)
+                phoneValue.setText(phone)
+                emailValue.setText(email)
+                classValue.text = classes
             }
         }
     }
@@ -167,5 +224,13 @@ class ProfileFragment : BaseMvvmFragment<ProfileViewModel>(R.layout.profile_frag
 
     private fun handlerError(ex: ErrorModel) {
         Log.d("unknown", ex.exception.stackTraceToString())
+    }
+
+    private fun onSelectItem(item: BowClass) {
+        if (item.selected) {
+            viewModel.selectList.remove(item)
+        } else {
+            viewModel.selectList.add(item)
+        }
     }
 }

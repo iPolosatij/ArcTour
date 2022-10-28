@@ -9,6 +9,7 @@ import kotlinx.coroutines.flow.MutableSharedFlow
 import kotlinx.coroutines.flow.filterNotNull
 import kotlinx.coroutines.launch
 import org.jivesoftware.smackx.vcardtemp.packet.VCard
+import space.dlsunity.arctour.data.models.BowClass
 import space.dlsunity.arctour.data.room.data.User
 import space.dlsunity.arctour.domain.usecases.user.*
 import space.dlsunity.arctour.presenter.base.mvvm.BaseViewModel
@@ -24,6 +25,7 @@ class ProfileViewModel(
 ) : BaseViewModel() {
 
     var vCard: VCard? = null
+    var selectList: ArrayList<BowClass> = arrayListOf()
 
     private val _needSaveUser: MutableLiveData<Event<User>> = MutableLiveData<Event<User>>()
     val needSaveUser: LiveData<Event<User>>

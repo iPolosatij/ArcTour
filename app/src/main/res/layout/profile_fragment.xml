@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/profile"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:id="@+id/profile">
+    android:layout_height="match_parent">
 
     <ScrollView
         android:layout_width="match_parent"
@@ -18,7 +18,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:background="@color/white"
-            android:orientation="vertical" >
+            android:orientation="vertical">
 
             <FrameLayout
                 android:layout_width="match_parent"
@@ -30,20 +30,20 @@
                     android:layout_height="match_parent"
                     android:layout_gravity="center"
                     android:background="@android:color/transparent"
-                    app:srcCompat="@drawable/transparent_button"/>
+                    app:srcCompat="@drawable/transparent_button" />
 
                 <ImageView
                     android:id="@+id/profile_image"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
-                    android:clickable="false"/>
+                    android:clickable="false" />
 
                 <FrameLayout
                     android:id="@+id/photoSafety"
-                    android:clickable="true"
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent">
+                    android:layout_height="match_parent"
+                    android:clickable="true">
 
                 </FrameLayout>
 
@@ -76,9 +76,9 @@
                     android:layout_marginEnd="16dp"
                     android:layout_marginBottom="18dp"
                     android:background="@color/transparent"
+                    android:gravity="end"
                     android:text=""
                     android:textSize="16sp"
-                    android:gravity="end"
                     app:layout_constraintBottom_toTopOf="@+id/nameDeliver"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toEndOf="@+id/nameTitle"
@@ -92,7 +92,7 @@
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent"/>
+                    app:layout_constraintTop_toTopOf="parent" />
 
                 <LinearLayout
                     android:id="@+id/nameDeliver"
@@ -104,7 +104,7 @@
                     android:orientation="horizontal"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"/>
+                    app:layout_constraintStart_toStartOf="parent" />
 
             </androidx.constraintlayout.widget.ConstraintLayout>
 
@@ -135,9 +135,9 @@
                     android:layout_marginEnd="16dp"
                     android:layout_marginBottom="18dp"
                     android:background="@color/transparent"
+                    android:gravity="end"
                     android:text=""
                     android:textSize="16sp"
-                    android:gravity="end"
                     app:layout_constraintBottom_toTopOf="@+id/lastnameDeliver"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintHorizontal_bias="1.0"
@@ -152,7 +152,7 @@
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent"/>
+                    app:layout_constraintTop_toTopOf="parent" />
 
                 <LinearLayout
                     android:id="@+id/lastnameDeliver"
@@ -164,7 +164,7 @@
                     android:orientation="horizontal"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"/>
+                    app:layout_constraintStart_toStartOf="parent" />
 
             </androidx.constraintlayout.widget.ConstraintLayout>
 
@@ -195,9 +195,9 @@
                     android:layout_marginEnd="16dp"
                     android:layout_marginBottom="18dp"
                     android:background="@color/transparent"
+                    android:gravity="end"
                     android:text=""
                     android:textSize="16sp"
-                    android:gravity="end"
                     app:layout_constraintBottom_toTopOf="@+id/nickDeliver"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintHorizontal_bias="1.0"
@@ -212,7 +212,7 @@
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent"/>
+                    app:layout_constraintTop_toTopOf="parent" />
 
                 <LinearLayout
                     android:id="@+id/nickDeliver"
@@ -224,7 +224,7 @@
                     android:orientation="horizontal"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"/>
+                    app:layout_constraintStart_toStartOf="parent" />
 
             </androidx.constraintlayout.widget.ConstraintLayout>
 
@@ -255,10 +255,10 @@
                     android:layout_marginEnd="16dp"
                     android:layout_marginBottom="18dp"
                     android:background="@color/transparent"
+                    android:gravity="end"
+                    android:inputType="phone"
                     android:text=" "
                     android:textSize="16sp"
-                    android:inputType="phone"
-                    android:gravity="end"
                     app:layout_constraintBottom_toTopOf="@+id/phoneDeliver"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintHorizontal_bias="1.0"
@@ -274,7 +274,7 @@
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent"/>
+                    app:layout_constraintTop_toTopOf="parent" />
 
                 <LinearLayout
                     android:id="@+id/phoneDeliver"
@@ -286,7 +286,7 @@
                     android:orientation="horizontal"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"/>
+                    app:layout_constraintStart_toStartOf="parent" />
 
             </androidx.constraintlayout.widget.ConstraintLayout>
 
@@ -370,7 +370,7 @@
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent" />
 
-                <androidx.appcompat.widget.AppCompatSpinner
+                <androidx.appcompat.widget.AppCompatTextView
                     android:id="@+id/classValue"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
@@ -378,9 +378,10 @@
                     android:layout_marginTop="18dp"
                     android:layout_marginEnd="16dp"
                     android:layout_marginBottom="18dp"
+                    android:gravity="end"
                     android:text=""
                     android:textSize="16sp"
-                    android:gravity="end"
+                    android:inputType="textMultiLine|textFilter"
                     app:layout_constraintBottom_toTopOf="@+id/classDeliver"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintHorizontal_bias="1.0"
@@ -391,11 +392,12 @@
                     android:id="@+id/class_safety"
                     android:layout_width="0dp"
                     android:layout_height="0dp"
+                    android:layout_marginTop="12dp"
                     android:clickable="true"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent"/>
+                    app:layout_constraintTop_toTopOf="parent" />
 
                 <LinearLayout
                     android:id="@+id/classDeliver"
@@ -407,7 +409,7 @@
                     android:orientation="horizontal"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"/>
+                    app:layout_constraintStart_toStartOf="parent" />
 
             </androidx.constraintlayout.widget.ConstraintLayout>
 
@@ -438,10 +440,10 @@
                     android:layout_marginEnd="16dp"
                     android:layout_marginBottom="18dp"
                     android:background="@color/transparent"
+                    android:gravity="end"
+                    android:inputType="date"
                     android:text=""
                     android:textSize="16sp"
-                    android:inputType="date"
-                    android:gravity="end"
                     app:layout_constraintBottom_toTopOf="@+id/bornDateDeliver"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintHorizontal_bias="1.0"
@@ -456,7 +458,7 @@
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent"/>
+                    app:layout_constraintTop_toTopOf="parent" />
 
                 <LinearLayout
                     android:id="@+id/bornDateDeliver"
@@ -468,7 +470,7 @@
                     android:orientation="horizontal"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"/>
+                    app:layout_constraintStart_toStartOf="parent" />
 
             </androidx.constraintlayout.widget.ConstraintLayout>
 
@@ -498,4 +500,52 @@
                 android:textColor="@color/red" />
         </LinearLayout>
     </ScrollView>
+
+    <LinearLayout
+        android:id="@+id/classes_changed"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:background="@color/transparent_black"
+        android:orientation="vertical"
+        android:visibility="gone"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <ScrollView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:orientation="vertical">
+
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/classes_list"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="24dp"
+                    android:padding="8dp"
+                    app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager">
+
+                </androidx.recyclerview.widget.RecyclerView>
+
+                <androidx.appcompat.widget.AppCompatButton
+                    android:id="@+id/save_classes"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_horizontal"
+                    android:layout_marginTop="16dp"
+                    android:background="@drawable/white_solid_action_button"
+                    android:text="Save"
+                    android:textAllCaps="false"
+                    android:textColor="@color/black" />
+
+            </LinearLayout>
+        </ScrollView>
+
+    </LinearLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>
