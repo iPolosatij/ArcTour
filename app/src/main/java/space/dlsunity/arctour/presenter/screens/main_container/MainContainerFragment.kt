@@ -10,6 +10,7 @@ import androidx.navigation.NavDirections
 import androidx.navigation.fragment.findNavController
 import by.kirich1409.viewbindingdelegate.viewBinding
 import org.koin.androidx.viewmodel.ext.android.sharedViewModel
+import space.dlsunity.arctour.MainActivity
 import space.dlsunity.arctour.R
 import space.dlsunity.arctour.databinding.MainContainerFragmentBinding
 import space.dlsunity.arctour.presenter.base.navigation.NavMvvmFragment
@@ -17,6 +18,7 @@ import space.dlsunity.arctour.presenter.screens.errors.ErrorModel
 import space.dlsunity.arctour.presenter.screens.main_container.destinations.MainDestination
 import space.dlsunity.arctour.presenter.screens.main_container.screens.profile.ProfileFragment
 import space.dlsunity.arctour.presenter.screens.main_container.screens.tournaments.TournamentsListFragment
+import space.dlsunity.arctour.presenter.screens.main_container.screens.tournaments.TournamentsListViewModel
 import space.dlsunity.arctour.presenter.screens.main_container.screens.tournaments.create.CreateTournamentFragment
 import space.dlsunity.arctour.utils.extensions.collectWhenStarted
 import space.dlsunity.arctour.utils.navigation.navigateSafe
@@ -27,6 +29,8 @@ class MainContainerFragment :
     NavMvvmFragment<MainDestination, MainContainerViewModel>(R.layout.main_container_fragment) {
 
     override val viewModel: MainContainerViewModel by sharedViewModel()
+
+    val tournamentsListViewModel: TournamentsListViewModel by sharedViewModel()
 
     private val binding: MainContainerFragmentBinding by viewBinding()
 
@@ -78,7 +82,7 @@ class MainContainerFragment :
                 viewModel.setScreen(it.itemId)
                 true
             }
-            bottomNavMenu.selectedItemId = R.id.item4
+            bottomNavMenu.selectedItemId = R.id.item3
         }
     }
 
@@ -131,7 +135,13 @@ class MainContainerFragment :
         viewModel.apply {
             navigateCommander.collectWhenStarted(viewLifecycleOwner, ::handlerDestination)
             error.collectWhenStarted(viewLifecycleOwner, ::handlerError)
-            downloadUser()
+
+            userDownloaded.observe(viewLifecycleOwner) {
+                it.getFirstOrNull()?.let {user->
+
+                }
+            }
+
             needShowBottomMenu.observe(viewLifecycleOwner) {
                 it.getFirstOrNull()?.let { needShow ->
                     setShowBottomMenu(needShow)
@@ -139,6 +149,9 @@ class MainContainerFragment :
             }
             logOut.observe(viewLifecycleOwner) {
                 it.getFirstOrNull()?.let {
+                    if (tournamentsAct)
+                            tournamentsListViewModel.viewList.clear()
+                    (activity as MainActivity).restart()
                     toWelcome()
                 }
             }

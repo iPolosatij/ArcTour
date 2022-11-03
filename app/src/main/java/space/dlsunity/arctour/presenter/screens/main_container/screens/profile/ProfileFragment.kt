@@ -28,6 +28,7 @@ class ProfileFragment : BaseMvvmFragment<ProfileViewModel>(R.layout.profile_frag
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        viewModel.getAllUsers()
         setUpBinding()
         observeVM()
         observeContainerVM()
@@ -156,6 +157,12 @@ class ProfileFragment : BaseMvvmFragment<ProfileViewModel>(R.layout.profile_frag
                 }
             }
 
+           userWasLoaded.observe(viewLifecycleOwner) {
+                it.getFirstOrNull()?.let {user->
+                    updateFields(user)
+                }
+            }
+
             userWasSaved.observe(viewLifecycleOwner) {
                 it.getFirstOrNull()?.let {
                     binding.apply {
@@ -184,11 +191,7 @@ class ProfileFragment : BaseMvvmFragment<ProfileViewModel>(R.layout.profile_frag
             setScreenTitle(MainContainerFragment.PROFILE)
             showAddBtn(false, "")
             showFindBtn(false)
-            userDownloaded.observe(viewLifecycleOwner) {
-                it.getFirstOrNull()?.let {user->
-                    updateFields(user)
-                }
-            }
+
             needUpdateProfilePhoto.observe(viewLifecycleOwner) {
                 it.getFirstOrNull()?.let {
                     binding.profileImage.setImageBitmap(mainContainerViewModel.photoMain)

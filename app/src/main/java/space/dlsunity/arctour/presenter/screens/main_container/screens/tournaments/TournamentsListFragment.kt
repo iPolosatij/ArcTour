@@ -72,6 +72,7 @@ class TournamentsListFragment:
 
     private fun observeContainerVm() {
         mainContainerViewModel.apply {
+            tournamentsAct = true
             setScreenTitle(MainContainerFragment.TOURNAMENTS)
             showAddBtn(true, "")
             needShowBottomMenu(true)

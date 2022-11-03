@@ -43,7 +43,6 @@ class TournamentsListViewModel(
         CoroutineScope(Dispatchers.Default).launch {
             safeProgressHandler(error = _error) {
                 getAllTournamentsUseCase.invoke().let {
-                    if (it.isNotEmpty())
                         viewList = it as ArrayList<Tournament>
                         _tournamentListDownloaded.postValue(Event(true))
                 }

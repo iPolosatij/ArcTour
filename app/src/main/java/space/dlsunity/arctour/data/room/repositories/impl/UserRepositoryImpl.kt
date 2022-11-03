@@ -1,5 +1,7 @@
 package space.dlsunity.arctour.data.room.repositories.impl
 
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.withContext
 import space.dlsunity.arctour.data.room.dao.UserDao
 import space.dlsunity.arctour.data.room.data.User
 import space.dlsunity.arctour.data.room.repositories.UserRepository
@@ -7,29 +9,53 @@ import space.dlsunity.arctour.data.room.repositories.UserRepository
 class UserRepositoryImpl(
     private val userDao: UserDao
 ): UserRepository {
-    override suspend fun getUserById(id: String): User {
-        return userDao.findUserById(id)
+    override suspend fun getUserById(id: String): User? {
+        return withContext(Dispatchers.IO){
+            try {
+                userDao.findUserById(id)
+            }catch (e:Exception){
+                null
+            }
+        }
     }
 
     override suspend fun getAllUsers(): List<User> {
-        var userList = listOf<User>()
-        try {
-            userList = userDao.getAll()
-        }catch (e:Exception){
-
+        return withContext(Dispatchers.IO){
+            try {
+                userDao.getAll()
+            }catch (e:Exception){
+                listOf()
+            }
         }
-        return userList
     }
 
     override suspend fun deleteUser(user: User) {
-        userDao.delete(user)
+        return withContext(Dispatchers.IO) {
+            try {
+                userDao.delete(user)
+            } catch (_: Exception) {
+
+            }
+        }
     }
 
     override suspend fun saveUser(user: User) {
-       userDao.insertAll(user)
+        return withContext(Dispatchers.IO) {
+            try {
+                userDao.insertAll(user)
+            } catch (_: Exception) {
+
+            }
+        }
     }
 
     override suspend fun deleteAllUsers() {
-        userDao.deleteAll()
+        return withContext(Dispatchers.IO){
+            try {
+                userDao.deleteAll()
+            }catch (_: Exception){
+
+            }
+        }
     }
 }

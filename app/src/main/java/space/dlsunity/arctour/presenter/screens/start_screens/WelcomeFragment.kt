@@ -8,9 +8,13 @@ import androidx.navigation.NavDirections
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import by.kirich1409.viewbindingdelegate.viewBinding
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
 import org.koin.androidx.viewmodel.ext.android.sharedViewModel
 import space.dlsunity.arctour.R
 import space.dlsunity.arctour.data.room.data.User
+import space.dlsunity.arctour.data.room.db.AppDatabase
 import space.dlsunity.arctour.databinding.WelcomeFragmentBinding
 import space.dlsunity.arctour.presenter.base.navigation.NavMvvmFragment
 import space.dlsunity.arctour.presenter.screens.errors.ErrorModel
@@ -58,6 +62,12 @@ class WelcomeFragment: NavMvvmFragment<AppDestination, WelcomeViewModel>(R.layou
                     }
                 }
             }
+
+            newUser.observe(viewLifecycleOwner) {
+                it.getFirstOrNull()?.let { user ->
+                   newUser(user)
+                }
+            }
         }
     }
 
@@ -78,28 +88,29 @@ class WelcomeFragment: NavMvvmFragment<AppDestination, WelcomeViewModel>(R.layou
                 viewModel.state = WelcomeState.Registration
             }
             accept.setOnClickListener {
-                if (
+
+                val user: User? = if (
                     loginValue.text?.isNotEmpty() == true
                     && passwordValue.text?.isNotEmpty() == true
-                    && viewModel.state == WelcomeState.Login){
+                    && viewModel.state == WelcomeState.Login
+                ) {
                     viewModel.defaultPhotoProfile?.let { photo ->
+
                         User(
                             photo = photo,
                             memberId = loginValue.text.toString(),
                             password = passwordValue.text.toString(),
                             email = loginValue.text.toString()
                         )
-                    }?.let { user ->
-                        viewModel.acceptUser(
-                            user
-                        )
+
                     }
-                }else if (
+                } else if (
                     loginValue.text?.isNotEmpty() == true
                     && passwordValue.text?.isNotEmpty() == true
                     && nameValue.text?.isNotEmpty() == true
                     && lastnameValue.text?.isNotEmpty() == true
-                    && viewModel.state == WelcomeState.Registration){
+                    && viewModel.state == WelcomeState.Registration
+                ) {
                     viewModel.defaultPhotoProfile?.let { photo ->
                         User(
                             photo = photo,
@@ -109,14 +120,38 @@ class WelcomeFragment: NavMvvmFragment<AppDestination, WelcomeViewModel>(R.layou
                             last_name = lastnameValue.text.toString(),
                             email = loginValue.text.toString()
                         )
-                    }?.let { user ->
-                        viewModel.acceptUser(
-                            user
-                        )
                     }
-                }else{
-                    Toast.makeText(requireContext(), " Все поля необходимо заполнить ", Toast.LENGTH_LONG).show()
+                } else {
+                    null
                 }
+                if (user == null) {
+                    Toast.makeText(
+                        requireContext(),
+                        " Все поля необходимо заполнить ",
+                        Toast.LENGTH_LONG
+                    ).show()
+                } else {
+                    passwordValue.text?.clear()
+                    loginValue.text?.clear()
+                    nameValue.text?.clear()
+                    lastnameValue.text?.clear()
+                    viewModel.acceptUser(user)
+                }
+            }
+        }
+    }
+
+    private fun newUser(user: User) {
+        CoroutineScope(Dispatchers.Default).launch {
+            AppDatabase.getInstance(requireContext()).clearAllTables().let {
+                binding.apply {
+                    accept.isClickable = false
+                    passwordValue.isClickable = false
+                    loginValue.isClickable = false
+                    nameValue.isClickable = false
+                    lastnameValue.isClickable = false
+                }
+                viewModel.loginNewUser(user)
             }
         }
     }

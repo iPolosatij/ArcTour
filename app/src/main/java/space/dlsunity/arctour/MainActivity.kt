@@ -13,4 +13,11 @@ class MainActivity : BaseActivity(R.layout.activity_main), FragmentCloseInterfac
     override fun handlerErrors(error: ErrorModel, fragmentManager: FragmentManager) {
     }
 
+    fun restart(){
+        finish();
+        overridePendingTransition(0, 0);
+        startActivity(intent);
+        overridePendingTransition(0, 0);
+    }
+
 }

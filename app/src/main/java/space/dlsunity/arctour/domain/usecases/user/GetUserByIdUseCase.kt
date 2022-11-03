@@ -6,7 +6,7 @@ import space.dlsunity.arctour.data.room.repositories.UserRepository
 class GetUserByIdUseCase(
     private val userRepository: UserRepository
 ) {
-    suspend operator fun invoke(id: String): User{
+    suspend operator fun invoke(id: String): User?{
         return userRepository.getUserById(id)
     }
 }

@@ -73,7 +73,7 @@ class ProfileViewModel(
     fun getUserById(id: String){
         CoroutineScope(Dispatchers.Default).launch {
             safeProgressHandler(error = _error) {
-                getUserByIdUseCase.invoke(id).let {
+                getUserByIdUseCase.invoke(id)?.let {
                     _userWasLoaded.postValue(Event(it))
                 }
             }
@@ -84,7 +84,8 @@ class ProfileViewModel(
         CoroutineScope(Dispatchers.Default).launch {
             safeProgressHandler(error = _error) {
                getAllUsersUseCase.invoke().let {
-                   _userWasLoaded.postValue(Event(it[0]))
+                   if (it.isNotEmpty())
+                       _userWasLoaded.postValue(Event(it[0]))
                }
             }
         }

@@ -4,7 +4,7 @@ import space.dlsunity.arctour.data.room.data.Tournament
 
 interface TournamentRepository {
 
-    suspend fun getTournamentById(id: String): Tournament
+    suspend fun getTournamentById(id: String): Tournament?
 
     suspend fun getAllTournaments(): List<Tournament>
 

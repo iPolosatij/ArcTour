@@ -41,6 +41,10 @@ class WelcomeViewModel(
     val message: LiveData<Event<String>>
         get() = _message
 
+    private val _newUser: MutableLiveData<Event<User>> = MutableLiveData<Event<User>>()
+    val newUser: LiveData<Event<User>>
+        get() = _newUser
+
 
     val defaultPhotoProfile = localContext.getDrawable(R.drawable.ic_account_stock)?.toBitmap()?.toByteArray()
     var state : WelcomeState? = null
@@ -58,17 +62,27 @@ class WelcomeViewModel(
     }
 
     fun acceptUser(user: User){
-        CoroutineScope(Dispatchers.Default).launch {
+        CoroutineScope(Dispatchers.IO).launch {
             safeProgressHandler(error = _error) {
                 if (user.name.isEmpty()){
                     getAllUsersUseCase.invoke().let{savedUser->
-                        if (savedUser.isNotEmpty()){
+                        if (savedUser.size == 2){
                             if(savedUser[0].memberId == user.memberId && savedUser[0].password == user.password){
                                 _message.postValue(Event(""))
                             }else{
                                 _message.postValue(Event("Неверный пароль"))
                             }
-                        }else{
+                        }
+                        else if(savedUser.size == 1){
+                            if(savedUser[0].memberId == user.memberId && savedUser[0].password == user.password){
+                                val userSave = savedUser[0].copy(memberId = "saved")
+                                saveUserUseCase.invoke(userSave)
+                                _message.postValue(Event(""))
+                            }else{
+                                _message.postValue(Event("Неверный пароль"))
+                            }
+                        }
+                        else{
                             _message.postValue(Event("Пользователь не найден"))
                         }
                     }
@@ -82,13 +96,7 @@ class WelcomeViewModel(
                             if (savedUser[0].memberId == user.memberId) {
                                 _message.postValue(Event(" Пользователь с такой почтой уже существует "))
                             } else {
-                                deleteAllUsersUseCase.invoke().let {
-                                    deleteAllTournamentsUseCase.invoke()
-                                }
-                                delay(1000)
-                                saveUserUseCase.invoke(user).let {
-                                    _message.postValue(Event(""))
-                                }
+                                _newUser.postValue(Event(user))
                             }
                         }
                     }
@@ -97,4 +105,19 @@ class WelcomeViewModel(
         }
     }
 
+    fun loginNewUser(user: User) {
+        CoroutineScope(Dispatchers.IO).launch {
+            safeProgressHandler(error = _error) {
+                delay(1000)
+                saveUserUseCase.invoke(user).let {
+                    delay(1000)
+                    user.memberId = "saved"
+                    saveUserUseCase.invoke(user).let {
+                        delay(1000)
+                        _message.postValue(Event(""))
+                    }
+                }
+            }
+        }
+    }
 }

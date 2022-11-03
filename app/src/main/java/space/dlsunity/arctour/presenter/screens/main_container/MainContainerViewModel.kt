@@ -20,6 +20,7 @@ import space.dlsunity.arctour.R
 import space.dlsunity.arctour.data.room.data.Tournament
 import space.dlsunity.arctour.data.room.data.User
 import space.dlsunity.arctour.domain.usecases.tournaments.*
+import space.dlsunity.arctour.domain.usecases.user.DeleteUserUseCase
 import space.dlsunity.arctour.domain.usecases.user.GetAllUsersUseCase
 import space.dlsunity.arctour.domain.usecases.user.SaveUserUseCase
 import space.dlsunity.arctour.presenter.base.mvvm.BaseViewModel
@@ -38,9 +39,10 @@ class MainContainerViewModel(
     private val getTournamentByIdUseCase: GetTournamentByIdUseCase,
     private val deleteAllTournamentsUseCase: DeleteAllTournamentsUseCase,
     private val getAllUsersUseCase: GetAllUsersUseCase,
+    private val deleteUserUseCase: DeleteUserUseCase,
     private val saveUserUseCase: SaveUserUseCase,
 
-) : BaseViewModel() {
+    ) : BaseViewModel() {
 
     private val _navigateCommander = MutableSharedFlow<MainDestination>()
     val navigateCommander: SharedFlow<MainDestination> = _navigateCommander.asSharedFlow()
@@ -126,6 +128,10 @@ class MainContainerViewModel(
 
     var new = ""
 
+    var tournamentsAct = false
+    var notesAct = false
+    var workoutAct = false
+
     fun setScreen(id: Int) {
         if (presenterPosition != id) {
             _activeScreen.postValue(Event(id))
@@ -188,7 +194,17 @@ class MainContainerViewModel(
         viewModelScope.launch {
             CoroutineScope(Dispatchers.Default).launch {
                 safeProgressHandler(error = _error) {
-                    _logOut.postValue(Event(true))
+                    getAllUsersUseCase.invoke().let {
+                        if (it.isNotEmpty()){
+                            for (user in it){
+                                if (user.memberId == "saved"){
+                                    deleteUserUseCase.invoke(user).let {
+                                        _logOut.postValue(Event(true))
+                                    }
+                                }
+                            }
+                        }
+                    }
                 }
             }
         }

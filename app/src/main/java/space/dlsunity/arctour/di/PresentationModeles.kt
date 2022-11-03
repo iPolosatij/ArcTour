@@ -30,7 +30,9 @@ val presentationModule = module {
     }
 
     viewModel {
-        StartViewModel()
+        StartViewModel(
+            getAllUsersUseCase = get<GetAllUsersUseCase>()
+        )
     }
 
     viewModel {
@@ -53,6 +55,7 @@ val presentationModule = module {
             deleteAllTournamentsUseCase = get<DeleteAllTournamentsUseCase>(),
             deleteTournamentUseCase = get<DeleteTournamentUseCase>(),
             getAllUsersUseCase = get<GetAllUsersUseCase>(),
+            deleteUserUseCase = get<DeleteUserUseCase>(),
             saveUserUseCase = get<SaveUserUseCase>()
         )
     }
