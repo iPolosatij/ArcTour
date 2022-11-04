@@ -135,7 +135,7 @@ class MainContainerFragment :
         viewModel.apply {
             navigateCommander.collectWhenStarted(viewLifecycleOwner, ::handlerDestination)
             error.collectWhenStarted(viewLifecycleOwner, ::handlerError)
-
+            downloadUser()
             userDownloaded.observe(viewLifecycleOwner) {
                 it.getFirstOrNull()?.let {user->
 
