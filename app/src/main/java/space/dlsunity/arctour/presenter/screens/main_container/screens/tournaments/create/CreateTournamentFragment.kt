@@ -1,5 +1,6 @@
 package space.dlsunity.arctour.presenter.screens.main_container.screens.tournaments.create
 
+import android.app.DatePickerDialog
 import android.os.Bundle
 import android.util.Log
 import android.view.View
@@ -40,6 +41,7 @@ class CreateTournamentFragment : BaseMvvmFragment<CreateTournamentViewModel>(R.l
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        clear()
         observeVm()
         observeContainerVm()
         setupBinding()
@@ -76,40 +78,30 @@ class CreateTournamentFragment : BaseMvvmFragment<CreateTournamentViewModel>(R.l
         binding.apply {
             viewModel.apply {
                 tournamentAddress.addTextChangedListener {
-                    if(isPossibleCreate())
-                        create.background = requireContext().getDrawable(R.drawable.blue_action_button)
-                    else
-                        create.background = requireContext().getDrawable(R.drawable.gray_button)
+                   checkPossible()
                 }
                 tournamentCountry.addTextChangedListener {
-                    if(isPossibleCreate())
-                        create.background = requireContext().getDrawable(R.drawable.blue_action_button)
-                    else
-                        create.background = requireContext().getDrawable(R.drawable.gray_button)
+                   checkPossible()
                 }
                 tournamentRegion.addTextChangedListener {
-                    if(isPossibleCreate())
-                        create.background = requireContext().getDrawable(R.drawable.blue_action_button)
-                    else
-                        create.background = requireContext().getDrawable(R.drawable.gray_button)
+                    checkPossible()
                 }
-                tournamentAddress.addTextChangedListener {
-                    if(isPossibleCreate())
-                        create.background = requireContext().getDrawable(R.drawable.blue_action_button)
-                    else
-                        create.background = requireContext().getDrawable(R.drawable.gray_button)
+                clickerDate.setOnClickListener {
+                    val c = Calendar.getInstance()
+                    val year = c.get(Calendar.YEAR)
+                    val month = c.get(Calendar.MONTH)
+                    val day = c.get(Calendar.DAY_OF_MONTH)
+                    val dpd = DatePickerDialog(requireActivity(), { view, year, monthOfYear, dayOfMonth ->
+                        // Display Selected date in textbox
+                        tournamentDate.setText("$dayOfMonth ${requireActivity().resources.getStringArray(R.array.month_array)[monthOfYear]}, $year")
+                    }, year, month, day)
+                    dpd.show()
                 }
                 tournamentName.addTextChangedListener {
-                    if(isPossibleCreate())
-                        create.background = requireContext().getDrawable(R.drawable.blue_action_button)
-                    else
-                        create.background = requireContext().getDrawable(R.drawable.gray_button)
+                    checkPossible()
                 }
                 tournamentDescription.addTextChangedListener {
-                    if(isPossibleCreate())
-                        create.background = requireContext().getDrawable(R.drawable.blue_action_button)
-                    else
-                        create.background = requireContext().getDrawable(R.drawable.gray_button)
+                   checkPossible()
                 }
 
                 addPart.setOnClickListener {
@@ -121,10 +113,10 @@ class CreateTournamentFragment : BaseMvvmFragment<CreateTournamentViewModel>(R.l
 
                 createPart.setOnClickListener {
                     if (lapName.text.toString().isNotEmpty() && targetCount.text.toString().isNotEmpty()){
-                        val targetCount = targetCount.text.toString().toInt()
+                        val targetsCount = targetCount.text.toString().toInt()
                         val targets = arrayListOf<Target>()
-                        if (targetCount>0){
-                            for(i in 1..targetCount)
+                        if (targetsCount>0){
+                            for(i in 1..targetsCount)
                             targets.add(Target(i, null))
                         }
                         viewListParts.add(
@@ -133,6 +125,10 @@ class CreateTournamentFragment : BaseMvvmFragment<CreateTournamentViewModel>(R.l
                             targets = targets))
                         enterLapName.visibility = View.GONE
                         partListAdapter.notifyDataSetChanged()
+                        lapName.text?.clear()
+                        targetCount.text?.clear()
+                        checkPossible()
+                        hideKeyboard()
                     }
                 }
 
@@ -155,6 +151,15 @@ class CreateTournamentFragment : BaseMvvmFragment<CreateTournamentViewModel>(R.l
                     }
                 }
             }
+        }
+    }
+
+    private fun checkPossible(){
+        binding.apply {
+            if(isPossibleCreate())
+                create.background = requireContext().getDrawable(R.drawable.blue_action_button)
+            else
+                create.background = requireContext().getDrawable(R.drawable.gray_button)
         }
     }
 
@@ -196,6 +201,14 @@ class CreateTournamentFragment : BaseMvvmFragment<CreateTournamentViewModel>(R.l
     private fun deleteTap(item: Part){
         viewModel.viewListParts.remove(item)
         partListAdapter.notifyDataSetChanged()
+    }
+
+    private fun clear(){
+        viewModel.apply {
+            viewListParticipant.clear()
+            viewListParts.clear()
+            viewListTarget.clear()
+        }
     }
 
 }

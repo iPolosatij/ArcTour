@@ -74,14 +74,24 @@
                     android:gravity="center"
                     android:text="Дата проведения"
                     android:textSize="16sp" />
-
-                <EditText
-                    android:id="@+id/tournament_date"
+                <FrameLayout
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:hint="Укажите название"
-                    android:inputType="datetime"
-                    android:textSize="16sp" />
+                    android:layout_height="wrap_content">
+                    <EditText
+                        android:id="@+id/tournament_date"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:hint="Укажите дату"
+                        android:inputType="datetime"
+                        android:clickable="false"
+                        android:textSize="16sp" />
+                    <FrameLayout
+                        android:id="@+id/clickerDate"
+                        android:clickable="true"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"/>
+                </FrameLayout>
+
             </LinearLayout>
 
             <LinearLayout
