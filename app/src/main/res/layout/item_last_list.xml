@@ -7,7 +7,7 @@
     android:padding="8dp">
 
     <TextView
-        android:id="@+id/title"
+        android:id="@+id/title_target"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:background="@drawable/gray_shape_frame"

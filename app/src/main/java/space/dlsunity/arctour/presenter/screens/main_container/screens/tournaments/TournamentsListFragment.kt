@@ -62,8 +62,12 @@ class TournamentsListFragment:
             }
 
             tournamentListDownloaded.observe(viewLifecycleOwner) {
-                it.getFirstOrNull()?.let { list ->
+                it.getFirstOrNull()?.let {
                     tournamentsListAdapter.submitList(viewList as List<Tournament>)
+                    if (viewList.isEmpty())
+                        binding.emptyFrame.visibility = View.VISIBLE
+                    else
+                        binding.emptyFrame.visibility = View.GONE
                     tournamentsListAdapter.notifyDataSetChanged()
                 }
             }
@@ -84,6 +88,10 @@ class TournamentsListFragment:
             viewModel.apply {
                 tournamentsList.adapter = tournamentsListAdapter
                 tournamentsListAdapter.submitList(viewList as List<Tournament>)
+                if (viewList.isEmpty())
+                    emptyFrame.visibility = View.VISIBLE
+                else
+                    binding.emptyFrame.visibility = View.GONE
             }
         }
     }
@@ -117,6 +125,9 @@ class TournamentsListFragment:
         activity?.onBackPressedDispatcher?.addCallback(viewLifecycleOwner, callback)
     }
 
-    private fun shortTap(item: Tournament){}
+    private fun shortTap(item: Tournament){
+        mainContainerViewModel.activeTournament = item
+        mainContainerViewModel.setScreen(R.id.tournament_fragment)
+    }
     private fun longTap(item: Tournament){}
 }

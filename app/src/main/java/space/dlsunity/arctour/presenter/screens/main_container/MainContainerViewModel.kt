@@ -132,6 +132,8 @@ class MainContainerViewModel(
     var notesAct = false
     var workoutAct = false
 
+    var activeTournament : Tournament? = null
+
     fun setScreen(id: Int) {
         if (presenterPosition != id) {
             _activeScreen.postValue(Event(id))

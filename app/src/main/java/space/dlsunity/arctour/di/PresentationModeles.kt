@@ -8,10 +8,13 @@ import space.dlsunity.arctour.data.network.StoragesFactory
 import space.dlsunity.arctour.domain.usecases.tournaments.*
 import space.dlsunity.arctour.domain.usecases.user.*
 import space.dlsunity.arctour.presenter.screens.main_container.MainContainerViewModel
+import space.dlsunity.arctour.presenter.screens.main_container.screens.notes.NoteListViewModel
+import space.dlsunity.arctour.presenter.screens.main_container.screens.outworks.WorkoutListViewModel
 import space.dlsunity.arctour.presenter.screens.main_container.screens.profile.ProfileViewModel
 import space.dlsunity.arctour.presenter.screens.main_container.screens.tournaments.TournamentsListViewModel
 import space.dlsunity.arctour.presenter.screens.main_container.screens.tournaments.create.CreateTournamentViewModel
 import space.dlsunity.arctour.presenter.screens.main_container.screens.tournaments.tournament.TournamentViewModel
+import space.dlsunity.arctour.presenter.screens.main_container.screens.tournaments.tournament_card.TournamentCardViewModel
 import space.dlsunity.arctour.presenter.screens.start_screens.StartViewModel
 import space.dlsunity.arctour.presenter.screens.start_screens.WelcomeViewModel
 
@@ -87,12 +90,33 @@ val presentationModule = module {
     }
 
     viewModel {
+       TournamentCardViewModel(
+           localContext = get<Context>(),
+           getAllTournamentsUseCase = get<GetAllTournamentsUseCase>(),
+           getTournamentByIdUseCase = get<GetTournamentByIdUseCase>(),
+           saveTournamentUseCase = get<SaveTournamentUseCase>(),
+        )
+    }
+
+    viewModel {
         ProfileViewModel(
             getAllUsersUseCase = get<GetAllUsersUseCase>(),
             getUserByIdUseCase = get<GetUserByIdUseCase>(),
             saveUserUseCase = get<SaveUserUseCase>(),
             deleteAllUsersUseCase = get<DeleteAllUsersUseCase>(),
             deleteUserUseCase = get<DeleteUserUseCase>()
+        )
+    }
+
+    viewModel {
+        NoteListViewModel(
+            localContext = get<Context>(),
+        )
+    }
+
+    viewModel {
+        WorkoutListViewModel(
+            localContext = get<Context>(),
         )
     }
 }

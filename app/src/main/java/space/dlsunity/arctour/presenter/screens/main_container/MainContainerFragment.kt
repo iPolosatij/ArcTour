@@ -16,10 +16,13 @@ import space.dlsunity.arctour.databinding.MainContainerFragmentBinding
 import space.dlsunity.arctour.presenter.base.navigation.NavMvvmFragment
 import space.dlsunity.arctour.presenter.screens.errors.ErrorModel
 import space.dlsunity.arctour.presenter.screens.main_container.destinations.MainDestination
+import space.dlsunity.arctour.presenter.screens.main_container.screens.notes.NotesListFragment
+import space.dlsunity.arctour.presenter.screens.main_container.screens.outworks.WorkoutListFragment
 import space.dlsunity.arctour.presenter.screens.main_container.screens.profile.ProfileFragment
 import space.dlsunity.arctour.presenter.screens.main_container.screens.tournaments.TournamentsListFragment
 import space.dlsunity.arctour.presenter.screens.main_container.screens.tournaments.TournamentsListViewModel
 import space.dlsunity.arctour.presenter.screens.main_container.screens.tournaments.create.CreateTournamentFragment
+import space.dlsunity.arctour.presenter.screens.main_container.screens.tournaments.tournament_card.TournamentCardFragment
 import space.dlsunity.arctour.utils.extensions.collectWhenStarted
 import space.dlsunity.arctour.utils.navigation.navigateSafe
 import space.dlsunity.arctour.utils.tools.DialogHelper
@@ -30,7 +33,7 @@ class MainContainerFragment :
 
     override val viewModel: MainContainerViewModel by sharedViewModel()
 
-    val tournamentsListViewModel: TournamentsListViewModel by sharedViewModel()
+    private val tournamentsListViewModel: TournamentsListViewModel by sharedViewModel()
 
     private val binding: MainContainerFragmentBinding by viewBinding()
 
@@ -66,6 +69,9 @@ class MainContainerFragment :
             toolbar.setOnClickListener {
                 when (screen) {
                     CREATE_TOURNAMENT ->{
+                        viewModel.setScreen(R.id.item3)
+                    }
+                    viewModel.activeTournament?.name ->{
                         viewModel.setScreen(R.id.item3)
                     }
                 }
@@ -248,14 +254,20 @@ class MainContainerFragment :
                         .replace(fragmentContainer.id, TournamentsListFragment()).commit()
                 }
                 R.id.item2 -> {
-
+                    childFragmentManager.beginTransaction()
+                        .replace(fragmentContainer.id, WorkoutListFragment()).commit()
                 }
                 R.id.item1 -> {
-
+                    childFragmentManager.beginTransaction()
+                        .replace(fragmentContainer.id, NotesListFragment()).commit()
                 }
                 R.id.create_tournament-> {
                     childFragmentManager.beginTransaction()
                         .replace(fragmentContainer.id, CreateTournamentFragment()).commit()
+                }
+                R.id.tournament_fragment-> {
+                    childFragmentManager.beginTransaction()
+                        .replace(fragmentContainer.id, TournamentCardFragment()).commit()
                 }
             }
         }

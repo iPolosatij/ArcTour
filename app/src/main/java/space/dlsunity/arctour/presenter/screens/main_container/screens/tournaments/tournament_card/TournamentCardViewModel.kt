@@ -1,4 +1,4 @@
-package space.dlsunity.arctour.presenter.screens.main_container.screens.tournaments.create
+package space.dlsunity.arctour.presenter.screens.main_container.screens.tournaments.tournament_card
 
 import android.content.Context
 import androidx.lifecycle.LiveData
@@ -13,25 +13,31 @@ import space.dlsunity.arctour.data.room.data.Part
 import space.dlsunity.arctour.data.room.data.Participant
 import space.dlsunity.arctour.data.room.data.TargetMy
 import space.dlsunity.arctour.data.room.data.Tournament
+import space.dlsunity.arctour.databinding.ItemPartListBinding
+import space.dlsunity.arctour.domain.usecases.tournaments.GetAllTournamentsUseCase
+import space.dlsunity.arctour.domain.usecases.tournaments.GetTournamentByIdUseCase
 import space.dlsunity.arctour.domain.usecases.tournaments.SaveTournamentUseCase
 import space.dlsunity.arctour.presenter.base.mvvm.BaseViewModel
 import space.dlsunity.arctour.presenter.screens.errors.ErrorModel
 import space.dlsunity.arctour.utils.auxiliary.Event
 
-class CreateTournamentViewModel(
+class TournamentCardViewModel (
     private val localContext: Context,
+    private val getAllTournamentsUseCase: GetAllTournamentsUseCase,
+    private val getTournamentByIdUseCase: GetTournamentByIdUseCase,
     private val saveTournamentUseCase: SaveTournamentUseCase,
-    ) : BaseViewModel() {
+) : BaseViewModel() {
 
     private val _showAlert: MutableLiveData<Event<String>> = MutableLiveData<Event<String>>()
     val showAlert: LiveData<Event<String>>
         get() = _showAlert
 
-private val _tournamentWasSaved: MutableLiveData<Event<Boolean>> = MutableLiveData<Event<Boolean>>()
+    private val _tournamentWasSaved: MutableLiveData<Event<Boolean>> = MutableLiveData<Event<Boolean>>()
     val tournamentWasSaved: LiveData<Event<Boolean>>
         get() = _tournamentWasSaved
 
-
+    var tournamentState: TournamentState = TournamentState.Read
+    var activeLayout : ItemPartListBinding? = null
 
     var viewListTargetMy: ArrayList<TargetMy> = arrayListOf()
     var viewListParts: ArrayList<Part> = arrayListOf()

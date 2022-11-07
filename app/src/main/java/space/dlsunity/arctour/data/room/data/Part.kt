@@ -7,6 +7,6 @@ import space.dlsunity.arctour.domain.model.Item
 data class Part(
     val id: String,
     var name:String,
-    val targets: List<Target>,
+    val targetMIES: List<TargetMy>,
     var complete: Boolean = false
 ): Item

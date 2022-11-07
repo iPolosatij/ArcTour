@@ -1,4 +1,4 @@
-package space.dlsunity.arctour.presenter.screens.main_container.screens.notes
+package space.dlsunity.arctour.presenter.screens.main_container.screens.outworks
 
 import android.os.Bundle
 import android.util.Log
@@ -10,7 +10,7 @@ import by.kirich1409.viewbindingdelegate.viewBinding
 import org.koin.androidx.viewmodel.ext.android.sharedViewModel
 import space.dlsunity.arctour.R
 import space.dlsunity.arctour.data.room.data.Tournament
-import space.dlsunity.arctour.databinding.NoticeListFragmentBinding
+import space.dlsunity.arctour.databinding.WorkoutListFragmentBinding
 import space.dlsunity.arctour.presenter.base.adapter.MultiItemsAdapter
 import space.dlsunity.arctour.presenter.base.navigation.NavMvvmFragment
 import space.dlsunity.arctour.presenter.screens.errors.ErrorModel
@@ -22,14 +22,14 @@ import space.dlsunity.arctour.presenter.screens.main_container.screens.tournamen
 import space.dlsunity.arctour.utils.navigation.navigateSafe
 import space.dlsunity.arctour.utils.tools.DialogHelper
 
-class NotesListFragment:
-    NavMvvmFragment<MainDestination, NoteListViewModel>(R.layout.notice_list_fragment) {
+class WorkoutListFragment :
+    NavMvvmFragment<MainDestination, WorkoutListViewModel>(R.layout.workout_list_fragment) {
 
-    override val viewModel: NoteListViewModel by sharedViewModel()
+    override val viewModel: WorkoutListViewModel by sharedViewModel()
 
     private val mainContainerViewModel: MainContainerViewModel by sharedViewModel()
 
-    private val binding: NoticeListFragmentBinding by viewBinding()
+    private val binding: WorkoutListFragmentBinding by viewBinding()
 
 
     private val tournamentsListAdapter: MultiItemsAdapter by lazy {
@@ -57,7 +57,7 @@ class NotesListFragment:
     private fun observeContainerVm() {
         mainContainerViewModel.apply {
             tournamentsAct = true
-            setScreenTitle(MainContainerFragment.NOTES)
+            setScreenTitle(MainContainerFragment.WORKOUTS)
             showAddBtn(false, "")
             needShowBottomMenu(true)
         }

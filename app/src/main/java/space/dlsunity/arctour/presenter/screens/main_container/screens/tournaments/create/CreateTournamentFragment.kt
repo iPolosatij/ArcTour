@@ -10,9 +10,10 @@ import by.kirich1409.viewbindingdelegate.viewBinding
 import org.koin.androidx.viewmodel.ext.android.sharedViewModel
 import space.dlsunity.arctour.R
 import space.dlsunity.arctour.data.room.data.Part
-import space.dlsunity.arctour.data.room.data.Target
+import space.dlsunity.arctour.data.room.data.TargetMy
 import space.dlsunity.arctour.data.room.data.Tournament
 import space.dlsunity.arctour.databinding.CreateTournamentFragmentBinding
+import space.dlsunity.arctour.databinding.ItemPartListBinding
 import space.dlsunity.arctour.domain.model.Item
 import space.dlsunity.arctour.presenter.base.adapter.MultiItemsAdapter
 import space.dlsunity.arctour.presenter.base.mvvm.BaseMvvmFragment
@@ -114,15 +115,15 @@ class CreateTournamentFragment : BaseMvvmFragment<CreateTournamentViewModel>(R.l
                 createPart.setOnClickListener {
                     if (lapName.text.toString().isNotEmpty() && targetCount.text.toString().isNotEmpty()){
                         val targetsCount = targetCount.text.toString().toInt()
-                        val targets = arrayListOf<Target>()
+                        val targetsTemp = arrayListOf<TargetMy>()
                         if (targetsCount>0){
                             for(i in 1..targetsCount)
-                            targets.add(Target(i, null))
+                            targetsTemp.add(TargetMy(i, null))
                         }
                         viewListParts.add(
                             Part(UUID.randomUUID().toString(),
                             name = lapName.text.toString(),
-                            targets = targets))
+                            targetMIES = targetsTemp))
                         enterLapName.visibility = View.GONE
                         partListAdapter.notifyDataSetChanged()
                         lapName.text?.clear()
@@ -196,7 +197,7 @@ class CreateTournamentFragment : BaseMvvmFragment<CreateTournamentViewModel>(R.l
         activity?.onBackPressedDispatcher?.addCallback(viewLifecycleOwner, callback)
     }
 
-    private fun shortTap(item: Part){}
+    private fun shortTap(item: Part, binding: ItemPartListBinding){}
     private fun longTap(item: Part){}
     private fun deleteTap(item: Part){
         viewModel.viewListParts.remove(item)
@@ -207,7 +208,7 @@ class CreateTournamentFragment : BaseMvvmFragment<CreateTournamentViewModel>(R.l
         viewModel.apply {
             viewListParticipant.clear()
             viewListParts.clear()
-            viewListTarget.clear()
+            viewListTargetMy.clear()
         }
     }
 

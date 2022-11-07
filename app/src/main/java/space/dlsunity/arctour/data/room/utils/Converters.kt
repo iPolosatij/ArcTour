@@ -6,7 +6,7 @@ import kotlinx.serialization.encodeToString
 import kotlinx.serialization.json.Json
 import space.dlsunity.arctour.data.room.data.Part
 import space.dlsunity.arctour.data.room.data.Participant
-import space.dlsunity.arctour.data.room.data.Target
+import space.dlsunity.arctour.data.room.data.TargetMy
 
 class Converters {
     @TypeConverter
@@ -15,9 +15,9 @@ class Converters {
     fun toList(value: String) = Json.decodeFromString<List<String>>(value)
 
     @TypeConverter
-    fun fromListTargets(value : List<Target>) = Json.encodeToString(value)
+    fun fromListTargets(value : List<TargetMy>) = Json.encodeToString(value)
     @TypeConverter
-    fun toListTargets(value: String) = Json.decodeFromString<List<Target>>(value)
+    fun toListTargets(value: String) = Json.decodeFromString<List<TargetMy>>(value)
 
     @TypeConverter
     fun fromListLaps(value : List<Part>) = Json.encodeToString(value)

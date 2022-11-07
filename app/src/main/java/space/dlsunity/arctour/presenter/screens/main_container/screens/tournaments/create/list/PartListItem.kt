@@ -13,7 +13,7 @@ import space.dlsunity.arctour.presenter.base.adapter.BaseItem
 import space.dlsunity.arctour.presenter.base.adapter.BaseViewHolder
 
 class PartListItem(
-    private val shortTap: (Part) -> Unit,
+    private val shortTap: (Part, ItemPartListBinding) -> Unit,
     private val longTap: (Part) -> Unit,
     private val deleteTap: (Part) -> Unit,
     private val isPossibleDelete: Boolean
@@ -22,8 +22,7 @@ class PartListItem(
 
     override fun isRelativeItem(item: Item): Boolean = item is Part
 
-    override fun getLayoutId(): Int = R.layout.item_tournaments_list
-
+    override fun getLayoutId(): Int = R.layout.item_part_list
 
     override fun getViewHolder(
         layoutInflater: LayoutInflater,
@@ -45,7 +44,7 @@ class PartListItem(
 
     private class ItemContactListViewHolder(
         binding: ItemPartListBinding,
-        shortTap: (Part) -> Unit,
+        shortTap: (Part, ItemPartListBinding) -> Unit,
         longTap: (Part) -> Unit,
         deleteTap: (Part) -> Unit,
         val isPossibleDelete: Boolean
@@ -54,13 +53,16 @@ class PartListItem(
         init {
             binding.partItem.setOnClickListener {
                 if (bindingAdapterPosition == RecyclerView.NO_POSITION) return@setOnClickListener
-                shortTap(item)
+                shortTap(item, binding)
             }
 
-            binding.deletePart.setOnClickListener {
-                if (bindingAdapterPosition == RecyclerView.NO_POSITION) return@setOnClickListener
-                deleteTap(item)
-            }
+            if (isPossibleDelete)
+                binding.deletePart.setOnClickListener {
+                    if (bindingAdapterPosition == RecyclerView.NO_POSITION) return@setOnClickListener
+                    deleteTap(item)
+                }
+            else
+                binding.deletePart.visibility = View.INVISIBLE
 
             binding.partItem.setOnLongClickListener {
                 if (bindingAdapterPosition == RecyclerView.NO_POSITION) return@setOnLongClickListener true
