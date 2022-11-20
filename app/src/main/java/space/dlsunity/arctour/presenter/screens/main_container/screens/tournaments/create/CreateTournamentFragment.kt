@@ -135,20 +135,24 @@ class CreateTournamentFragment : BaseMvvmFragment<CreateTournamentViewModel>(R.l
 
                 create.setOnClickListener {
                     if (isPossibleCreate()) {
-                        saveTournament(
-                            Tournament(
-                                address = tournamentAddress.text.toString(),
-                                region = tournamentRegion.text.toString(),
-                                country = tournamentCountry.text.toString(),
-                                name = tournamentName.text.toString(),
-                                description = tournamentDescription.text.toString(),
-                                tournamentId = UUID.randomUUID().toString(),
-                                date = tournamentDate.text.toString(),
-                                parts = viewListParts,
-                                participants = viewListParticipant,
-                                photo = photo
+                        containerViewModel.user?.let {user->
+                            saveTournament(
+                                Tournament(
+                                    address = tournamentAddress.text.toString(),
+                                    region = tournamentRegion.text.toString(),
+                                    country = tournamentCountry.text.toString(),
+                                    name = tournamentName.text.toString(),
+                                    description = tournamentDescription.text.toString(),
+                                    tournamentId = UUID.randomUUID().toString(),
+                                    date = tournamentDate.text.toString(),
+                                    parts = viewListParts,
+                                    participants = viewListParticipant,
+                                    photo = photo,
+                                    admins = listOf(user.toParticipant()),
+                                    teams = listOf()
+                                )
                             )
-                        )
+                        }
                     }
                 }
             }

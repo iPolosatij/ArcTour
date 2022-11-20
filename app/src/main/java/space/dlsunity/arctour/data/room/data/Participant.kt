@@ -4,10 +4,20 @@ import kotlinx.serialization.Serializable
 
 @Serializable
 data class Participant(
+    val personalId: String,
     val name: String,
     val lastName: String,
-    val SecondName: String?,
-    val firstShut: Int,
-    val secondShut: Int,
-    val score: Int,
-)
+    var secondName: String?,
+    var targetsResults: List<TargetResults>,
+    var score: Int,
+    var bowClass: String?,
+    var teamId: String?
+){
+    fun getTarget(name: Int):TargetResults?{
+        for (target in targetsResults){
+            if (target.targetNumber == name)
+                return target
+        }
+        return null
+    }
+}

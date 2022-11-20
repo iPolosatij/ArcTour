@@ -4,9 +4,7 @@ import androidx.room.TypeConverter
 import kotlinx.serialization.decodeFromString
 import kotlinx.serialization.encodeToString
 import kotlinx.serialization.json.Json
-import space.dlsunity.arctour.data.room.data.Part
-import space.dlsunity.arctour.data.room.data.Participant
-import space.dlsunity.arctour.data.room.data.TargetMy
+import space.dlsunity.arctour.data.room.data.*
 
 class Converters {
     @TypeConverter
@@ -18,6 +16,16 @@ class Converters {
     fun fromListTargets(value : List<TargetMy>) = Json.encodeToString(value)
     @TypeConverter
     fun toListTargets(value: String) = Json.decodeFromString<List<TargetMy>>(value)
+
+    @TypeConverter
+    fun fromListTargetResult(value : List<TargetResults>) = Json.encodeToString(value)
+    @TypeConverter
+    fun toListTargetResult(value: String) = Json.decodeFromString<List<TargetResults>>(value)
+
+    @TypeConverter
+    fun fromListTournamentTeam(value : List<TournamentTeam>) = Json.encodeToString(value)
+    @TypeConverter
+    fun toListTournamentTeam(value: String) = Json.decodeFromString<List<TournamentTeam>>(value)
 
     @TypeConverter
     fun fromListLaps(value : List<Part>) = Json.encodeToString(value)

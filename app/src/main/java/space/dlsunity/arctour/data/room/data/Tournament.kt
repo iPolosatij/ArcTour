@@ -23,4 +23,6 @@ data class Tournament(
     @ColumnInfo(name = "date") var date: String,
     @ColumnInfo(name = "laps") var parts: List<Part>,
     @ColumnInfo(name = "participants") var participants: List<Participant>,
+    @ColumnInfo(name = "admins") var admins: List<Participant>,
+    @ColumnInfo(name = "teams") var teams: List<TournamentTeam>,
 ): Item

@@ -24,6 +24,7 @@ data class User(
     @ColumnInfo(name = "bow_class") var bow_class: List<String> = listOf(),
     @ColumnInfo(name = "country") var country: String = "",
     @ColumnInfo(name = "city") var city: String = "",
+    @ColumnInfo(name = "second_name") var second_name: String = "",
 ): Item {
     override fun equals(other: Any?): Boolean {
         if (this === other) return true
@@ -59,5 +60,18 @@ data class User(
         result = 31 * result + country.hashCode()
         result = 31 * result + city.hashCode()
         return result
+    }
+
+    fun toParticipant(): Participant{
+        return Participant(
+            personalId = this.memberId,
+            name = this.name,
+            lastName = this.last_name,
+            secondName = this.second_name,
+            targetsResults = listOf(),
+            score = 0,
+            bowClass = null,
+            teamId = null
+        )
     }
 }
