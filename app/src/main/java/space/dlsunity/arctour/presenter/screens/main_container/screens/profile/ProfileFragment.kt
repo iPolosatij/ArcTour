@@ -92,9 +92,8 @@ class ProfileFragment : BaseMvvmFragment<ProfileViewModel>(R.layout.profile_frag
             editSave.setOnClickListener {
                 if (viewModel.mode == Mode.Read) {
                     editSave.text = "Save"
-                    fieldContainer.background = requireContext().getDrawable(R.color.lite_red)
-                    editSave.background =
-                        requireContext().getDrawable(R.drawable.white_action_button)
+                    fieldContainer.setBackgroundResource(R.color.transparent_lite_blue)
+                    editSave.setBackgroundResource(R.drawable.blue_action_button)
                     logOut.visibility = View.GONE
                     viewModel.mode = Mode.Edit
                     nameSafety.isClickable = false
@@ -167,9 +166,8 @@ class ProfileFragment : BaseMvvmFragment<ProfileViewModel>(R.layout.profile_frag
                 it.getFirstOrNull()?.let {
                     binding.apply {
                         editSave.text = "Edit profile"
-                        fieldContainer.background = requireContext().getDrawable(R.color.white)
-                        editSave.background =
-                            requireContext().getDrawable(R.drawable.black_action_button)
+                        fieldContainer.setBackgroundResource(R.color.white)
+                        editSave.setBackgroundResource(R.drawable.black_action_button)
                         logOut.visibility = View.VISIBLE
                         viewModel.mode = Mode.Read
                         nameSafety.isClickable = true

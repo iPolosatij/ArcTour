@@ -539,7 +539,7 @@
                     android:layout_height="wrap_content"
                     android:layout_gravity="center_horizontal"
                     android:layout_marginTop="16dp"
-                    android:background="@drawable/white_solid_action_button"
+                    android:background="@drawable/white_frame_8_all_radius"
                     android:text="Save"
                     android:textAllCaps="false"
                     android:textColor="@color/black" />
