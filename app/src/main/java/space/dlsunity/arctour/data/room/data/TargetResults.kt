@@ -6,7 +6,7 @@ import kotlinx.serialization.Serializable
 data class TargetResults(
     val tournamentId: String,
     val targetNumber: Int,
-    val firstShut: Int,
-    val secondShut: Int,
+    var firstShut: Int,
+    var secondShut: Int,
     val result: Int = firstShut + secondShut,
 )

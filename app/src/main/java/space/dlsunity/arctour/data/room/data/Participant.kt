@@ -1,6 +1,7 @@
 package space.dlsunity.arctour.data.room.data
 
 import kotlinx.serialization.Serializable
+import space.dlsunity.arctour.domain.model.Item
 
 @Serializable
 data class Participant(
@@ -11,8 +12,9 @@ data class Participant(
     var targetsResults: List<TargetResults>,
     var score: Int,
     var bowClass: String?,
-    var teamId: String?
-){
+    var teamId: String?,
+    var isAdmin: Boolean = false
+): Item {
     fun getTarget(name: Int):TargetResults?{
         for (target in targetsResults){
             if (target.targetNumber == name)

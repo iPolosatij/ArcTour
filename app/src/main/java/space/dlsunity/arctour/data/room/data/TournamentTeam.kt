@@ -5,7 +5,7 @@ import kotlinx.serialization.Serializable
 @Serializable
 data class TournamentTeam(
     val id: String,
-    val participants: List<Participant>,
+    var participants: List<Participant>,
     val teamName: String,
     val teamNumber: Int,
 )

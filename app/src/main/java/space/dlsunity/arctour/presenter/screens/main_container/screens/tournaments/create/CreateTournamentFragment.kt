@@ -9,6 +9,7 @@ import androidx.core.widget.addTextChangedListener
 import by.kirich1409.viewbindingdelegate.viewBinding
 import org.koin.androidx.viewmodel.ext.android.sharedViewModel
 import space.dlsunity.arctour.R
+import space.dlsunity.arctour.data.room.data.MockParticipantsRep
 import space.dlsunity.arctour.data.room.data.Part
 import space.dlsunity.arctour.data.room.data.TargetMy
 import space.dlsunity.arctour.data.room.data.Tournament
@@ -136,22 +137,25 @@ class CreateTournamentFragment : BaseMvvmFragment<CreateTournamentViewModel>(R.l
                 create.setOnClickListener {
                     if (isPossibleCreate()) {
                         containerViewModel.user?.let {user->
-                            saveTournament(
-                                Tournament(
-                                    address = tournamentAddress.text.toString(),
-                                    region = tournamentRegion.text.toString(),
-                                    country = tournamentCountry.text.toString(),
-                                    name = tournamentName.text.toString(),
-                                    description = tournamentDescription.text.toString(),
-                                    tournamentId = UUID.randomUUID().toString(),
-                                    date = tournamentDate.text.toString(),
-                                    parts = viewListParts,
-                                    participants = viewListParticipant,
-                                    photo = photo,
-                                    admins = listOf(user.toParticipant()),
-                                    teams = listOf()
+                            viewListParticipant = MockParticipantsRep.getParticipants() // Delete mock after fix
+                            viewListParticipant.add(user.toParticipant()).let {
+                                saveTournament(
+                                    Tournament(
+                                        address = tournamentAddress.text.toString(),
+                                        region = tournamentRegion.text.toString(),
+                                        country = tournamentCountry.text.toString(),
+                                        name = tournamentName.text.toString(),
+                                        description = tournamentDescription.text.toString(),
+                                        tournamentId = UUID.randomUUID().toString(),
+                                        date = tournamentDate.text.toString(),
+                                        parts = viewListParts,
+                                        participants = viewListParticipant,
+                                        photo = photo,
+                                        admins = listOf(user.toParticipant()),
+                                        teams = listOf(),
+                                    )
                                 )
-                            )
+                            }
                         }
                     }
                 }

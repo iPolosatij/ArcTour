@@ -9,10 +9,7 @@ import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.MutableSharedFlow
 import kotlinx.coroutines.flow.filterNotNull
 import kotlinx.coroutines.launch
-import space.dlsunity.arctour.data.room.data.Part
-import space.dlsunity.arctour.data.room.data.Participant
-import space.dlsunity.arctour.data.room.data.TargetMy
-import space.dlsunity.arctour.data.room.data.Tournament
+import space.dlsunity.arctour.data.room.data.*
 import space.dlsunity.arctour.databinding.ItemPartListBinding
 import space.dlsunity.arctour.domain.usecases.tournaments.GetAllTournamentsUseCase
 import space.dlsunity.arctour.domain.usecases.tournaments.GetTournamentByIdUseCase
@@ -20,6 +17,7 @@ import space.dlsunity.arctour.domain.usecases.tournaments.SaveTournamentUseCase
 import space.dlsunity.arctour.presenter.base.mvvm.BaseViewModel
 import space.dlsunity.arctour.presenter.screens.errors.ErrorModel
 import space.dlsunity.arctour.utils.auxiliary.Event
+import java.util.*
 
 class TournamentCardViewModel (
     private val localContext: Context,
@@ -38,10 +36,13 @@ class TournamentCardViewModel (
 
     var tournamentState: TournamentState = TournamentState.Read
     var activeLayout : ItemPartListBinding? = null
+    var target: TargetMy? = null
+    var team: TournamentTeam? = null
+    var tempFreeParticipantList: ArrayList<Participant> = arrayListOf()
+    var tempListParticipant: ArrayList<Participant> = arrayListOf()
 
     var viewListTargetMy: ArrayList<TargetMy> = arrayListOf()
     var viewListParts: ArrayList<Part> = arrayListOf()
-    var viewListParticipant: ArrayList<Participant> = arrayListOf()
     var photo: String = ""
 
     private val _error: MutableSharedFlow<ErrorModel> = MutableSharedFlow()
@@ -55,6 +56,20 @@ class TournamentCardViewModel (
                 }
             }
         }
+    }
+
+    fun addTeam(tournament: Tournament): Tournament{
+        val tempArray: ArrayList<TournamentTeam> = tournament.teams as ArrayList<TournamentTeam>
+        tempArray.add(TournamentTeam(
+            id = UUID.randomUUID().toString(),
+            teamName = "Команда №${tournament.teams.size+1}",
+            teamNumber = tournament.teams.size+1,
+            participants = tempListParticipant
+        ))
+        tournament.participants = tempFreeParticipantList
+        tempListParticipant.clear()
+        tournament.teams = tempArray
+        return tournament
     }
 
 }
