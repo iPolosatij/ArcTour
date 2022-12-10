@@ -20,14 +20,14 @@ class ParticipantListItem(private val shortTap: (Participant) -> Unit,
 
     override fun isRelativeItem(item: Item): Boolean = item is Participant
 
-    override fun getLayoutId(): Int = R.layout.item_targets_list
+    override fun getLayoutId(): Int = R.layout.item_participant_list
 
     override fun getViewHolder(
         layoutInflater: LayoutInflater,
         parent: ViewGroup,
     ): BaseViewHolder<ItemParticipantListBinding, Participant> {
         val binding = ItemParticipantListBinding.inflate(layoutInflater, parent, false)
-        return ItemTargetListViewHolder(binding, shortTap, longTap, target)
+        return ItemParticipantListViewHolder(binding, shortTap, longTap, target)
     }
 
     override fun getDiffUtil(): DiffUtil.ItemCallback<Participant>  = diffUtil
@@ -40,7 +40,7 @@ class ParticipantListItem(private val shortTap: (Participant) -> Unit,
             oldItem == newItem
     }
 
-    private class ItemTargetListViewHolder(
+    private class ItemParticipantListViewHolder(
         binding: ItemParticipantListBinding,
         shortTap: (Participant) -> Unit,
         longTap: (Participant) -> Unit,

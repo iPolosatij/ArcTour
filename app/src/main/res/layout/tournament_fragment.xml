@@ -216,8 +216,8 @@
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/create_team_frame"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
         android:background="@android:drawable/screen_background_dark_transparent"
         android:clickable="true"
         android:padding="8dp"
@@ -248,7 +248,7 @@
 
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/free_participant_list"
-                android:layout_width="match_parent"
+                android:layout_width="0dp"
                 android:layout_height="0dp"
                 android:layout_marginStart="8dp"
                 android:layout_marginTop="8dp"
