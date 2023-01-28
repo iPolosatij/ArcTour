@@ -60,12 +60,14 @@ class TournamentCardViewModel (
 
     fun addTeam(tournament: Tournament): Tournament{
         val tempArray: ArrayList<TournamentTeam> = tournament.teams as ArrayList<TournamentTeam>
-        tempArray.add(TournamentTeam(
+        val tempTeam = TournamentTeam(
             id = UUID.randomUUID().toString(),
             teamName = "Команда №${tournament.teams.size+1}",
             teamNumber = tournament.teams.size+1,
             participants = tempListParticipant
-        ))
+        )
+        tempArray.add(tempTeam)
+        team = tempTeam
         tournament.participants = tempFreeParticipantList
         tempListParticipant.clear()
         tournament.teams = tempArray

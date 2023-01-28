@@ -149,6 +149,7 @@ class TournamentCardFragment: BaseMvvmFragment<TournamentCardViewModel>(R.layout
                     setTeam()
                 }
                 arrowBtn.setOnClickListener {
+                   // viewModel.tempFreeParticipantList = containerViewModel.activeTournament.participants as ArrayList<Participant>
                     freeParticipantListAdapter.submitList(viewModel.tempFreeParticipantList as List<Item>)
                     freeParticipantListAdapter.notifyDataSetChanged()
                     createTeamFrame.visibility = View.VISIBLE
