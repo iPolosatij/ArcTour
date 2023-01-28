@@ -25,4 +25,9 @@ data class Tournament(
     @ColumnInfo(name = "participants") var participants: List<Participant>,
     @ColumnInfo(name = "admins") var admins: List<Participant>,
     @ColumnInfo(name = "teams") var teams: List<TournamentTeam>,
+    @ColumnInfo(name = "viewsCounter") var viewsCounter: String,
+    @ColumnInfo(name = "emails") var emails: List<String>,
+    @ColumnInfo(name = "telephones") var telephones: List<String>,
+    @ColumnInfo(name = "isSelect") var isSelect: Boolean,
+    @ColumnInfo(name = "uid") var uid: String,
 ): Item
