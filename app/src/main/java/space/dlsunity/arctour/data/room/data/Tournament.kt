@@ -7,6 +7,7 @@ import androidx.room.TypeConverters
 import kotlinx.serialization.Serializable
 import space.dlsunity.arctour.data.room.utils.Converters
 import space.dlsunity.arctour.domain.model.Item
+import java.util.*
 
 
 @Entity(tableName = "tournament")
@@ -25,9 +26,9 @@ data class Tournament(
     @ColumnInfo(name = "participants") var participants: List<Participant>,
     @ColumnInfo(name = "admins") var admins: List<Participant>,
     @ColumnInfo(name = "teams") var teams: List<TournamentTeam>,
-    @ColumnInfo(name = "viewsCounter") var viewsCounter: String,
-    @ColumnInfo(name = "emails") var emails: List<String>,
-    @ColumnInfo(name = "telephones") var telephones: List<String>,
-    @ColumnInfo(name = "isSelect") var isSelect: Boolean,
-    @ColumnInfo(name = "uid") var uid: String,
+    @ColumnInfo(name = "viewsCounter") var viewsCounter: String = "0",
+    @ColumnInfo(name = "emails") var emails: List<String> = arrayListOf(),
+    @ColumnInfo(name = "telephones") var telephones: List<String> = arrayListOf(),
+    @ColumnInfo(name = "isSelect") var isSelect: Boolean = false,
+    @ColumnInfo(name = "uid") var uid: String = UUID.randomUUID().toString(),
 ): Item
