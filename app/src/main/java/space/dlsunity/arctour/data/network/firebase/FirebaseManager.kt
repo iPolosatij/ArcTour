@@ -14,24 +14,23 @@ import space.dlsunity.arctour.data.room.data.ItemInfo
 import space.dlsunity.arctour.data.room.data.Tournament
 
 class FirebaseManager {
-    val db = Firebase.database.getReference(MAIN_NODE)
-    val dbStorage = Firebase.storage.getReference(MAIN_NODE)
-    val auth = Firebase.auth
+    private val firebaseDb = Firebase.database.getReference(MAIN_NODE)
+    private val firebaseStorage = Firebase.storage.getReference(MAIN_NODE)
+    val firebaseAuth = Firebase.auth
 
-    fun publishTournament(tournament: Tournament, finishListener: FinishWorkListener){
-        if(auth.uid != null) db.child(tournament.tournamentId)
-            .child(auth.uid!!).child(TOURNAMENT_NODE)
+    fun publishTournament(tournament: Tournament,
+                          finish: (Boolean) -> Unit){
+        if(firebaseAuth.uid != null) firebaseDb.child(tournament.tournamentId)
+            .child(firebaseAuth.uid!!).child(TOURNAMENT_NODE)
             .setValue(tournament).addOnCompleteListener{
-                if(it.isSuccessful) {
-                    finishListener.onFinish()
-                }
+                finish(it.isSuccessful)
             }
     }
 
     fun tournamentViewed(tournament: Tournament) {
         var counter = tournament.viewsCounter.toInt()
         counter++
-        if (auth.uid != null) db.child(tournament.tournamentId)
+        if (firebaseAuth.uid != null) firebaseDb.child(tournament.tournamentId)
             .child(INFO_NODE).setValue(
                 ItemInfo(counter.toString(),
                 tournament.emails.size.toString(),
@@ -45,8 +44,8 @@ class FirebaseManager {
     }
 
     private fun addSelect(tournament: Tournament, finishListener: FinishWorkListener) {
-        auth.uid?.let { uid ->
-            db.child(tournament.tournamentId)
+        firebaseAuth.uid?.let { uid ->
+            firebaseDb.child(tournament.tournamentId)
                 .child(SELECT_NODE)
                 .child(uid)
                 .setValue(uid)
@@ -59,8 +58,8 @@ class FirebaseManager {
     }
 
     private fun removeSelect(tournament: Tournament, finishListener: FinishWorkListener) {
-        auth.uid?.let { uid ->
-            db.child(tournament.tournamentId)
+        firebaseAuth.uid?.let { uid ->
+            firebaseDb.child(tournament.tournamentId)
                 .child(SELECT_NODE)
                 .child(uid)
                 .removeValue()
@@ -73,16 +72,16 @@ class FirebaseManager {
     }
 
     fun getMySelectTournaments(readDataCallback: ReadDataCallback?){
-        val query = db.orderByChild("/favorite/${auth.uid}").equalTo(auth.uid)
+        val query = firebaseDb.orderByChild("/favorite/${firebaseAuth.uid}").equalTo(firebaseAuth.uid)
         readDataFromFirebaseDb(query, readDataCallback)
     }
 
     fun getMyTournaments(readDataCallback: ReadDataCallback?){
-        val query = db.orderByChild(auth.uid + "/notice/uid").equalTo(auth.uid)
+        val query = firebaseDb.orderByChild(firebaseAuth.uid + "/notice/uid").equalTo(firebaseAuth.uid)
         readDataFromFirebaseDb(query, readDataCallback)
     }
     fun getAllTournaments(readDataCallback: ReadDataCallback?){
-        val query = db.orderByChild(auth.uid + "/notice/price")
+        val query = firebaseDb.orderByChild(firebaseAuth.uid + "/notice/price")
         readDataFromFirebaseDb(query, readDataCallback)
     }
 
@@ -98,7 +97,7 @@ class FirebaseManager {
 
                     val itemInfo = item.child(INFO_NODE).getValue(ItemInfo::class.java)
                     val favCounter = item.child(SELECT_NODE).childrenCount
-                    val isMyFavorite = auth.uid?.let{uid ->
+                    val isMyFavorite = firebaseAuth.uid?.let{ uid ->
                         item.child(SELECT_NODE).child(uid).getValue(String::class.java)
                     }
 
@@ -117,7 +116,7 @@ class FirebaseManager {
     }
 
     fun deleteTournament(tournament: Tournament, listener: FinishWorkListener) {
-        db.child(tournament.tournamentId).child(tournament.uid).removeValue()
+        firebaseDb.child(tournament.tournamentId).child(tournament.uid).removeValue()
             .addOnCompleteListener {
                 if (it.isSuccessful) listener.onFinish()}
     }
@@ -131,8 +130,8 @@ class FirebaseManager {
     }
 
     private fun upLoadImage(byteArray: ByteArray, listener: OnCompleteListener<Uri>){
-        val imStorageReference = auth.uid?.let { uid ->
-            dbStorage.child(uid).child("image_${System.currentTimeMillis()}")
+        val imStorageReference = firebaseAuth.uid?.let { uid ->
+            firebaseStorage.child(uid).child("image_${System.currentTimeMillis()}")
         }
         val uploadTask = imStorageReference?.putBytes(byteArray)
         uploadTask?.continueWithTask { task -> imStorageReference.downloadUrl

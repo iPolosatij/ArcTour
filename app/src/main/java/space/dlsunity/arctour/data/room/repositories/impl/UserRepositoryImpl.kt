@@ -1,5 +1,6 @@
 package space.dlsunity.arctour.data.room.repositories.impl
 
+import android.util.Log
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
 import space.dlsunity.arctour.data.room.dao.UserDao
@@ -43,8 +44,8 @@ class UserRepositoryImpl(
         return withContext(Dispatchers.IO) {
             try {
                 userDao.insertAll(user)
-            } catch (_: Exception) {
-
+            } catch (e: Exception) {
+                Log.d("UserRepository", e.stackTraceToString())
             }
         }
     }

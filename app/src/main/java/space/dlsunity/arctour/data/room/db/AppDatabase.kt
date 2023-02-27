@@ -20,7 +20,7 @@ abstract class AppDatabase : RoomDatabase() {
     abstract fun tournamentDao(): TournamentDao
 
     companion object {
-        internal const val DATABASE_VERSION = 6
+        internal const val DATABASE_VERSION = 7
         private const val DATABASE_NAME = "database-arctour"
 
         @Volatile

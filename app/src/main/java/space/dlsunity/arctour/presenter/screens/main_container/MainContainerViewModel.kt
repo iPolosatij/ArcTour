@@ -293,8 +293,12 @@ class MainContainerViewModel(
         CoroutineScope(Dispatchers.Default).launch {
             safeProgressHandler(error = _error) {
                 getAllUsersUseCase.invoke().let {
-                    user = it[0]
-                    _userDownloaded.postValue(Event(it[0]))
+                    if (it.isNotEmpty()){
+                        user = it[0]
+                        _userDownloaded.postValue(Event(it[0]))
+                    }else{
+                        toWelcome()
+                    }
                 }
             }
         }
