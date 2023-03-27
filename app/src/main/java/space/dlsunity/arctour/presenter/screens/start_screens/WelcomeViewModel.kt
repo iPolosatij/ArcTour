@@ -5,12 +5,15 @@ import androidx.core.graphics.drawable.toBitmap
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
+import com.google.firebase.auth.ktx.auth
+import com.google.firebase.ktx.Firebase
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.*
 import kotlinx.coroutines.launch
 import space.dlsunity.arctour.R
+import space.dlsunity.arctour.data.network.firebase.AccountHelper
 import space.dlsunity.arctour.data.room.data.User
 import space.dlsunity.arctour.domain.usecases.tournaments.DeleteAllTournamentsUseCase
 import space.dlsunity.arctour.domain.usecases.user.DeleteAllUsersUseCase
@@ -61,14 +64,15 @@ class WelcomeViewModel(
         }
     }
 
-    fun acceptUser(user: User){
+    fun acceptUser(user: User, context: Context){
         CoroutineScope(Dispatchers.IO).launch {
             safeProgressHandler(error = _error) {
                 if (user.name.isEmpty()){
                     getAllUsersUseCase.invoke().let{savedUser->
                         if (savedUser.size == 2){
                             if(savedUser[0].memberId == user.memberId && savedUser[0].password == user.password){
-                                _message.postValue(Event(""))
+                                AccountHelper(Firebase.auth, context).signInWithEmail(user.email, user.password, _message)
+                               // _message.postValue(Event(""))
                             }else{
                                 _message.postValue(Event("Неверный пароль"))
                             }
@@ -76,8 +80,9 @@ class WelcomeViewModel(
                         else if(savedUser.size == 1){
                             if(savedUser[0].memberId == user.memberId && savedUser[0].password == user.password){
                                 val userSave = savedUser[0].copy(memberId = "saved")
-                                saveUserUseCase.invoke(userSave)
-                                _message.postValue(Event(""))
+                                saveUserUseCase.invoke(userSave).let {
+                                    AccountHelper(Firebase.auth, context).signInWithEmail(user.email, user.password, _message)
+                                }
                             }else{
                                 _message.postValue(Event("Неверный пароль"))
                             }
@@ -90,7 +95,8 @@ class WelcomeViewModel(
                     getAllUsersUseCase.invoke().let{savedUser->
                         if (savedUser.isEmpty()){
                             saveUserUseCase.invoke(user).let {
-                                _message.postValue(Event(""))
+                                AccountHelper(Firebase.auth, context).signUpWithEmail(user.email, user.password, _message)
+                                //_message.postValue(Event(""))
                             }
                         }else {
                             if (savedUser[0].memberId == user.memberId) {
@@ -105,7 +111,7 @@ class WelcomeViewModel(
         }
     }
 
-    fun loginNewUser(user: User) {
+    fun loginNewUser(user: User, context:Context) {
         CoroutineScope(Dispatchers.IO).launch {
             safeProgressHandler(error = _error) {
                 delay(1000)
@@ -114,7 +120,8 @@ class WelcomeViewModel(
                     user.memberId = "saved"
                     saveUserUseCase.invoke(user).let {
                         delay(1000)
-                        _message.postValue(Event(""))
+                        AccountHelper(Firebase.auth, context).signUpWithEmail(user.email, user.password, _message)
+                       // _message.postValue(Event(""))
                     }
                 }
             }

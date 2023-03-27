@@ -3,33 +3,53 @@ package space.dlsunity.arctour.data.network.firebase
 import android.content.Context
 import android.util.Log
 import android.widget.Toast
+import androidx.lifecycle.MutableLiveData
 import com.google.android.gms.auth.api.signin.GoogleSignIn
 import com.google.android.gms.auth.api.signin.GoogleSignInClient
 import com.google.android.gms.auth.api.signin.GoogleSignInOptions
 import com.google.firebase.auth.*
+import space.dlsunity.arctour.Config
 import space.dlsunity.arctour.R.string
+import space.dlsunity.arctour.utils.auxiliary.Event
 
 class AccountHelper(private val auth: FirebaseAuth, val context: Context) {
 
     private lateinit var signInClient: GoogleSignInClient
 
-    fun signUpWithEmail(email: String, password: String) {
+    fun signUpWithEmail(email: String, password: String, _message: MutableLiveData<Event<String>>) {
         if (email.isNotEmpty() && password.isNotEmpty()) {
-            auth.currentUser?.delete()?.addOnCompleteListener {
-                if (it.isSuccessful) {
-                    auth.createUserWithEmailAndPassword(email, password)
-                        .addOnCompleteListener { task ->
-                            if (task.isSuccessful) {
-                                task.result.user?.let { user ->
-                                    signUpWithEmailIsSuccessful(user)
-                                }
-                            } else {
-                                task.exception?.let { exception ->
-                                    checkSignUpWithEmailException(exception, email, password)
+            if(auth.currentUser != null){
+                auth.currentUser?.delete()?.addOnCompleteListener {
+                    if (it.isSuccessful) {
+                        auth.createUserWithEmailAndPassword(email, password)
+                            .addOnCompleteListener { task ->
+                                if (task.isSuccessful) {
+                                    task.result.user?.let { user ->
+                                        signUpWithEmailIsSuccessful(user)
+                                        _message.postValue(Event(""))
+                                    }
+                                } else {
+                                    task.exception?.let { exception ->
+                                        checkSignUpWithEmailException(exception, email, password)
+                                    }
                                 }
                             }
-                        }
+                    }
                 }
+            }else{
+                auth.createUserWithEmailAndPassword(email, password)
+                    .addOnCompleteListener { task ->
+                        if (task.isSuccessful) {
+                            task.result.user?.let { user ->
+                                signUpWithEmailIsSuccessful(user)
+                                _message.postValue(Event(""))
+                            }
+                        } else {
+                            task.exception?.let { exception ->
+                                checkSignUpWithEmailException(exception, email, password)
+                            }
+                        }
+                    }
             }
         }
     }
@@ -42,7 +62,7 @@ class AccountHelper(private val auth: FirebaseAuth, val context: Context) {
         }
         if (exception is FirebaseAuthUserCollisionException) {
             if (exception.errorCode == FirebaseAuthConstants.ERROR_EMAIL_ALREADY_IN_USE) {
-                //Toast.makeText(act, FirebaseAuthConstants.ERROR_EMAIL_ALREADY_IN_USE, Toast.LENGTH_LONG).show()
+                Toast.makeText(context, FirebaseAuthConstants.ERROR_EMAIL_ALREADY_IN_USE, Toast.LENGTH_LONG).show()
                 linkEmailToG(email, password)
             }
         }
@@ -72,7 +92,7 @@ class AccountHelper(private val auth: FirebaseAuth, val context: Context) {
 
     private fun getSignInClient(): GoogleSignInClient {
         val gso = GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN).
-        requestIdToken("context.getString(string.default_web_client_id)").requestEmail().build()
+        requestIdToken(Config.WEB_API_KEY).requestEmail().build()
         return GoogleSignIn.getClient(context, gso)
     }
 
@@ -112,13 +132,13 @@ class AccountHelper(private val auth: FirebaseAuth, val context: Context) {
         }
     }
 
-    fun signInWithEmail(email:String, password:String){
+    fun signInWithEmail(email: String, password: String, _message: MutableLiveData<Event<String>>){
         if(email.isNotEmpty() && password.isNotEmpty()){
             auth.currentUser?.delete()?.addOnCompleteListener {
                 if (it.isSuccessful){
                     auth.signInWithEmailAndPassword(email, password).addOnCompleteListener{task ->
                         if(task.isSuccessful){
-                            //act.uiUpdate(task.result?.user)
+                            _message.postValue(Event(""))
                         }else{
                             task.exception?.let {exception ->
                                 checkSignInException(exception)
@@ -132,7 +152,7 @@ class AccountHelper(private val auth: FirebaseAuth, val context: Context) {
 
     private fun checkSignInException(exception: Exception){
         //Log.d("MyLog", "Exception - ${task.exception}")
-        Toast.makeText(context, context.resources.getString(string.sign_in_error), Toast.LENGTH_LONG).show()
+        Toast.makeText(context, context.resources.getString(string.sign_in_error), Toast.LENGTH_SHORT).show()
 
         if (exception is FirebaseAuthInvalidCredentialsException) {
             if (exception.errorCode == FirebaseAuthConstants.ERROR_WRONG_PASSWORD) {

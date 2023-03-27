@@ -99,8 +99,8 @@ class WelcomeFragment: NavMvvmFragment<AppDestination, WelcomeViewModel>(R.layou
                         User(
                             photo = photo,
                             memberId = loginValue.text.toString(),
+                            email = loginValue.text.toString(),
                             password = passwordValue.text.toString(),
-                            email = loginValue.text.toString()
                         )
 
                     }
@@ -135,7 +135,7 @@ class WelcomeFragment: NavMvvmFragment<AppDestination, WelcomeViewModel>(R.layou
                     loginValue.text?.clear()
                     nameValue.text?.clear()
                     lastnameValue.text?.clear()
-                    viewModel.acceptUser(user)
+                    viewModel.acceptUser(user, requireContext())
                 }
             }
         }
@@ -151,7 +151,7 @@ class WelcomeFragment: NavMvvmFragment<AppDestination, WelcomeViewModel>(R.layou
                     nameValue.isClickable = false
                     lastnameValue.isClickable = false
                 }
-                viewModel.loginNewUser(user)
+                viewModel.loginNewUser(user, requireContext())
             }
         }
     }
