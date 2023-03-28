@@ -13,24 +13,28 @@ import com.google.firebase.storage.ktx.storage
 import space.dlsunity.arctour.data.room.data.ItemInfo
 import space.dlsunity.arctour.data.room.data.Tournament
 
-class FirebaseManager {
-    private val firebaseDb = Firebase.database.getReference(MAIN_NODE)
+class FirebaseTournamentManager {
+    private val firebaseDb = Firebase.database.getReference(MAIN_NODE).child(TOURNAMENT_NODE)
     private val firebaseStorage = Firebase.storage.getReference(MAIN_NODE)
     val firebaseAuth = Firebase.auth
 
-    fun publishTournament(tournament: Tournament,
-                          finish: (Boolean) -> Unit){
-        if(firebaseAuth.uid != null) firebaseDb.child(tournament.tournamentId)
-            .child(firebaseAuth.uid!!).child(TOURNAMENT_NODE)
-            .setValue(tournament).addOnCompleteListener{
-                finish(it.isSuccessful)
-            }
+    fun publishTournament(
+        tournament: Tournament,
+        finish: (Boolean) -> Unit
+    ) {
+        if (firebaseAuth.uid != null)
+            firebaseDb
+                .child(tournament.tournamentId)
+                .setValue(tournament).addOnCompleteListener {
+                    finish(it.isSuccessful)
+                }
     }
 
     fun tournamentViewed(tournament: Tournament) {
         var counter = tournament.viewsCounter.toInt()
         counter++
-        if (firebaseAuth.uid != null) firebaseDb.child(tournament.tournamentId)
+        if (firebaseAuth.uid != null) firebaseDb
+            .child(tournament.tournamentId)
             .child(INFO_NODE).setValue(
                 ItemInfo(counter.toString(),
                 tournament.emails.size.toString(),
@@ -38,12 +42,14 @@ class FirebaseManager {
             )
     }
 
-    fun clickSelect(tournament: Tournament, finishWorkListener: FinishWorkListener){
-        if (tournament.isSelect) removeSelect(tournament, finishWorkListener)
-        else addSelect(tournament, finishWorkListener)
+    fun clickSelect(tournament: Tournament){
+        if (tournament.isSelect)
+            removeSelect(tournament)
+        else
+            addSelect(tournament)
     }
 
-    private fun addSelect(tournament: Tournament, finishListener: FinishWorkListener) {
+    private fun addSelect(tournament: Tournament) {
         firebaseAuth.uid?.let { uid ->
             firebaseDb.child(tournament.tournamentId)
                 .child(SELECT_NODE)
@@ -51,13 +57,13 @@ class FirebaseManager {
                 .setValue(uid)
                 .addOnCompleteListener {
                     if (it.isSuccessful) {
-                        finishListener.onFinish()
+                        //ADD EVENT
                     }
                 }
         }
     }
 
-    private fun removeSelect(tournament: Tournament, finishListener: FinishWorkListener) {
+    private fun removeSelect(tournament: Tournament) {
         firebaseAuth.uid?.let { uid ->
             firebaseDb.child(tournament.tournamentId)
                 .child(SELECT_NODE)
@@ -65,7 +71,7 @@ class FirebaseManager {
                 .removeValue()
                 .addOnCompleteListener {
                     if (it.isSuccessful) {
-                        finishListener.onFinish()
+                       //ADD EVENT
                     }
                 }
         }
