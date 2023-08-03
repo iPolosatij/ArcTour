@@ -4,17 +4,22 @@ import android.content.Context
 import androidx.room.Database
 import androidx.room.Room
 import androidx.room.RoomDatabase
-import space.dlsunity.arctour.data.room.dao.BdDao
-import space.dlsunity.arctour.data.room.data.BdEntity
+import space.dlsunity.arctour.data.room.dao.*
+import space.dlsunity.arctour.data.room.data.*
 import space.dlsunity.arctour.data.room.db.AppDatabase.Companion.DATABASE_VERSION
 
-@Database(entities = [ BdEntity::class], version = DATABASE_VERSION, exportSchema = false)
+@Database(entities = [ BdEntity::class, Business::class, Constructor::class, Doc::class, Status::class, User::class], version = DATABASE_VERSION, exportSchema = false)
 abstract class AppDatabase : RoomDatabase() {
     abstract fun bdDao(): BdDao
+    abstract fun businessDao(): BusinessDao
+    abstract fun constructorDao(): ConstructorDao
+    abstract fun docDao(): DocDao
+    abstract fun statusDao(): StatusDao
+    abstract fun userDao(): UserDao
 
     companion object {
         internal const val DATABASE_VERSION = 1
-        private const val DATABASE_NAME = "database-arctour"
+        private const val DATABASE_NAME = "database-business-line"
 
         @Volatile
         private var INSTANCE: AppDatabase? = null
