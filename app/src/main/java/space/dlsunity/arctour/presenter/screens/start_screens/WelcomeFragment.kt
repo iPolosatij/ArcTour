@@ -2,6 +2,8 @@ package space.dlsunity.arctour.presenter.screens.start_screens
 
 import android.os.Bundle
 import android.view.View
+import androidx.navigation.NavDirections
+import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import by.kirich1409.viewbindingdelegate.viewBinding
 import org.koin.androidx.viewmodel.ext.android.sharedViewModel
@@ -9,6 +11,7 @@ import space.dlsunity.arctour.R
 import space.dlsunity.arctour.databinding.WelcomeFragmentBinding
 import space.dlsunity.arctour.presenter.base.navigation.NavMvvmFragment
 import space.dlsunity.arctour.utils.extensions.collectWhenStarted
+import space.dlsunity.arctour.utils.navigation.navigateSafe
 
 class WelcomeFragment: NavMvvmFragment<AppDestination, WelcomeViewModel>(R.layout.welcome_fragment) {
 
@@ -26,14 +29,14 @@ class WelcomeFragment: NavMvvmFragment<AppDestination, WelcomeViewModel>(R.layou
         super.onViewCreated(view, savedInstanceState)
         observeVm()
         setUpButtons()
-        if(logout){
-            (requireActivity() as space.dlsunity.arctour.MainActivity).mChatService.onDestroy()
-            activity?.finish()
-        }
     }
 
     override fun handlerDestination(destination: AppDestination) {
-
+        val action: NavDirections? = when(destination){
+            AppDestination.ToMain -> WelcomeFragmentDirections.toMain()
+            else -> null
+        }
+        action?.let { findNavController().navigateSafe(it) }
     }
 
     private fun observeVm() {
@@ -45,7 +48,7 @@ class WelcomeFragment: NavMvvmFragment<AppDestination, WelcomeViewModel>(R.layou
     private fun setUpButtons(){
         binding.apply {
             login.setOnClickListener {
-
+                viewModel.toMain()
             }
             registration.setOnClickListener {
 

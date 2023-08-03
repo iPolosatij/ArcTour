@@ -4,4 +4,5 @@ import space.dlsunity.arctour.presenter.base.navigation.Destination
 
 interface AppDestination: Destination {
     object ToWelcome : AppDestination
+    object ToMain : AppDestination
 }

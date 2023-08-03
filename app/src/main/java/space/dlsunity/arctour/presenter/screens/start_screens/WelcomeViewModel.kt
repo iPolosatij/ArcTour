@@ -1,8 +1,10 @@
 package space.dlsunity.arctour.presenter.screens.start_screens
 
+import androidx.lifecycle.viewModelScope
 import kotlinx.coroutines.flow.MutableSharedFlow
 import kotlinx.coroutines.flow.SharedFlow
 import kotlinx.coroutines.flow.asSharedFlow
+import kotlinx.coroutines.launch
 import space.dlsunity.arctour.presenter.base.mvvm.BaseViewModel
 
 class WelcomeViewModel: BaseViewModel() {
@@ -15,5 +17,11 @@ class WelcomeViewModel: BaseViewModel() {
     }
 
     private fun loadData() {}
+
+    fun toMain(){
+        viewModelScope.launch {
+            _navigateCommander.emit(AppDestination.ToMain)
+        }
+    }
 
 }
