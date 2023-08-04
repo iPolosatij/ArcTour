@@ -1,6 +1,6 @@
 package space.dlsunity.arctour.domain.usecases
 
-import space.dlsunity.arctour.data.room.data.Bd_data
+import space.dlsunity.arctour.data.room.data.sketch.Bd_data
 import space.dlsunity.arctour.data.room.repositories.BdDataRepository
 
 class GetBdDataByIdUseCase (

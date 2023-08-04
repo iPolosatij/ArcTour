@@ -1,8 +1,8 @@
-package space.dlsunity.arctour.data.room.data
+package space.dlsunity.arctour.data.room.data.sketch
 
 import androidx.room.Entity
 import androidx.room.TypeConverters
-import space.dlsunity.arctour.data.room.data.BdEntity.Companion.TABLE_NAME
+import space.dlsunity.arctour.data.room.data.sketch.BdEntity.Companion.TABLE_NAME
 import space.dlsunity.arctour.data.room.utils.Converters
 
 @Entity(tableName = TABLE_NAME, primaryKeys = ["id"])
@@ -21,7 +21,7 @@ fun Bd_data.toEntity(): BdEntity{
     )
 }
 
-fun BdEntity.toData(): Bd_data{
+fun BdEntity.toData(): Bd_data {
     return  Bd_data(
         id = id,
     )

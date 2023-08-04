@@ -29,4 +29,6 @@ val dataModule = module {
     single<DocDao> { get<AppDatabase>().docDao() }
     single<StatusDao> { get<AppDatabase>().statusDao() }
     single<UserDao> { get<AppDatabase>().userDao() }
+    single<ConstructorTypeDao> { get<AppDatabase>().constructorTypeDao() }
+    single<SectionDao> { get<AppDatabase>().sectionDao() }
 }

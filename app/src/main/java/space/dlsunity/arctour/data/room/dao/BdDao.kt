@@ -1,7 +1,7 @@
 package space.dlsunity.arctour.data.room.dao
 
 import androidx.room.*
-import space.dlsunity.arctour.data.room.data.BdEntity
+import space.dlsunity.arctour.data.room.data.sketch.BdEntity
 
 @Dao
 interface BdDao {

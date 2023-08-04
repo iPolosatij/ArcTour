@@ -9,7 +9,8 @@ data class Business(
     var id: String = "",
     var name: String = "",
     var staff: String = "",
-    var docsL: String = ""
+    var docsL: String = "",
+    var constructorsL: String = ""
 ): Serializable{
     companion object {
         const val TABLE_NAME = "business_table"

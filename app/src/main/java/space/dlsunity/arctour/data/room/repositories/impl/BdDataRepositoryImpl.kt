@@ -1,9 +1,9 @@
 package space.dlsunity.arctour.data.room.repositories.impl
 
 import space.dlsunity.arctour.data.room.dao.BdDao
-import space.dlsunity.arctour.data.room.data.Bd_data
-import space.dlsunity.arctour.data.room.data.toData
-import space.dlsunity.arctour.data.room.data.toEntity
+import space.dlsunity.arctour.data.room.data.sketch.Bd_data
+import space.dlsunity.arctour.data.room.data.sketch.toData
+import space.dlsunity.arctour.data.room.data.sketch.toEntity
 import space.dlsunity.arctour.data.room.repositories.BdDataRepository
 
 class BdDataRepositoryImpl(
