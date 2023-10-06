@@ -15,7 +15,10 @@ import space.dlsunity.arctour.databinding.MainContainerFragmentBinding
 import space.dlsunity.arctour.presenter.base.navigation.NavMvvmFragment
 import space.dlsunity.arctour.presenter.screens.errors.ErrorModel
 import space.dlsunity.arctour.presenter.screens.main_container.destinations.MainDestination
+import space.dlsunity.arctour.presenter.screens.main_container.screens.hr.HRFragment
+import space.dlsunity.arctour.presenter.screens.main_container.screens.lists.ListsFragment
 import space.dlsunity.arctour.presenter.screens.main_container.screens.profile.ProfileFragment
+import space.dlsunity.arctour.presenter.screens.main_container.screens.works.WorksFragment
 import space.dlsunity.arctour.utils.extensions.collectWhenStarted
 import space.dlsunity.arctour.utils.navigation.navigateSafe
 import space.dlsunity.arctour.utils.tools.DialogHelper
@@ -216,6 +219,18 @@ class MainContainerFragment :
                 R.id.item4 -> {
                     childFragmentManager.beginTransaction()
                         .replace(fragmentContainer.id, ProfileFragment()).commit()
+                }
+                R.id.item3 -> {
+                    childFragmentManager.beginTransaction()
+                        .replace(fragmentContainer.id, ListsFragment()).commit()
+                }
+                R.id.item2 -> {
+                    childFragmentManager.beginTransaction()
+                        .replace(fragmentContainer.id, HRFragment()).commit()
+                }
+                R.id.item1 -> {
+                    childFragmentManager.beginTransaction()
+                        .replace(fragmentContainer.id, WorksFragment()).commit()
                 }
             }
         }

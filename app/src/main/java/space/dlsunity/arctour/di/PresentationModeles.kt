@@ -6,7 +6,10 @@ import org.koin.androidx.viewmodel.dsl.viewModel
 import org.koin.dsl.module
 import space.dlsunity.arctour.data.network.StoragesFactory
 import space.dlsunity.arctour.presenter.screens.main_container.MainContainerViewModel
+import space.dlsunity.arctour.presenter.screens.main_container.screens.hr.HRViewModel
+import space.dlsunity.arctour.presenter.screens.main_container.screens.lists.ListsViewModel
 import space.dlsunity.arctour.presenter.screens.main_container.screens.profile.ProfileViewModel
+import space.dlsunity.arctour.presenter.screens.main_container.screens.works.WorksViewModel
 import space.dlsunity.arctour.presenter.screens.start_screens.StartViewModel
 import space.dlsunity.arctour.presenter.screens.start_screens.WelcomeViewModel
 
@@ -40,5 +43,17 @@ val presentationModule = module {
 
     viewModel {
         ProfileViewModel()
+    }
+
+    viewModel {
+        HRViewModel()
+    }
+
+    viewModel {
+        ListsViewModel()
+    }
+
+    viewModel {
+        WorksViewModel()
     }
 }
