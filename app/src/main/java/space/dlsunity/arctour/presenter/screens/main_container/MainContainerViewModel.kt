@@ -13,7 +13,11 @@ import androidx.lifecycle.viewModelScope
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.delay
-import kotlinx.coroutines.flow.*
+import kotlinx.coroutines.flow.Flow
+import kotlinx.coroutines.flow.MutableSharedFlow
+import kotlinx.coroutines.flow.SharedFlow
+import kotlinx.coroutines.flow.asSharedFlow
+import kotlinx.coroutines.flow.filterNotNull
 import kotlinx.coroutines.launch
 import space.dlsunity.arctour.MainActivity
 import space.dlsunity.arctour.R
@@ -22,13 +26,14 @@ import space.dlsunity.arctour.presenter.base.mvvm.BaseViewModel
 import space.dlsunity.arctour.presenter.screens.errors.ErrorModel
 import space.dlsunity.arctour.presenter.screens.main_container.destinations.MainDestination
 import space.dlsunity.arctour.utils.auxiliary.Event
-import space.dlsunity.arctour.utils.extensions.toByteArray
 import space.dlsunity.arctour.utils.tools.ImageManager
 import space.dlsunity.arctour.utils.tools.ImagePiker
 
 class MainContainerViewModel(
     private val localContext: Context
 ) : BaseViewModel() {
+
+    //region EVENT
 
     private val _navigateCommander = MutableSharedFlow<MainDestination>()
     val navigateCommander: SharedFlow<MainDestination> = _navigateCommander.asSharedFlow()
@@ -87,6 +92,9 @@ class MainContainerViewModel(
     val profilePhoto: LiveData<Event<Bitmap>>
         get() = _profilePhoto
 
+    //endregion
+
+    //region VARIABLES
     var changedAvatar = false
 
     var user: User? = null
@@ -110,6 +118,9 @@ class MainContainerViewModel(
 
     var new = ""
 
+    //endregion
+
+    //region FUNCTIONS
     fun setScreen(id: Int) {
         _activeScreen.postValue(Event(id))
     }
@@ -207,7 +218,7 @@ class MainContainerViewModel(
     fun toWelcome(){
         CoroutineScope(Dispatchers.Default).launch {
             safeProgressHandler(error = _error) {
-                _navigateCommander.emit(MainDestination.toWelcome(true))
+                _navigateCommander.emit(MainDestination.ToWelcome(true))
             }
         }
     }
@@ -219,6 +230,8 @@ class MainContainerViewModel(
     fun stopTimer() {
         counter = -1
     }
+
+    //endregion
 
     companion object {}
 }

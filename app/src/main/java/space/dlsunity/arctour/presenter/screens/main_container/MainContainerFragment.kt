@@ -245,7 +245,7 @@ class MainContainerFragment :
 
     override fun handlerDestination(destination: MainDestination) {
         val action: NavDirections? = when (destination) {
-            is MainDestination.toWelcome -> {
+            is MainDestination.ToWelcome -> {
                 MainContainerFragmentDirections.logOut(destination.logout)
             }
             else -> null
