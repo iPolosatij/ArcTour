@@ -12,4 +12,6 @@
 /captures
 .externalNativeBuild
 .cxx
+app/src/main/java/space/dlsunity/arctour/Config.kt
+app/google-services.json
 local.properties

@@ -1,4 +1,4 @@
-package space.dlsunity.arctour.domain.usecases
+package space.dlsunity.arctour.domain.usecases.bd
 
 import space.dlsunity.arctour.data.room.repositories.BdDataRepository
 
@@ -6,6 +6,6 @@ class DeleteAllBdDataUseCase(
     private val bdDataRepository: BdDataRepository
 ) {
     suspend operator fun invoke(){
-        return bdDataRepository.deleteAllBdEntities()
+        bdDataRepository.deleteAllBdEntities()
     }
 }

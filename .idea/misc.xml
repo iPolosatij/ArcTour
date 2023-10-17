@@ -4,18 +4,84 @@
     <option name="filePathToZoomLevelMap">
       <map>
         <entry key="..\:/Users/User/AndroidStudioProjects/ArcTour/app/src/main/res/layout/activity_main.xml" value="0.1" />
+        <entry key="..\:/Users/User/AndroidStudioProjects/ArcTourProject/ArcTour/app/src/main/res/drawable/back_action_button.xml" value="0.1695" />
+        <entry key="..\:/Users/User/AndroidStudioProjects/ArcTourProject/ArcTour/app/src/main/res/drawable/black_action_button.xml" value="0.1695" />
+        <entry key="..\:/Users/User/AndroidStudioProjects/ArcTourProject/ArcTour/app/src/main/res/drawable/black_button.xml" value="0.1695" />
+        <entry key="..\:/Users/User/AndroidStudioProjects/ArcTourProject/ArcTour/app/src/main/res/drawable/black_outline.xml" value="0.1695" />
+        <entry key="..\:/Users/User/AndroidStudioProjects/ArcTourProject/ArcTour/app/src/main/res/drawable/blue_action_button.xml" value="0.1695" />
+        <entry key="..\:/Users/User/AndroidStudioProjects/ArcTourProject/ArcTour/app/src/main/res/drawable/blue_button.xml" value="0.1695" />
+        <entry key="..\:/Users/User/AndroidStudioProjects/ArcTourProject/ArcTour/app/src/main/res/drawable/blue_frame_12_all_corner_radius.xml" value="0.1695" />
+        <entry key="..\:/Users/User/AndroidStudioProjects/ArcTourProject/ArcTour/app/src/main/res/drawable/dark_gray_rectungle_shape.xml" value="0.1695" />
+        <entry key="..\:/Users/User/AndroidStudioProjects/ArcTourProject/ArcTour/app/src/main/res/drawable/gray_frame_12_all_corner_radius.xml" value="0.1695" />
+        <entry key="..\:/Users/User/AndroidStudioProjects/ArcTourProject/ArcTour/app/src/main/res/drawable/gray_rectungle_shape.xml" value="0.1695" />
+        <entry key="..\:/Users/User/AndroidStudioProjects/ArcTourProject/ArcTour/app/src/main/res/drawable/gray_rectungle_shape_white_strocke.xml" value="0.1695" />
+        <entry key="..\:/Users/User/AndroidStudioProjects/ArcTourProject/ArcTour/app/src/main/res/drawable/ic_account_stock.xml" value="0.1695" />
+        <entry key="..\:/Users/User/AndroidStudioProjects/ArcTourProject/ArcTour/app/src/main/res/drawable/ic_baseline_assignment_ind_24.xml" value="0.1695" />
+        <entry key="..\:/Users/User/AndroidStudioProjects/ArcTourProject/ArcTour/app/src/main/res/drawable/ic_bottom_note_black.xml" value="0.1695" />
+        <entry key="..\:/Users/User/AndroidStudioProjects/ArcTourProject/ArcTour/app/src/main/res/drawable/ic_bottom_note_gray.xml" value="0.1695" />
+        <entry key="..\:/Users/User/AndroidStudioProjects/ArcTourProject/ArcTour/app/src/main/res/drawable/ic_bottom_profile_black.xml" value="0.1695" />
+        <entry key="..\:/Users/User/AndroidStudioProjects/ArcTourProject/ArcTour/app/src/main/res/drawable/ic_bottom_profile_gray.xml" value="0.1695" />
+        <entry key="..\:/Users/User/AndroidStudioProjects/ArcTourProject/ArcTour/app/src/main/res/drawable/ic_bottom_tournament_black.xml" value="0.1695" />
+        <entry key="..\:/Users/User/AndroidStudioProjects/ArcTourProject/ArcTour/app/src/main/res/drawable/ic_bottom_tournament_gray.xml" value="0.1695" />
+        <entry key="..\:/Users/User/AndroidStudioProjects/ArcTourProject/ArcTour/app/src/main/res/drawable/ic_bottom_worckout_black.xml" value="0.1695" />
+        <entry key="..\:/Users/User/AndroidStudioProjects/ArcTourProject/ArcTour/app/src/main/res/drawable/ic_bottom_workout_gray.xml" value="0.1695" />
+        <entry key="..\:/Users/User/AndroidStudioProjects/ArcTourProject/ArcTour/app/src/main/res/drawable/ic_delete_bascket.xml" value="0.1695" />
+        <entry key="..\:/Users/User/AndroidStudioProjects/ArcTourProject/ArcTour/app/src/main/res/drawable/ic_gray_save_large.xml" value="0.1695" />
         <entry key="..\:/Users/User/AndroidStudioProjects/ArcTourProject/ArcTour/app/src/main/res/drawable/ic_logo_arc_tour_background.xml" value="0.124" />
         <entry key="..\:/Users/User/AndroidStudioProjects/ArcTourProject/ArcTour/app/src/main/res/drawable/ic_logo_blue.xml" value="0.124" />
+        <entry key="..\:/Users/User/AndroidStudioProjects/ArcTourProject/ArcTour/app/src/main/res/drawable/ic_menu_pressed_unpressed.xml" value="0.1695" />
+        <entry key="..\:/Users/User/AndroidStudioProjects/ArcTourProject/ArcTour/app/src/main/res/drawable/ic_round_stars_24.xml" value="0.1695" />
+        <entry key="..\:/Users/User/AndroidStudioProjects/ArcTourProject/ArcTour/app/src/main/res/drawable/ic_white_arrow_up.xml" value="0.1695" />
+        <entry key="..\:/Users/User/AndroidStudioProjects/ArcTourProject/ArcTour/app/src/main/res/drawable/ic_white_plus.xml" value="0.1695" />
+        <entry key="..\:/Users/User/AndroidStudioProjects/ArcTourProject/ArcTour/app/src/main/res/drawable/ic_white_save_large.xml" value="0.1695" />
+        <entry key="..\:/Users/User/AndroidStudioProjects/ArcTourProject/ArcTour/app/src/main/res/drawable/ic_workout.xml" value="0.1695" />
+        <entry key="..\:/Users/User/AndroidStudioProjects/ArcTourProject/ArcTour/app/src/main/res/drawable/ic_workout_select.xml" value="0.1695" />
+        <entry key="..\:/Users/User/AndroidStudioProjects/ArcTourProject/ArcTour/app/src/main/res/drawable/item_part_list.xml" value="0.1695" />
+        <entry key="..\:/Users/User/AndroidStudioProjects/ArcTourProject/ArcTour/app/src/main/res/drawable/lite_blue_button.xml" value="0.1695" />
+        <entry key="..\:/Users/User/AndroidStudioProjects/ArcTourProject/ArcTour/app/src/main/res/drawable/lite_gray_frame.xml" value="0.1695" />
+        <entry key="..\:/Users/User/AndroidStudioProjects/ArcTourProject/ArcTour/app/src/main/res/drawable/lite_red_button.xml" value="0.1695" />
+        <entry key="..\:/Users/User/AndroidStudioProjects/ArcTourProject/ArcTour/app/src/main/res/drawable/orange_action_button.xml" value="0.1695" />
+        <entry key="..\:/Users/User/AndroidStudioProjects/ArcTourProject/ArcTour/app/src/main/res/drawable/orange_button.xml" value="0.1695" />
+        <entry key="..\:/Users/User/AndroidStudioProjects/ArcTourProject/ArcTour/app/src/main/res/drawable/red_btn.xml" value="0.1695" />
+        <entry key="..\:/Users/User/AndroidStudioProjects/ArcTourProject/ArcTour/app/src/main/res/drawable/selector_profile_checked.xml" value="0.1695" />
+        <entry key="..\:/Users/User/AndroidStudioProjects/ArcTourProject/ArcTour/app/src/main/res/drawable/selector_profile_unchecked.xml" value="0.1695" />
+        <entry key="..\:/Users/User/AndroidStudioProjects/ArcTourProject/ArcTour/app/src/main/res/drawable/transparent_button.xml" value="0.1695" />
+        <entry key="..\:/Users/User/AndroidStudioProjects/ArcTourProject/ArcTour/app/src/main/res/drawable/white_action_button.xml" value="0.1695" />
+        <entry key="..\:/Users/User/AndroidStudioProjects/ArcTourProject/ArcTour/app/src/main/res/drawable/white_button.xml" value="0.1695" />
+        <entry key="..\:/Users/User/AndroidStudioProjects/ArcTourProject/ArcTour/app/src/main/res/drawable/white_frame.xml" value="0.1695" />
+        <entry key="..\:/Users/User/AndroidStudioProjects/ArcTourProject/ArcTour/app/src/main/res/drawable/white_frame_8_all_radius.xml" value="0.1695" />
+        <entry key="..\:/Users/User/AndroidStudioProjects/ArcTourProject/ArcTour/app/src/main/res/drawable/white_frame_btn.xml" value="0.1695" />
+        <entry key="..\:/Users/User/AndroidStudioProjects/ArcTourProject/ArcTour/app/src/main/res/drawable/white_message_frame.xml" value="0.1695" />
+        <entry key="..\:/Users/User/AndroidStudioProjects/ArcTourProject/ArcTour/app/src/main/res/drawable/white_solid_action_button.xml" value="0.1695" />
         <entry key="..\:/Users/User/AndroidStudioProjects/ArcTourProject/ArcTour/app/src/main/res/layout/alert_dialog_frame.xml" value="0.25416666666666665" />
         <entry key="..\:/Users/User/AndroidStudioProjects/ArcTourProject/ArcTour/app/src/main/res/layout/attachment_item.xml" value="0.11302083333333333" />
+        <entry key="..\:/Users/User/AndroidStudioProjects/ArcTourProject/ArcTour/app/src/main/res/layout/bow_class_item.xml" value="0.4" />
         <entry key="..\:/Users/User/AndroidStudioProjects/ArcTourProject/ArcTour/app/src/main/res/layout/cache_fragment.xml" value="0.11302083333333333" />
+        <entry key="..\:/Users/User/AndroidStudioProjects/ArcTourProject/ArcTour/app/src/main/res/layout/create_tournament_fragment.xml" value="0.264" />
+        <entry key="..\:/Users/User/AndroidStudioProjects/ArcTourProject/ArcTour/app/src/main/res/layout/item_chats_list.xml" value="0.20863616930312098" />
+        <entry key="..\:/Users/User/AndroidStudioProjects/ArcTourProject/ArcTour/app/src/main/res/layout/item_last_list.xml" value="0.253125" />
+        <entry key="..\:/Users/User/AndroidStudioProjects/ArcTourProject/ArcTour/app/src/main/res/layout/item_part_list.xml" value="0.4" />
+        <entry key="..\:/Users/User/AndroidStudioProjects/ArcTourProject/ArcTour/app/src/main/res/layout/item_targets_list.xml" value="0.1" />
+        <entry key="..\:/Users/User/AndroidStudioProjects/ArcTourProject/ArcTour/app/src/main/res/layout/item_tournaments_list.xml" value="0.264" />
+        <entry key="..\:/Users/User/AndroidStudioProjects/ArcTourProject/ArcTour/app/src/main/res/layout/main_container_fragment.xml" value="0.2" />
+        <entry key="..\:/Users/User/AndroidStudioProjects/ArcTourProject/ArcTour/app/src/main/res/layout/participant_target_item.xml" value="0.264" />
+        <entry key="..\:/Users/User/AndroidStudioProjects/ArcTourProject/ArcTour/app/src/main/res/layout/profile_fragment.xml" value="0.2" />
         <entry key="..\:/Users/User/AndroidStudioProjects/ArcTourProject/ArcTour/app/src/main/res/layout/progress_dialog_layout.xml" value="0.25416666666666665" />
+        <entry key="..\:/Users/User/AndroidStudioProjects/ArcTourProject/ArcTour/app/src/main/res/layout/spinner_layout.xml" value="0.264" />
+        <entry key="..\:/Users/User/AndroidStudioProjects/ArcTourProject/ArcTour/app/src/main/res/layout/spinner_shut_item.xml" value="0.264" />
         <entry key="..\:/Users/User/AndroidStudioProjects/ArcTourProject/ArcTour/app/src/main/res/layout/start_fragment.xml" value="0.11302083333333333" />
+        <entry key="..\:/Users/User/AndroidStudioProjects/ArcTourProject/ArcTour/app/src/main/res/layout/tournament_card.xml" value="0.20863616930312098" />
+        <entry key="..\:/Users/User/AndroidStudioProjects/ArcTourProject/ArcTour/app/src/main/res/layout/tournament_fragment.xml" value="0.253125" />
+        <entry key="..\:/Users/User/AndroidStudioProjects/ArcTourProject/ArcTour/app/src/main/res/layout/tournament_part_item.xml" value="0.4" />
+        <entry key="..\:/Users/User/AndroidStudioProjects/ArcTourProject/ArcTour/app/src/main/res/layout/tournaments_list.xml" value="0.253125" />
         <entry key="..\:/Users/User/AndroidStudioProjects/ArcTourProject/ArcTour/app/src/main/res/layout/updated_fragment.xml" value="0.25416666666666665" />
+        <entry key="..\:/Users/User/AndroidStudioProjects/ArcTourProject/ArcTour/app/src/main/res/layout/welcome_fragment.xml" value="0.264" />
         <entry key="..\:/Users/User/AndroidStudioProjects/ArcTourProject/ArcTour/app/src/main/res/menu/bottom_menu.xml" value="0.11302083333333333" />
+        <entry key="..\:/Users/User/AndroidStudioProjects/ArcTourProject/ArcTour/app/src/main/res/menu/menu_choose_image.xml" value="0.25416666666666665" />
         <entry key="..\:/Users/User/AndroidStudioProjects/ArcTourProject/ArcTour/app/src/main/res/mipmap-anydpi-v26/ic_logo_arc_tour.xml" value="0.124" />
         <entry key="..\:/Users/User/AndroidStudioProjects/ArcTourProject/ArcTour/app/src/main/res/mipmap-anydpi-v26/ic_logo_arc_tour_round.xml" value="0.124" />
         <entry key="..\:/Users/User/AndroidStudioProjects/ArcTourProject/ArcTour/app/src/main/res/mipmap-anydpi-v26/ic_logo_tab.xml" value="0.124" />
+        <entry key="..\:/Users/User/AppData/Local/Android/Sdk/platforms/android-31/data/res/layout/simple_spinner_item.xml" value="0.20863616930312098" />
       </map>
     </option>
   </component>

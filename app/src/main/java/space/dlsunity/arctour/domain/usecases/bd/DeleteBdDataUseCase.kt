@@ -1,12 +1,12 @@
-package space.dlsunity.arctour.domain.usecases
+package space.dlsunity.arctour.domain.usecases.bd
 
 import space.dlsunity.arctour.data.room.data.Bd_data
 import space.dlsunity.arctour.data.room.repositories.BdDataRepository
 
-class GetBdDataUseCase(
+class DeleteBdDataUseCase (
     private val bdDataRepository: BdDataRepository
 ) {
-    suspend operator fun invoke(): List<Bd_data> {
-        return bdDataRepository.getAllBdEntities()
+    suspend operator fun invoke(bdData: Bd_data){
+        return bdDataRepository.deleteBdEntity(bdData)
     }
 }

@@ -40,4 +40,18 @@
     <!-- added from old -->
     <string name="chat_message_notification_send_a_file">Sent a file</string>
 
+    <!-- main -->
+    <string name="title">Title</string>
+    <string name="notes">Notes</string>
+    <string name="workout">Workout</string>
+    <string name="tournament">Tournament</string>
+    <string name="profile">Profile</string>
+
+    <!-- SignUp Dialog -->
+    <string name="link_done">Email подключен к Google аккаунту</string>
+    <string name="link_exception">Для этого Email уже создана учетная запись через гугл аккаунт, войдите через гугл аккаунт</string>
+    <string name="sent_verification_done">На вашу почту было отправлено пистмо для подтверждения перейдите по ссылке из письма</string>
+    <string name="sent_verification_email_error">Неудалось отправить письмо подтверждения</string>
+    <string name="sign_in_error">Неудалось войти</string>
+
 </resources>

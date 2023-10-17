@@ -140,7 +140,7 @@ object ImageManager {
         }
     }
 
-    private suspend fun getBitmapsFromUris(uris : List<String?>): List<Bitmap> = withContext(
+    suspend fun getBitmapsFromUris(uris : List<String?>): List<Bitmap> = withContext(
         Dispatchers.IO){
 
         val bitmapList = ArrayList<Bitmap>()
