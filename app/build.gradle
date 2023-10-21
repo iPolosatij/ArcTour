@@ -7,12 +7,12 @@ plugins {
 }
 
 android {
-    compileSdk 31
+    compileSdk 33
 
     defaultConfig {
         applicationId "space.dlsunity.arctour"
         minSdk 26
-        targetSdk 31
+        targetSdk 33
         versionCode 1
         versionName "2.0"
 
