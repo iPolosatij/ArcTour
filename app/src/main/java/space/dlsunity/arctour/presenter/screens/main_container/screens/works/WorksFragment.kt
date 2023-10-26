@@ -21,7 +21,6 @@ class WorksFragment : BaseMvvmFragment<WorksViewModel>(R.layout.works_flagment) 
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        updateFields()
         setUpBinding()
         observeVM()
         observeContainerVM()
@@ -29,7 +28,17 @@ class WorksFragment : BaseMvvmFragment<WorksViewModel>(R.layout.works_flagment) 
 
     private fun setUpBinding() {
         binding.apply {
+            addButtonFrame.addWorkCardButton.setOnClickListener {
+                gone(addButtonFrame.root)
+                visible(cardBuilder.root)
+            }
 
+        }
+    }
+
+    private fun closeCardBuilder(){
+        binding.apply {
+            gone(cardBuilder.root)
         }
     }
 
@@ -46,16 +55,6 @@ class WorksFragment : BaseMvvmFragment<WorksViewModel>(R.layout.works_flagment) 
             showFindBtn(false)
             userDownloaded.observe(viewLifecycleOwner) {
                 it.getFirstOrNull()?.let {
-                    updateFields()
-                }
-            }
-        }
-    }
-
-    private fun updateFields() {
-        binding.apply {
-            mainContainerViewModel.user.let { user ->
-                viewModel.apply {
 
                 }
             }

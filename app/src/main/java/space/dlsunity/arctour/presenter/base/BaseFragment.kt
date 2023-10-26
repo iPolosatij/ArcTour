@@ -18,6 +18,16 @@ abstract class BaseFragment(@LayoutRes layoutId: Int) : Fragment(layoutId) {
         inputMethodManager.hideSoftInputFromWindow(view.windowToken, 0)
     }
 
+    fun gone(view: View){
+        view.visibility = View.GONE
+    }
+    fun invisible(view: View){
+        view.visibility = View.INVISIBLE
+    }
+    fun visible(view: View){
+        view.visibility = View.VISIBLE
+    }
+
     fun focus(view: View){
         view.requestFocus()
         // Show keyboard

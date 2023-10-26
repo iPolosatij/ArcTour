@@ -5,6 +5,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <include
+        android:id="@+id/free_box"
         layout="@layout/free_box"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -15,7 +16,7 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <include
-        android:id="@+id/include"
+        android:id="@+id/item_detail_card_frame"
         layout="@layout/item_detail_card_frame"
         android:layout_width="0dp"
         android:layout_height="0dp"
@@ -26,10 +27,15 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <include
+        android:id="@+id/card_builder"
+        layout="@layout/creator_frame"
+        android:visibility="gone"/>
+
+    <include
+        android:id="@+id/content_container_frame"
         layout="@layout/content_container_frame"
         android:layout_width="0dp"
         android:layout_height="0dp"
-
         android:visibility="gone"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -37,6 +43,7 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <include
+        android:id="@+id/menu_frame"
         layout="@layout/menu_frame"
         android:layout_width="0dp"
         android:layout_height="0dp"
@@ -47,6 +54,7 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <include
+        android:id="@+id/add_button_frame"
         layout="@layout/add_button_farme"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
