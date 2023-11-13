@@ -223,6 +223,14 @@ class MainContainerViewModel(
         }
     }
 
+    fun toCreate(){
+        CoroutineScope(Dispatchers.Default).launch {
+            safeProgressHandler(error = _error) {
+                _navigateCommander.emit(MainDestination.ToCreateWorkCard)
+            }
+        }
+    }
+
     private fun showLoader(need: Boolean) {
         _needLoader.postValue(Event(need))
     }

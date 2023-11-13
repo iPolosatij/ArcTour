@@ -1,4 +1,4 @@
-package space.dlsunity.arctour.presenter.screens.main_container.screens.works
+package space.dlsunity.arctour.presenter.screens.main_container.screens.works.screens
 
 import android.os.Bundle
 import android.util.Log
@@ -6,18 +6,18 @@ import android.view.View
 import by.kirich1409.viewbindingdelegate.viewBinding
 import org.koin.androidx.viewmodel.ext.android.sharedViewModel
 import space.dlsunity.arctour.R
-import space.dlsunity.arctour.databinding.WorksFlagmentBinding
+import space.dlsunity.arctour.databinding.CreateWorkCardFragmentBinding
 import space.dlsunity.arctour.presenter.base.mvvm.BaseMvvmFragment
 import space.dlsunity.arctour.presenter.screens.errors.ErrorModel
-import space.dlsunity.arctour.presenter.screens.main_container.MainContainerFragment
 import space.dlsunity.arctour.presenter.screens.main_container.MainContainerViewModel
+import space.dlsunity.arctour.presenter.screens.main_container.screens.works.viewmodels.CreateWorkCardViewModel
 import space.dlsunity.arctour.utils.extensions.collectWhenStarted
 
-class WorksFragment : BaseMvvmFragment<WorksViewModel>(R.layout.works_flagment) {
+class CreateWorkCardFragment: BaseMvvmFragment<CreateWorkCardViewModel>(R.layout.create_work_card_fragment) {
 
     private val mainContainerViewModel: MainContainerViewModel by sharedViewModel()
-    override val viewModel: WorksViewModel by sharedViewModel()
-    private val binding: WorksFlagmentBinding by viewBinding()
+    override val viewModel: CreateWorkCardViewModel by sharedViewModel()
+    private val binding: CreateWorkCardFragmentBinding by viewBinding()
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -28,14 +28,13 @@ class WorksFragment : BaseMvvmFragment<WorksViewModel>(R.layout.works_flagment) 
 
     private fun setUpBinding() {
         binding.apply {
-            addButtonFrame.addWorkCardButton.setOnClickListener {
-                mainContainerViewModel.toCreate()
-            }
+
         }
     }
 
     private fun closeCardBuilder(){
         binding.apply {
+
         }
     }
 
@@ -47,7 +46,7 @@ class WorksFragment : BaseMvvmFragment<WorksViewModel>(R.layout.works_flagment) 
 
     private fun observeContainerVM() {
         mainContainerViewModel.apply {
-            setScreenTitle(MainContainerFragment.WORKS)
+            setScreenTitle(requireContext().getString(R.string.creator))
             showAddBtn(false, "")
             showFindBtn(false)
             userDownloaded.observe(viewLifecycleOwner) {

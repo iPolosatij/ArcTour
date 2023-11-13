@@ -47,4 +47,7 @@
     <string name="lists">Lists</string>
     <string name="profile">Profile</string>
 
+    <!-- screens titles-->
+    <string name="creator">Create work card</string>
+
 </resources>

@@ -4,4 +4,5 @@ import space.dlsunity.arctour.presenter.base.navigation.Destination
 
 interface MainDestination: Destination {
     class ToWelcome(val logout: Boolean): MainDestination
+    object ToCreateWorkCard: MainDestination
 }

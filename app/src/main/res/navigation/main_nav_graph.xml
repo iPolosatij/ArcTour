@@ -56,5 +56,18 @@
             app:destination="@id/welcomeFragment"
             app:popUpTo="@id/startFragment"
             app:popUpToInclusive="true"/>
+
+        <action
+            android:id="@+id/create_work"
+            app:destination="@id/createWorkCard"
+            app:popUpTo="@id/startFragment"
+            app:popUpToInclusive="true"/>
+    </fragment>
+
+    <fragment
+        android:id="@+id/createWorkCard"
+        android:name="space.dlsunity.arctour.presenter.screens.main_container.screens.works.screens.CreateWorkCardFragment"
+        android:label="CreateWorkCard"
+        tools:layout="@layout/create_work_card_fragment">
     </fragment>
 </navigation>

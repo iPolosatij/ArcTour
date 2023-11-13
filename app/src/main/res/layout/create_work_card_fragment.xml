@@ -76,12 +76,23 @@
         <include
             android:id="@+id/create_element_frame"
             layout="@layout/create_element_frame"
-            android:visibility="visible"/>
+            android:visibility="gone" />
 
         <include
             android:id="@+id/create_list_frame"
             layout="@layout/create_list_frame"
-            android:visibility="gone"/>
+            android:visibility="gone" />
+
+        <include
+            android:id="@+id/menu_frame"
+            layout="@layout/menu_frame"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:visibility="gone"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 

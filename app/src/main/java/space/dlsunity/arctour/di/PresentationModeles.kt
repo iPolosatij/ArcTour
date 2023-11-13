@@ -10,6 +10,7 @@ import space.dlsunity.arctour.presenter.screens.main_container.screens.hr.HRView
 import space.dlsunity.arctour.presenter.screens.main_container.screens.lists.ListsViewModel
 import space.dlsunity.arctour.presenter.screens.main_container.screens.profile.ProfileViewModel
 import space.dlsunity.arctour.presenter.screens.main_container.screens.works.WorksViewModel
+import space.dlsunity.arctour.presenter.screens.main_container.screens.works.viewmodels.CreateWorkCardViewModel
 import space.dlsunity.arctour.presenter.screens.start_screens.StartViewModel
 import space.dlsunity.arctour.presenter.screens.start_screens.WelcomeViewModel
 
@@ -55,5 +56,9 @@ val presentationModule = module {
 
     viewModel {
         WorksViewModel()
+    }
+
+    viewModel {
+        CreateWorkCardViewModel()
     }
 }

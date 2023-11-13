@@ -27,11 +27,6 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <include
-        android:id="@+id/card_builder"
-        layout="@layout/creator_frame"
-        android:visibility="gone"/>
-
-    <include
         android:id="@+id/content_container_frame"
         layout="@layout/content_container_frame"
         android:layout_width="0dp"
@@ -58,7 +53,7 @@
         layout="@layout/add_button_farme"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:visibility="gone"
+        android:visibility="visible"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent" />
 
