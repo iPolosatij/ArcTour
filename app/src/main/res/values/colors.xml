@@ -17,6 +17,8 @@
     <color name="red">#FF3F3D</color>
     <color name="lite_red">#FB8B8A</color>
     <color name="green">#6ABF40</color>
+    <color name="lite_green">#9DE679</color>
+    <color name="trans_green">#3271EF33</color>
     <color name="transparent_green">#1A6ABF40</color>
     <color name="transparent">#00FFFFFF</color>
 

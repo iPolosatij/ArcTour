@@ -50,4 +50,8 @@
     <!-- screens titles-->
     <string name="creator">Create work card</string>
 
+    <!-- plugs-->
+    <string name="plug_enter_data_hint">enter you data</string>
+    <string name="plug_title">you_title</string>
+
 </resources>

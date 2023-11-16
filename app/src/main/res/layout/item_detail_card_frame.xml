@@ -51,7 +51,7 @@
             android:layout_height="wrap_content"
             android:layout_marginEnd="16dp"
             android:layout_marginBottom="16dp"
-            android:background="@drawable/gray_frame_12_all_corner_radius"
+            android:background="@drawable/background_shape_r12_gray"
             android:visibility="gone"
             app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
             app:layout_constraintBottom_toBottomOf="parent"
