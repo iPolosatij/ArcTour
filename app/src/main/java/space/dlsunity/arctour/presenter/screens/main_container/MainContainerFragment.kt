@@ -248,6 +248,9 @@ class MainContainerFragment :
             is MainDestination.ToWelcome -> {
                 MainContainerFragmentDirections.logOut(destination.logout)
             }
+            is MainDestination.ToCreateWorkCard -> {
+                MainContainerFragmentDirections.createWork()
+            }
             else -> null
         }
         action?.let { findNavController().navigateSafe(it) }
