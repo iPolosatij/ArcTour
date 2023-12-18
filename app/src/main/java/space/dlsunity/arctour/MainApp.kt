@@ -5,6 +5,7 @@ import android.content.Context
 import androidx.appcompat.app.AppCompatDelegate
 import androidx.lifecycle.LifecycleObserver
 import androidx.multidex.MultiDexApplication
+import com.parse.Parse
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.SupervisorJob
@@ -27,6 +28,14 @@ class MainApp : MultiDexApplication(), LifecycleObserver {
 
     override fun onCreate() {
         super.onCreate()
+
+        Parse.initialize(
+            Parse.Configuration.Builder(this)
+                .applicationId(getString(R.string.back4app_app_id))
+                .clientKey(getString(R.string.back4app_client_key))
+                .server(getString(R.string.back4app_server_url))
+                .build());
+
         sApplication = this
         setUpLightMode()
         setUpVectorCompat()

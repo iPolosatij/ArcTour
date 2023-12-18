@@ -180,4 +180,7 @@ dependencies {
     implementation 'androidx.activity:activity-ktx:1.4.0'
     implementation 'androidx.fragment:fragment-ktx:1.4.1'
     implementation 'com.droidninja:filepicker:2.2.5'
+
+    implementation "com.github.parse-community.Parse-SDK-Android:parse:4.2.1"
+
 }

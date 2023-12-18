@@ -1,6 +1,14 @@
 <resources>
     <string name="app_name">ArcTour</string>
 
+    <!-- Back4App  -->
+    <string name="back4app_server_url">https://parseapi.back4app.com/</string>
+
+    <!-- Paste BOTH strings as required -->
+    <string name="back4app_app_id">fIUj9XkVSZsEU4XeuwY0es1FQPQFSNdSn6ZhKbte</string>
+    <string name="back4app_client_key">EG899TNdT3relgx5wxgiXLok2gANAzuDWUD6NGpO</string>
+
+
     <!--  Auth  -->
     <string name="welcome">Welcome\nto ArcTour</string>
     <!--^-->

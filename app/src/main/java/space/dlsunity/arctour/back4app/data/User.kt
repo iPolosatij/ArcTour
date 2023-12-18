@@ -1,0 +1,31 @@
+package space.dlsunity.arctour.back4app.data
+
+data class User(
+    val id: String,
+    val type: String,
+    val nik: String,
+    val name: String,
+    val lastname: String,
+    val patronymic: String,
+    val birthday: String,
+    val gender: String,
+    val country: String,
+    val index: String,
+    val settlement: String,
+    val address: String,
+    val specialization: List<String>,
+    val skills: List<String>,
+    val baseWork: String,
+    val otherWork: List<String>,
+    val portfolio: List<String>,
+    val mail: List<String>,
+    val tel: List<String>,
+    val socialNetworking: List<String>,
+    val experienceDescription: String,
+    val experienceSince: String,
+    val education: String,
+    val studyPlace: String,
+    val baseQualification: String,
+    val awards: List<String>,
+    val business: List<String>
+)
