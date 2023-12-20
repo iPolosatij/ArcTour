@@ -4,6 +4,7 @@ import com.parse.ParseObject
 import com.parse.ParseQuery
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.cancel
 import kotlinx.coroutines.flow.MutableSharedFlow
 import kotlinx.coroutines.launch
 import space.dlsunity.arctour.back4app.data.User
@@ -154,7 +155,7 @@ class Back4AppDataSavedManager(private val callback: MutableSharedFlow<SavedStat
     private fun postSavedState(state: SavedState){
         CoroutineScope(Dispatchers.Main).launch {
             callback.emit(state)
+            this.cancel()
         }
     }
-
 }
