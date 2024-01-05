@@ -2,12 +2,16 @@ package space.dlsunity.arctour.presenter.screens.start_screens
 
 import android.os.Bundle
 import android.view.View
+import android.widget.Toast
+import androidx.core.view.isVisible
 import androidx.navigation.NavDirections
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import by.kirich1409.viewbindingdelegate.viewBinding
 import org.koin.androidx.viewmodel.ext.android.sharedViewModel
 import space.dlsunity.arctour.R
+import space.dlsunity.arctour.back4app.state.AuthorisationState
+import space.dlsunity.arctour.back4app.state.AuthorisationState.SignUpSuccess
 import space.dlsunity.arctour.databinding.WelcomeFragmentBinding
 import space.dlsunity.arctour.presenter.base.navigation.NavMvvmFragment
 import space.dlsunity.arctour.utils.extensions.collectWhenStarted
@@ -39,19 +43,71 @@ class WelcomeFragment: NavMvvmFragment<AppDestination, WelcomeViewModel>(R.layou
         action?.let { findNavController().navigateSafe(it) }
     }
 
+    private fun handlerAuthorisation(authorisationState: AuthorisationState) {
+        when(authorisationState) {
+            is SignUpSuccess -> {
+                viewModel.signIn(authorisationState.login, authorisationState.password)
+                showLoader(false)
+            }
+            is AuthorisationState.Success -> {
+                showMessage(authorisationState.sessionToken)
+                viewModel.toMain(authorisationState.sessionToken)
+                showLoader(false)
+            }
+            is AuthorisationState.AuthError -> {
+                authorisationState.message?.let { showMessage(it) }
+                showLoader(false)
+            }
+            is AuthorisationState.Processing -> showLoader(true)
+        }
+    }
+
     private fun observeVm() {
         viewModel.apply {
             navigateCommander.collectWhenStarted(viewLifecycleOwner, ::handlerDestination)
+            authorisationCallBack.collectWhenStarted(viewLifecycleOwner, ::handlerAuthorisation)
+        }
+    }
+
+    private fun showMessage(message: String){
+        Toast.makeText(requireContext(), message, Toast.LENGTH_LONG).show()
+    }
+
+    private fun showLoader(needShoe: Boolean){
+        if(needShoe){
+            binding.loginFrame.visibility = View.GONE
+            binding.loader.visibility = View.VISIBLE
+        } else {
+            binding.loginFrame.visibility = View.VISIBLE
+            binding.loader.visibility = View.GONE
         }
     }
 
     private fun setUpButtons(){
         binding.apply {
             login.setOnClickListener {
-                viewModel.toMain()
+                if (loginText.isVisible && !emailText.isVisible) {
+                    if (loginText.text.isNotEmpty() && passwordText.text.isNotEmpty())
+                        viewModel.signIn(loginText.text.toString(), passwordText.text.toString())
+                    else
+                        showMessage("Enter login or password")
+                }else{
+                    loginText.visibility = View.VISIBLE
+                    passwordText.visibility = View.VISIBLE
+                    emailText.visibility = View.GONE
+                }
             }
             registration.setOnClickListener {
-
+                if (loginText.isVisible && emailText.isVisible) {
+                    if (loginText.text.isNotEmpty() && passwordText.text.isNotEmpty() && emailText.text.isNotEmpty())
+                        viewModel.signUp(loginText.text.toString(), passwordText.text.toString(), emailText.text.toString())
+                    else
+                        showMessage("Enter login , password or email")
+                }else{
+                    loginText.visibility = View.VISIBLE
+                    passwordText.visibility = View.VISIBLE
+                    emailText.visibility = View.VISIBLE
+                }
             }
         }
     }

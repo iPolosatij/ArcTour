@@ -6,6 +6,8 @@ import space.dlsunity.arctour.presenter.ui_kit.FieldConstructorHelper.UI_KIT_SWI
 
 data class UiKitSwitchFieldDto(
     val id: String,
+    var name: String,
+    var active: Boolean,
     val itemType: String = UI_KIT_SWITCH_FIELD_DTO
 ): Item {
     override fun toJsonString(): String {

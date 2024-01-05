@@ -11,28 +11,28 @@ import space.dlsunity.arctour.back4app.state.AuthorisationState
 
 class Back4AppAuthorisationManager(private val callback: MutableSharedFlow<AuthorisationState>)  {
 
-    private fun login(username: String, password: String) {
+    fun login(username: String, password: String) {
         postAuthorisationState(AuthorisationState.Processing)
         ParseUser.logInInBackground(username,password) { parseUser: ParseUser?, e: ParseException? ->
             if (parseUser != null) {
                 postAuthorisationState(AuthorisationState.Success(parseUser.sessionToken))
             } else {
                 ParseUser.logOut()
-                postAuthorisationState(AuthorisationState.Error(e?.message))
+                postAuthorisationState(AuthorisationState.AuthError(e?.message))
             }
         }
     }
 
-    private fun logout(){
+    fun logout(){
         ParseUser.logOutInBackground { e: ParseException? ->
             if (e == null)
                 postAuthorisationState(AuthorisationState.Logout)
             else
-                postAuthorisationState(AuthorisationState.Error(e?.message))
+                postAuthorisationState(AuthorisationState.AuthError(e?.message))
         }
     }
 
-    private fun signUp(username: String, password: String, email: String) {
+    fun signUp(username: String, password: String, email: String) {
         val user = ParseUser()
         user.username = username
         user.setPassword(password)
@@ -40,10 +40,10 @@ class Back4AppAuthorisationManager(private val callback: MutableSharedFlow<Autho
         user.signUpInBackground {
             if (it == null) {
                 ParseUser.logOut();
-              postAuthorisationState(AuthorisationState.SignUpSuccess)
+              postAuthorisationState(AuthorisationState.SignUpSuccess(username, password))
             } else {
                 ParseUser.logOut();
-                postAuthorisationState(AuthorisationState.Error(it.message))
+                postAuthorisationState(AuthorisationState.AuthError(it.message))
             }
         }
     }

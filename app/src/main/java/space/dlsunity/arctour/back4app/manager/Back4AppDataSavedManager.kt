@@ -7,19 +7,20 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.cancel
 import kotlinx.coroutines.flow.MutableSharedFlow
 import kotlinx.coroutines.launch
+import space.dlsunity.arctour.back4app.data.DataClass
 import space.dlsunity.arctour.back4app.data.User
 import space.dlsunity.arctour.back4app.data.UserFields
 import space.dlsunity.arctour.back4app.state.SavedState
 
 class Back4AppDataSavedManager(private val callback: MutableSharedFlow<SavedState>) {
     fun save(
-        className: String,
-        valueMap: HashMap<String, String>
+        data: DataClass
     ) {
         postSavedState(SavedState.Processing)
-        val savedObject = ParseObject(className)
-        for (value in valueMap) {
-            savedObject.put(value.key, value.value)
+        val savedObject = ParseObject(data.type)
+        savedObject.put(UserFields.ID, data.id)
+        for (value in data.fields) {
+            savedObject.put(value.name, value.value)
         }
         savedObject.saveInBackground {
             if (it != null) {
@@ -32,16 +33,19 @@ class Back4AppDataSavedManager(private val callback: MutableSharedFlow<SavedStat
     }
 
     fun replace(
-        id: String,
-        className: String,
-        valueMap: HashMap<String, String>
+        data: DataClass
     ) {
         postSavedState(SavedState.Processing)
         CoroutineScope(Dispatchers.Main).launch {
-            val query = ParseQuery.getQuery<ParseObject>(className)
-            query.get(id).let { savedObject ->
-                for (value in valueMap) {
-                    savedObject.put(value.key, value.value)
+            val query = ParseQuery.getQuery<ParseObject>(data.type)
+            query.whereEqualTo(UserFields.ID, data.id).getFirstInBackground { savedObject, e ->
+                if (e != null) {
+                    if (e.message != null) postSavedState(SavedState.Error(e.message!!))
+                    else postSavedState(SavedState.Error(e.stackTraceToString()))
+                } else {
+                    for (value in data.fields) {
+                        savedObject.put(value.name, value.value)
+                    }
                 }
                 savedObject.saveInBackground {
                     if (it != null) {
@@ -59,6 +63,7 @@ class Back4AppDataSavedManager(private val callback: MutableSharedFlow<SavedStat
         postSavedState(SavedState.Processing)
         CoroutineScope(Dispatchers.Main).launch {
             val savedObject = ParseObject(UserFields.USER)
+            savedObject.put(UserFields.ID, user.id)
             savedObject.put(UserFields.NIK, user.nik)
             savedObject.put(UserFields.NAME, user.name)
             savedObject.put(UserFields.LAST_NAME, user.lastname)

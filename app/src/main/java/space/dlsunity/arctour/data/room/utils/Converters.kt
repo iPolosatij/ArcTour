@@ -4,6 +4,7 @@ import androidx.room.TypeConverter
 import kotlinx.serialization.decodeFromString
 import kotlinx.serialization.encodeToString
 import kotlinx.serialization.json.Json
+import space.dlsunity.arctour.back4app.data.Field
 import space.dlsunity.arctour.presenter.ui_kit.containers.UiKitObjectDto
 import space.dlsunity.arctour.presenter.ui_kit.dto.UiKitCheckBoxFieldDto
 import space.dlsunity.arctour.presenter.ui_kit.dto.UiKitEditedDateDto
@@ -25,6 +26,16 @@ class Converters {
     fun fromBitmap(value : ByteArray) = Json.encodeToString(value)
     @TypeConverter
     fun toBitmap(value: String) = Json.decodeFromString<ByteArray>(value)
+
+    @TypeConverter
+    fun fromField(value : Field) = Json.encodeToString(value)
+    @TypeConverter
+    fun toField(value: String) = Json.decodeFromString<Field>(value)
+
+    @TypeConverter
+    fun fromListField(value : List<Field>) = Json.encodeToString(value)
+    @TypeConverter
+    fun toListField(value: String) = Json.decodeFromString<List<Field>>(value)
 
     @TypeConverter
     fun fromCheckBoxFieldDto(value : UiKitCheckBoxFieldDto) = Json.encodeToString(value)

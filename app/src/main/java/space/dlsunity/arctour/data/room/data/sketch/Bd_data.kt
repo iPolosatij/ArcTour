@@ -9,5 +9,4 @@ class Bd_data(
     override fun toJsonString(): String {
         return ""
     }
-
 }

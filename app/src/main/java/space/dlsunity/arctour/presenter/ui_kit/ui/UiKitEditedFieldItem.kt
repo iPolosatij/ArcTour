@@ -6,7 +6,7 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
 import space.dlsunity.arctour.R
-import space.dlsunity.arctour.databinding.UiKitEditedFieldBinding
+import space.dlsunity.arctour.databinding.UiKitEditedFieldTextBinding
 import space.dlsunity.arctour.domain.model.Item
 import space.dlsunity.arctour.presenter.base.adapter.BaseItem
 import space.dlsunity.arctour.presenter.base.adapter.BaseViewHolder
@@ -15,7 +15,7 @@ import space.dlsunity.arctour.presenter.ui_kit.dto.UiKitEditedFieldDto
 class UiKitEditedFieldItem (private val firstAction: (UiKitEditedFieldDto) -> Unit,
                             private val secondAction: (UiKitEditedFieldDto) -> Unit,
                             private val localContext: Context
-) : BaseItem<UiKitEditedFieldBinding, UiKitEditedFieldDto>
+) : BaseItem<UiKitEditedFieldTextBinding, UiKitEditedFieldDto>
 {
 
     override fun isRelativeItem(item: Item): Boolean = item is UiKitEditedFieldDto
@@ -26,8 +26,8 @@ class UiKitEditedFieldItem (private val firstAction: (UiKitEditedFieldDto) -> Un
     override fun getViewHolder(
         layoutInflater: LayoutInflater,
         parent: ViewGroup,
-    ): BaseViewHolder<UiKitEditedFieldBinding, UiKitEditedFieldDto> {
-        val binding = UiKitEditedFieldBinding.inflate(layoutInflater, parent, false)
+    ): BaseViewHolder<UiKitEditedFieldTextBinding, UiKitEditedFieldDto> {
+        val binding = UiKitEditedFieldTextBinding.inflate(layoutInflater, parent, false)
         return ItemViewHolder(binding, firstAction, secondAction, localContext)
     }
 
@@ -42,11 +42,11 @@ class UiKitEditedFieldItem (private val firstAction: (UiKitEditedFieldDto) -> Un
     }
 
     private class ItemViewHolder(
-        binding: UiKitEditedFieldBinding,
+        binding: UiKitEditedFieldTextBinding,
         firstAction: (UiKitEditedFieldDto) -> Unit,
         secondAction: (UiKitEditedFieldDto) -> Unit,
         localContext: Context
-    ) : BaseViewHolder<UiKitEditedFieldBinding, UiKitEditedFieldDto>(binding) {
+    ) : BaseViewHolder<UiKitEditedFieldTextBinding, UiKitEditedFieldDto>(binding) {
 
         init {
             binding.root.setOnClickListener {

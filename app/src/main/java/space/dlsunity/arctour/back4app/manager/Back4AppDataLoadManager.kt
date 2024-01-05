@@ -8,6 +8,7 @@ import kotlinx.coroutines.cancel
 import kotlinx.coroutines.flow.MutableSharedFlow
 import kotlinx.coroutines.launch
 import space.dlsunity.arctour.back4app.data.DataClass
+import space.dlsunity.arctour.back4app.data.Field
 import space.dlsunity.arctour.back4app.data.QueryResponse
 import space.dlsunity.arctour.back4app.data.User
 import space.dlsunity.arctour.back4app.data.UserFields
@@ -70,14 +71,9 @@ class Back4AppDataLoadManager(
                     for (data in list){
                         val id = data.objectId
                         val type = data.className
-                        val dataArray = arrayListOf<Pair<String,String>>()
+                        val dataArray = arrayListOf<Field>()
                         for (field in queryResponse.dataSketch.fields){
-                            dataArray.add(
-                                Pair(
-                                    first = field,
-                                    second = data.getString(field)
-                                ) as Pair<String, String>
-                            )
+                                data.getString(field.name)?.let { dataArray.add(field.copy(value = it) )}
                         }
                         responseList.add(DataClass(id, type, dataArray))
                     }
