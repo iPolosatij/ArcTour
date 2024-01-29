@@ -18,7 +18,10 @@ data class User(
     var emailL: String = "",
     var telL: String = "",
     var docsL: String = "",
-    var businessL: String = ""
+    var businessL: String = "",
+    var pinCode: String = "",
+    var login: String = "",
+    var password: String = "",
 ):Serializable{
     companion object {
         const val TABLE_NAME = "user_table"

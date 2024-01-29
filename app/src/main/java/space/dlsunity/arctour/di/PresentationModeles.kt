@@ -5,6 +5,7 @@ import android.content.Intent
 import org.koin.androidx.viewmodel.dsl.viewModel
 import org.koin.dsl.module
 import space.dlsunity.arctour.data.network.StoragesFactory
+import space.dlsunity.arctour.data.room.dao.UserDao
 import space.dlsunity.arctour.presenter.screens.main_container.MainContainerViewModel
 import space.dlsunity.arctour.presenter.screens.main_container.screens.hr.HRViewModel
 import space.dlsunity.arctour.presenter.screens.main_container.screens.lists.ListsViewModel
@@ -33,7 +34,9 @@ val presentationModule = module {
     }
 
     viewModel {
-        WelcomeViewModel()
+        WelcomeViewModel(
+            userDao = get<UserDao>()
+        )
     }
 
     viewModel {

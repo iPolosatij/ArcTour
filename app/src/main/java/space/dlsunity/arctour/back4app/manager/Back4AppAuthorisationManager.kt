@@ -8,8 +8,12 @@ import kotlinx.coroutines.cancel
 import kotlinx.coroutines.flow.MutableSharedFlow
 import kotlinx.coroutines.launch
 import space.dlsunity.arctour.back4app.state.AuthorisationState
+import space.dlsunity.arctour.data.room.data.User
+import java.util.UUID
 
-class Back4AppAuthorisationManager(private val callback: MutableSharedFlow<AuthorisationState>)  {
+class Back4AppAuthorisationManager(
+    private val callback: MutableSharedFlow<AuthorisationState>
+)  {
 
     fun login(username: String, password: String) {
         postAuthorisationState(AuthorisationState.Processing)
@@ -28,7 +32,7 @@ class Back4AppAuthorisationManager(private val callback: MutableSharedFlow<Autho
             if (e == null)
                 postAuthorisationState(AuthorisationState.Logout)
             else
-                postAuthorisationState(AuthorisationState.AuthError(e?.message))
+                postAuthorisationState(AuthorisationState.AuthError(e.message))
         }
     }
 
@@ -40,7 +44,8 @@ class Back4AppAuthorisationManager(private val callback: MutableSharedFlow<Autho
         user.signUpInBackground {
             if (it == null) {
                 ParseUser.logOut();
-              postAuthorisationState(AuthorisationState.SignUpSuccess(username, password))
+                val user = User(id = UUID.randomUUID().toString(), login = username, password = password)
+                postAuthorisationState(AuthorisationState.SignUpSuccess(username, password, user))
             } else {
                 ParseUser.logOut();
                 postAuthorisationState(AuthorisationState.AuthError(it.message))

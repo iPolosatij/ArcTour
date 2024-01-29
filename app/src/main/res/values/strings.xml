@@ -10,7 +10,7 @@
 
 
     <!--  Auth  -->
-    <string name="welcome">Welcome\nto ArcTour</string>
+    <string name="welcome">Welcome\nto \nSimple SRM</string>
     <!--^-->
     <string name="login">Log In</string>
     <string name="id_title">Enter your member ID</string>

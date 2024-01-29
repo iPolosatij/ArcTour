@@ -112,4 +112,46 @@
             app:layout_constraintVertical_bias="0.0" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 
+    <LinearLayout
+        android:id="@+id/pin_frame"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/white"
+        android:visibility="gone"
+        android:orientation="vertical">
+
+        <TextView
+            android:id="@+id/pin_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="30sp"
+            android:layout_marginTop="60dp"
+            android:layout_gravity="center"
+            android:text="Установить пин код"/>
+
+        <EditText
+            android:id="@+id/pin_code"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="60dp"
+            android:inputType="number"
+            android:hint="****"
+            android:textCursorDrawable="@color/blue"
+            android:layout_gravity="center"
+            android:textSize="45sp"
+            android:maxLength="4" />
+
+        <Button
+            android:id="@+id/set_pin_btn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@drawable/blue_action_button"
+            android:text="Подтвердить"
+            android:textAllCaps="false"
+            android:textSize="30sp"
+            android:layout_gravity="center"
+            android:layout_marginTop="60dp"/>
+
+    </LinearLayout>
+
 </FrameLayout>
