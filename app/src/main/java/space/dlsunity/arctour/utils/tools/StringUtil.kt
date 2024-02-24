@@ -7,6 +7,15 @@ import java.text.DecimalFormat
 
 object StringUtil {
     private const val TAG = "STRING_UTIL"
+
+    private fun validateEmails(items: List<String>): Boolean {
+        items.forEach {
+            if (!it.contains(Regex("(^[a-zA-Z0-9.!#\$%&`*+/=?^_{|}-]+@[a-zA-Z0-9.!#\$%&`*+/=?^_{|}-]+\\.[a-zA-Z0-9.!#\$%&`*+/=?^_{|}-]+\$)"))){
+                return false
+            }
+        }
+        return true
+    }
     fun isNullOrWhiteSpace(value: String?): Boolean {
         return value == null || value.trim { it <= ' ' }.isEmpty()
     }
