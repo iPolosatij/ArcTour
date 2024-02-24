@@ -4,8 +4,13 @@ import android.content.Context
 import android.content.Intent
 import org.koin.androidx.viewmodel.dsl.viewModel
 import org.koin.dsl.module
+import space.dlsunity.arctour.MainActivity
+import space.dlsunity.arctour.MainViewModel
+import space.dlsunity.arctour.data.Storages
 import space.dlsunity.arctour.data.network.StoragesFactory
-import space.dlsunity.arctour.data.room.dao.UserDao
+import space.dlsunity.arctour.domain.usecases.users.DeleteAllUsersUseCase
+import space.dlsunity.arctour.domain.usecases.users.GetAllUserUseCase
+import space.dlsunity.arctour.domain.usecases.users.SaveUserUseCase
 import space.dlsunity.arctour.presenter.screens.main_container.MainContainerViewModel
 import space.dlsunity.arctour.presenter.screens.main_container.screens.hr.HRViewModel
 import space.dlsunity.arctour.presenter.screens.main_container.screens.lists.ListsViewModel
@@ -18,15 +23,15 @@ import space.dlsunity.arctour.presenter.screens.start_screens.WelcomeViewModel
 val presentationModule = module {
 
     factory<Intent> {
-        Intent(get<Context>(), space.dlsunity.arctour.MainActivity::class.java)
+        Intent(get<Context>(), MainActivity::class.java)
     }
 
-    single<space.dlsunity.arctour.data.Storages> {
+    single<Storages> {
         StoragesFactory().createNew(get<Context>())
     }
 
     viewModel {
-        space.dlsunity.arctour.MainViewModel()
+        MainViewModel()
     }
 
     viewModel {
@@ -35,7 +40,8 @@ val presentationModule = module {
 
     viewModel {
         WelcomeViewModel(
-            userDao = get<UserDao>()
+            saveUserUseCase = get<SaveUserUseCase>(),
+            getAllUserUseCase = get<GetAllUserUseCase>(),
         )
     }
 
@@ -46,7 +52,9 @@ val presentationModule = module {
     }
 
     viewModel {
-        ProfileViewModel()
+        ProfileViewModel(
+            deleteUsersUseCase = get<DeleteAllUsersUseCase>()
+        )
     }
 
     viewModel {

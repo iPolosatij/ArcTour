@@ -1,6 +1,6 @@
 package space.dlsunity.arctour.back4app.state
 
-import space.dlsunity.arctour.data.room.data.User
+import space.dlsunity.arctour.back4app.data.User
 
 sealed class AuthorisationState{
     object Processing: AuthorisationState()

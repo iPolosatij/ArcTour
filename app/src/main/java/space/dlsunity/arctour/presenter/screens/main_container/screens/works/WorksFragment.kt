@@ -50,7 +50,7 @@ class WorksFragment : BaseMvvmFragment<WorksViewModel>(R.layout.works_flagment) 
             setScreenTitle(MainContainerFragment.WORKS)
             showAddBtn(false, "")
             showFindBtn(false)
-            userDownloaded.observe(viewLifecycleOwner) {
+            userEntityDownloaded.observe(viewLifecycleOwner) {
                 it.getFirstOrNull()?.let {
 
                 }

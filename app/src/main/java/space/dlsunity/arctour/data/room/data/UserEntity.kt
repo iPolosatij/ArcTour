@@ -1,8 +1,15 @@
-package space.dlsunity.arctour.back4app.data
+package space.dlsunity.arctour.data.room.data
 
-import space.dlsunity.arctour.data.room.data.UserEntity
+import androidx.room.Entity
+import androidx.room.TypeConverters
+import space.dlsunity.arctour.back4app.data.User
+import space.dlsunity.arctour.data.room.data.UserEntity.Companion.TABLE_NAME
+import space.dlsunity.arctour.data.room.utils.Converters
+import java.io.Serializable
 
-data class User(
+@Entity(tableName = TABLE_NAME, primaryKeys = ["id"])
+@TypeConverters(Converters::class)
+data class UserEntity(
     var id: String = "",
     var type: String = "",
     var pinCode: String = "",
@@ -35,9 +42,10 @@ data class User(
     var baseQualification: String = "",
     var awards: List<String> = listOf(),
     var business: List<String> = listOf()
-){
-    fun toEntity(): UserEntity{
-        return UserEntity(
+):Serializable{
+
+    fun toUser():User{
+        return User(
             id,
             type,
             pinCode,
@@ -71,6 +79,8 @@ data class User(
             awards,
             business
         )
-
+    }
+    companion object {
+        const val TABLE_NAME = "user_table"
     }
 }

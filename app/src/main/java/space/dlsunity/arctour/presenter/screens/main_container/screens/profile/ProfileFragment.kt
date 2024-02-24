@@ -6,6 +6,7 @@ import android.view.View
 import by.kirich1409.viewbindingdelegate.viewBinding
 import org.koin.androidx.viewmodel.ext.android.sharedViewModel
 import space.dlsunity.arctour.R
+import space.dlsunity.arctour.back4app.state.AuthorisationState
 import space.dlsunity.arctour.databinding.ProfileFragmentBinding
 import space.dlsunity.arctour.presenter.base.mvvm.BaseMvvmFragment
 import space.dlsunity.arctour.presenter.screens.errors.ErrorModel
@@ -67,11 +68,22 @@ class ProfileFragment : BaseMvvmFragment<ProfileViewModel>(R.layout.profile_frag
             error.collectWhenStarted(viewLifecycleOwner, ::handlerError)
             needSaveUser.observe(viewLifecycleOwner) {
                 it.getFirstOrNull()?.let {
-                    mainContainerViewModel.user?.let { it1 -> saveUser(it1) }
+                    mainContainerViewModel.userEntity?.let { it1 -> saveUser(it1) }
                     updateFields()
                 }
             }
+            authorisationCallBack.collectWhenStarted(viewLifecycleOwner, ::authorizationAction)
         }
+    }
+
+    private fun authorizationAction(state: AuthorisationState){
+        if (state == AuthorisationState.Logout){
+            viewModel
+        }
+    }
+
+    private fun logOut(){
+        viewModel
     }
 
     private fun observeContainerVM() {
@@ -79,7 +91,7 @@ class ProfileFragment : BaseMvvmFragment<ProfileViewModel>(R.layout.profile_frag
             setScreenTitle(MainContainerFragment.PROFILE)
             showAddBtn(false, "")
             showFindBtn(false)
-            userDownloaded.observe(viewLifecycleOwner) {
+            userEntityDownloaded.observe(viewLifecycleOwner) {
                 it.getFirstOrNull()?.let {
                     updateFields()
                 }
@@ -105,15 +117,15 @@ class ProfileFragment : BaseMvvmFragment<ProfileViewModel>(R.layout.profile_frag
 
     private fun updateFields() {
         binding.apply {
-            mainContainerViewModel.user.let { user ->
+            mainContainerViewModel.userEntity.let { user ->
                 viewModel.apply {
                     user?.name?.let {
                         nameValue.text = it
                     }
-                    user?.telL?.let {
+                    user?.telR?.let {
                         phoneValue.text = it
                     }
-                    user?.emailL?.let {
+                    user?.mailR?.let {
                         emailValue.text = it
                     }
                 }

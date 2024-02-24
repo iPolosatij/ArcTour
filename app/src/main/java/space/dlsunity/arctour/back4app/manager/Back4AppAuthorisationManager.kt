@@ -7,8 +7,8 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.cancel
 import kotlinx.coroutines.flow.MutableSharedFlow
 import kotlinx.coroutines.launch
+import space.dlsunity.arctour.back4app.data.User
 import space.dlsunity.arctour.back4app.state.AuthorisationState
-import space.dlsunity.arctour.data.room.data.User
 import java.util.UUID
 
 class Back4AppAuthorisationManager(

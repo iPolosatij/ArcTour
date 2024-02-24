@@ -21,7 +21,7 @@ import kotlinx.coroutines.flow.filterNotNull
 import kotlinx.coroutines.launch
 import space.dlsunity.arctour.MainActivity
 import space.dlsunity.arctour.R
-import space.dlsunity.arctour.data.room.data.User
+import space.dlsunity.arctour.data.room.data.UserEntity
 import space.dlsunity.arctour.presenter.base.mvvm.BaseViewModel
 import space.dlsunity.arctour.presenter.screens.errors.ErrorModel
 import space.dlsunity.arctour.presenter.screens.main_container.destinations.MainDestination
@@ -64,9 +64,9 @@ class MainContainerViewModel(
     val needLoader: LiveData<Event<Boolean>>
         get() = _needLoader
 
-    private val _userWasSaved: MutableLiveData<Event<User>> = MutableLiveData<Event<User>>()
-    val userWasSaved: LiveData<Event<User>>
-        get() = _userWasSaved
+    private val _userEntityWasSaved: MutableLiveData<Event<UserEntity>> = MutableLiveData<Event<UserEntity>>()
+    val userEntityWasSaved: LiveData<Event<UserEntity>>
+        get() = _userEntityWasSaved
 
     private val _title: MutableLiveData<Event<String>> = MutableLiveData<Event<String>>()
     val title: LiveData<Event<String>>
@@ -76,9 +76,9 @@ class MainContainerViewModel(
     val showAlert: LiveData<Event<String>>
         get() = _showAlert
 
-    private val _userDownloaded: MutableLiveData<Event<User>> = MutableLiveData<Event<User>>()
-    val userDownloaded: LiveData<Event<User>>
-        get() = _userDownloaded
+    private val _userEntityDownloaded: MutableLiveData<Event<UserEntity>> = MutableLiveData<Event<UserEntity>>()
+    val userEntityDownloaded: LiveData<Event<UserEntity>>
+        get() = _userEntityDownloaded
 
     private val _needUpdateProfilePhoto: MutableLiveData<Event<Boolean>> = MutableLiveData<Event<Boolean>>()
     val needUpdateProfilePhoto: LiveData<Event<Boolean>>
@@ -97,7 +97,7 @@ class MainContainerViewModel(
     //region VARIABLES
     var changedAvatar = false
 
-    var user: User? = null
+    var userEntity: UserEntity? = null
 
     private val _error: MutableSharedFlow<ErrorModel> = MutableSharedFlow()
     val error: Flow<ErrorModel> = _error.filterNotNull()
@@ -154,8 +154,8 @@ class MainContainerViewModel(
     fun saveUser() {
         CoroutineScope(Dispatchers.IO).launch {
             safeProgressHandler(error = _error) {
-                user?.let {
-                    _userWasSaved.postValue(Event(it))
+                userEntity?.let {
+                    _userEntityWasSaved.postValue(Event(it))
                 }
             }
         }

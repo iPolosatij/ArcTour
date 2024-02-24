@@ -7,14 +7,16 @@ import kotlinx.coroutines.flow.MutableSharedFlow
 import kotlinx.coroutines.flow.SharedFlow
 import kotlinx.coroutines.flow.asSharedFlow
 import kotlinx.coroutines.launch
+import space.dlsunity.arctour.back4app.data.User
 import space.dlsunity.arctour.back4app.manager.Back4AppAuthorisationManager
 import space.dlsunity.arctour.back4app.state.AuthorisationState
-import space.dlsunity.arctour.data.room.dao.UserDao
-import space.dlsunity.arctour.data.room.data.User
+import space.dlsunity.arctour.domain.usecases.users.GetAllUserUseCase
+import space.dlsunity.arctour.domain.usecases.users.SaveUserUseCase
 import space.dlsunity.arctour.presenter.base.mvvm.BaseViewModel
 
 class WelcomeViewModel (
-    private val  userDao: UserDao
+    private val saveUserUseCase: SaveUserUseCase,
+    private val getAllUserUseCase: GetAllUserUseCase,
 ): BaseViewModel() {
 
     var user: User? = null
@@ -35,13 +37,13 @@ class WelcomeViewModel (
     }
 
     fun saveUser(user: User){
-        CoroutineScope(Dispatchers.Default).launch { userDao.insertAll(user) }
+        CoroutineScope(Dispatchers.Default).launch { saveUserUseCase.invoke(user) }
     }
 
     fun setPin(pin : String){
         user?.let {
             CoroutineScope(Dispatchers.Default).launch {
-                userDao.insertAll(it.copy(pinCode = pin))
+                saveUserUseCase.invoke(it.copy(pinCode = pin))
                 _authorisationCallBack.emit(AuthorisationState.SuccessPinCode)
             }
         }
@@ -58,12 +60,12 @@ class WelcomeViewModel (
 
     fun getUser(){
         CoroutineScope(Dispatchers.Default).launch {
-            userDao.getAll().let {
+            getAllUserUseCase.invoke().let {
                 for(i in it){
                     user = i
                 }
-                user?.let {
-                    if(it.pinCode.isNotEmpty()){
+                user?.let {user->
+                    if(user.pinCode.isNotEmpty()){
                         CoroutineScope(Dispatchers.Main).launch {
                             _authorisationCallBack.emit(AuthorisationState.ShowPinCode)
                         }

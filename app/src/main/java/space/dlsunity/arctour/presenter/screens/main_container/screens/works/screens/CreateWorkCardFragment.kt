@@ -49,7 +49,7 @@ class CreateWorkCardFragment: BaseMvvmFragment<CreateWorkCardViewModel>(R.layout
             setScreenTitle(requireContext().getString(R.string.creator))
             showAddBtn(false, "")
             showFindBtn(false)
-            userDownloaded.observe(viewLifecycleOwner) {
+            userEntityDownloaded.observe(viewLifecycleOwner) {
                 it.getFirstOrNull()?.let {
 
                 }

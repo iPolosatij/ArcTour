@@ -44,7 +44,7 @@ class HRFragment : BaseMvvmFragment<HRViewModel>(R.layout.hr_fragment) {
             setScreenTitle(MainContainerFragment.HUMAN_RESOURCE)
             showAddBtn(false, "")
             showFindBtn(false)
-            userDownloaded.observe(viewLifecycleOwner) {
+            userEntityDownloaded.observe(viewLifecycleOwner) {
                 it.getFirstOrNull()?.let {
                     updateFields()
                 }
@@ -54,7 +54,7 @@ class HRFragment : BaseMvvmFragment<HRViewModel>(R.layout.hr_fragment) {
 
     private fun updateFields() {
         binding.apply {
-            mainContainerViewModel.user.let { user ->
+            mainContainerViewModel.userEntity.let { user ->
                 viewModel.apply {
 
                 }

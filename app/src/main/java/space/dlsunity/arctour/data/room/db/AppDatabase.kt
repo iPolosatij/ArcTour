@@ -4,8 +4,21 @@ import android.content.Context
 import androidx.room.Database
 import androidx.room.Room
 import androidx.room.RoomDatabase
-import space.dlsunity.arctour.data.room.dao.*
-import space.dlsunity.arctour.data.room.data.*
+import space.dlsunity.arctour.data.room.dao.BdDao
+import space.dlsunity.arctour.data.room.dao.BusinessDao
+import space.dlsunity.arctour.data.room.dao.ConstructorDao
+import space.dlsunity.arctour.data.room.dao.ConstructorTypeDao
+import space.dlsunity.arctour.data.room.dao.DocDao
+import space.dlsunity.arctour.data.room.dao.SectionDao
+import space.dlsunity.arctour.data.room.dao.StatusDao
+import space.dlsunity.arctour.data.room.dao.UserDao
+import space.dlsunity.arctour.data.room.data.Business
+import space.dlsunity.arctour.data.room.data.Constructor
+import space.dlsunity.arctour.data.room.data.ConstructorType
+import space.dlsunity.arctour.data.room.data.Doc
+import space.dlsunity.arctour.data.room.data.Section
+import space.dlsunity.arctour.data.room.data.Status
+import space.dlsunity.arctour.data.room.data.UserEntity
 import space.dlsunity.arctour.data.room.data.sketch.BdEntity
 import space.dlsunity.arctour.data.room.db.AppDatabase.Companion.DATABASE_VERSION
 
@@ -15,7 +28,7 @@ import space.dlsunity.arctour.data.room.db.AppDatabase.Companion.DATABASE_VERSIO
         Business::class,
         Constructor::class,
         Doc::class, Status::class,
-        User::class,
+        UserEntity::class,
         ConstructorType::class,
         Section::class
     ],
