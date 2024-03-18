@@ -73,6 +73,10 @@ class WelcomeFragment :
             is AuthorisationState.ShowPinCode -> {
                     showEnterPin()
             }
+
+            is AuthorisationState.Logout -> {
+
+            }
         }
     }
 
