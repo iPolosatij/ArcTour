@@ -15,11 +15,14 @@ class Back4AppAuthorisationManager(
     private val callback: MutableSharedFlow<AuthorisationState>
 )  {
 
-    fun login(username: String, password: String) {
+    fun login(username: String, password: String, needSetPin: Boolean) {
         postAuthorisationState(AuthorisationState.Processing)
         ParseUser.logInInBackground(username,password) { parseUser: ParseUser?, e: ParseException? ->
             if (parseUser != null) {
-                postAuthorisationState(AuthorisationState.Success(parseUser.sessionToken))
+                postAuthorisationState(AuthorisationState.Success(
+                    parseUser.sessionToken,
+                    needSetPin,
+                    if (needSetPin) User(id = UUID.randomUUID().toString(), login = username, password = password) else null))
             } else {
                 ParseUser.logOut()
                 postAuthorisationState(AuthorisationState.AuthError(e?.message))

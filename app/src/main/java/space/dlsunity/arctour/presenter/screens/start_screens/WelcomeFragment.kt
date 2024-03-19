@@ -49,13 +49,19 @@ class WelcomeFragment :
         when (authorisationState) {
             is SignUpSuccess -> {
                 viewModel.user = authorisationState.user
-                showSetPin()
+                showSetPin(null)
             }
 
             is AuthorisationState.Success -> {
-                showMessage(authorisationState.sessionToken)
-                viewModel.toMain(authorisationState.sessionToken)
-                showLoader(false)
+                authorisationState.user?.let { viewModel.user = it }
+                if (authorisationState.needSetPin) {
+                    showSetPin(authorisationState.sessionToken)
+                    showLoader(false)
+                }else{
+                    showMessage(authorisationState.sessionToken)
+                    viewModel.toMain(authorisationState.sessionToken)
+                    showLoader(false)
+                }
             }
 
             is AuthorisationState.AuthError -> {
@@ -65,13 +71,19 @@ class WelcomeFragment :
 
             is AuthorisationState.Processing -> showLoader(true)
             is AuthorisationState.SuccessPinCode -> {
-                viewModel.user?.let {
-                    viewModel.signIn(it.login, it.password)
+                if (authorisationState.sessionToken != null && !authorisationState.needSetPin){
+                    showMessage(authorisationState.sessionToken)
+                    viewModel.toMain(authorisationState.sessionToken)
                     showLoader(false)
+                }else {
+                    viewModel.user?.let {
+                        viewModel.signIn(it.login, it.password, false)
+                        showLoader(false)
+                    }
                 }
             }
             is AuthorisationState.ShowPinCode -> {
-                    showEnterPin()
+                    showEnterPin(false)
             }
 
             is AuthorisationState.Logout -> {
@@ -101,7 +113,7 @@ class WelcomeFragment :
         }
     }
 
-    private fun showSetPin() {
+    private fun showSetPin(sessionToken: String?) {
         binding.apply {
             pinFrame.visibility = View.VISIBLE
             setPinBtn.setOnClickListener {
@@ -109,13 +121,13 @@ class WelcomeFragment :
                 if (pin.length < 4){
                     Toast.makeText(requireContext(), "Введите ПИН код", Toast.LENGTH_LONG).show()
                 }else{
-                    viewModel.setPin(pin)
+                    viewModel.setPin(pin, sessionToken)
                 }
             }
         }
     }
 
-    private fun showEnterPin() {
+    private fun showEnterPin(needSetPin: Boolean) {
         binding.apply {
             pinFrame.visibility = View.VISIBLE
             pinTitle.text = "Введите ПИН"
@@ -124,7 +136,7 @@ class WelcomeFragment :
                 if (pin.length < 4){
                     Toast.makeText(requireContext(), "Введите ПИН код", Toast.LENGTH_LONG).show()
                 }else{
-                    viewModel.enterPin(pin)
+                    viewModel.enterPin(pin, needSetPin)
                 }
             }
         }
@@ -135,7 +147,7 @@ class WelcomeFragment :
             login.setOnClickListener {
                 if (loginText.isVisible && !emailText.isVisible) {
                     if (loginText.text.isNotEmpty() && passwordText.text.isNotEmpty())
-                        viewModel.signIn(loginText.text.toString(), passwordText.text.toString())
+                        viewModel.signIn(loginText.text.toString(), passwordText.text.toString(), true)
                     else
                         showMessage("Enter login or password")
                 } else {

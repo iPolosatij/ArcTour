@@ -29,8 +29,8 @@ class WelcomeViewModel (
 
     private val authorisationManager = Back4AppAuthorisationManager(_authorisationCallBack)
 
-    fun signIn(login: String, password:String) {
-        authorisationManager.login(login, password)
+    fun signIn(login: String, password:String, needSetPin: Boolean) {
+        authorisationManager.login(login, password, needSetPin)
     }
     fun signUp(login: String, password:String, email: String) {
         authorisationManager.signUp(login, password, email)
@@ -40,20 +40,20 @@ class WelcomeViewModel (
         CoroutineScope(Dispatchers.Default).launch { saveUserUseCase.invoke(user) }
     }
 
-    fun setPin(pin : String){
+    fun setPin(pin: String, sessionToken: String?){
         user?.let {
             CoroutineScope(Dispatchers.Default).launch {
                 saveUserUseCase.invoke(it.copy(pinCode = pin))
-                _authorisationCallBack.emit(AuthorisationState.SuccessPinCode)
+                _authorisationCallBack.emit(AuthorisationState.SuccessPinCode(sessionToken, false))
             }
         }
     }
 
-    fun enterPin(pin: String){
+    fun enterPin(pin: String, needSetPin: Boolean){
         user?.let {
             CoroutineScope(Dispatchers.Main).launch {
                 if (pin == it.pinCode)
-                    _authorisationCallBack.emit(AuthorisationState.SuccessPinCode)
+                    _authorisationCallBack.emit(AuthorisationState.SuccessPinCode(null, needSetPin ))
             }
         }
     }

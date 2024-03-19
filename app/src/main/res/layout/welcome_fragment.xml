@@ -54,30 +54,30 @@
             app:layout_constraintTop_toBottomOf="@+id/welcome_text" />
 
         <EditText
-            android:id="@+id/email_text"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="24dp"
-            android:ems="10"
-            android:inputType="text"
-            android:hint="Email"
-            android:visibility="gone"
-            app:layout_constraintEnd_toEndOf="@+id/password_text"
-            app:layout_constraintStart_toStartOf="@+id/password_text"
-            app:layout_constraintTop_toBottomOf="@+id/password_text" />
-
-        <EditText
             android:id="@+id/password_text"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="24dp"
             android:ems="10"
-            android:inputType="text"
+            android:inputType="textPassword"
             android:hint="Password"
             android:visibility="gone"
             app:layout_constraintEnd_toEndOf="@+id/login_text"
             app:layout_constraintStart_toStartOf="@+id/login_text"
             app:layout_constraintTop_toBottomOf="@+id/login_text" />
+
+        <EditText
+            android:id="@+id/email_text"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="24dp"
+            android:ems="10"
+            android:inputType="textEmailAddress|textMultiLine"
+            android:hint="Email"
+            android:visibility="gone"
+            app:layout_constraintEnd_toEndOf="@+id/password_text"
+            app:layout_constraintStart_toStartOf="@+id/password_text"
+            app:layout_constraintTop_toBottomOf="@+id/password_text" />
 
         <Button
             android:id="@+id/login"
