@@ -1,6 +1,8 @@
 package space.dlsunity.arctour.presenter.screens.start_screens
 
 import androidx.lifecycle.viewModelScope
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.MutableSharedFlow
@@ -19,8 +21,23 @@ class StartViewModel(): BaseViewModel() {
     private val _error: MutableSharedFlow<ErrorModel> = MutableSharedFlow()
     val error: Flow<ErrorModel> = _error.filterNotNull()
 
+    private val _changer: MutableSharedFlow<Int> = MutableSharedFlow()
+    val changer: Flow<Int> = _changer.filterNotNull()
+
+    var active = true
+
     init {
         navigateToWelcome()
+    }
+
+    fun startChange(){
+        CoroutineScope(Dispatchers.Default).launch {
+        while (active)
+            for(i in 1..4){
+                delay(200)
+                _changer.emit(i)
+            }
+        }
     }
 
     private fun navigateToWelcome() {

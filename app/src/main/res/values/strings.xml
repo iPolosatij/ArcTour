@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">ArcTour</string>
+    <string name="app_name">Simple CRM</string>
 
     <!-- Back4App  -->
     <string name="back4app_server_url">https://parseapi.back4app.com/</string>

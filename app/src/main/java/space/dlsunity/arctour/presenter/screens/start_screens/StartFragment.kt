@@ -1,5 +1,6 @@
 package space.dlsunity.arctour.presenter.screens.start_screens
 
+import android.annotation.SuppressLint
 import android.os.Bundle
 import android.view.View
 import androidx.navigation.NavDirections
@@ -29,12 +30,34 @@ class StartFragment: NavMvvmFragment<AppDestination, StartViewModel>(R.layout.st
 
     private fun observeVm() {
         viewModel.apply {
+            startChange()
+            changer.collectWhenStarted(viewLifecycleOwner, ::changeLogo)
             navigateCommander.collectWhenStarted(viewLifecycleOwner, ::handlerDestination)
             error.collectWhenStarted(viewLifecycleOwner, ::handlerError)
         }
     }
 
+    @SuppressLint("UseCompatLoadingForDrawables")
+    private fun changeLogo(change: Int){
+        when (change){
+            1 -> {
+                binding.imageView.setImageDrawable(requireContext().getDrawable(R.drawable.white_logo))
+            }
+            2 -> {
+                binding.imageView.setImageDrawable(requireContext().getDrawable(R.drawable.blue_logo))
+            }
+            3 -> {
+                binding.imageView.setImageDrawable(requireContext().getDrawable(R.drawable.green_logo))
+            }
+            4 -> {
+                binding.imageView.setImageDrawable(requireContext().getDrawable(R.drawable.red_logo))
+            }
+        }
+
+    }
+
     override fun handlerDestination(destination: AppDestination) {
+        viewModel.active = false
         val action: NavDirections? = when(destination){
             AppDestination.ToWelcome -> StartFragmentDirections.toWelcomeFrag()
             AppDestination.ToMain -> StartFragmentDirections.toMain()
