@@ -16,7 +16,7 @@ import space.dlsunity.simple_crm.presenter.base.navigation.NavMvvmFragment
 import space.dlsunity.simple_crm.presenter.screens.errors.ErrorModel
 import space.dlsunity.simple_crm.presenter.screens.main_container.destinations.MainDestination
 import space.dlsunity.simple_crm.presenter.screens.main_container.screens.hr.HRFragment
-import space.dlsunity.simple_crm.presenter.screens.main_container.screens.lists.ListsFragment
+import space.dlsunity.simple_crm.presenter.screens.main_container.screens.planing.PlaningFragment
 import space.dlsunity.simple_crm.presenter.screens.main_container.screens.profile.ProfileFragment
 import space.dlsunity.simple_crm.presenter.screens.main_container.screens.works.WorksFragment
 import space.dlsunity.simple_crm.utils.extensions.collectWhenStarted
@@ -222,7 +222,7 @@ class MainContainerFragment :
                 }
                 R.id.item3 -> {
                     childFragmentManager.beginTransaction()
-                        .replace(fragmentContainer.id, ListsFragment()).commit()
+                        .replace(fragmentContainer.id, PlaningFragment()).commit()
                 }
                 R.id.item2 -> {
                     childFragmentManager.beginTransaction()

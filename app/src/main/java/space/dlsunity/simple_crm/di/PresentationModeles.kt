@@ -13,7 +13,7 @@ import space.dlsunity.simple_crm.domain.usecases.users.GetAllUserUseCase
 import space.dlsunity.simple_crm.domain.usecases.users.SaveUserUseCase
 import space.dlsunity.simple_crm.presenter.screens.main_container.MainContainerViewModel
 import space.dlsunity.simple_crm.presenter.screens.main_container.screens.hr.HRViewModel
-import space.dlsunity.simple_crm.presenter.screens.main_container.screens.lists.ListsViewModel
+import space.dlsunity.simple_crm.presenter.screens.main_container.screens.planing.PlaningViewModel
 import space.dlsunity.simple_crm.presenter.screens.main_container.screens.profile.ProfileViewModel
 import space.dlsunity.simple_crm.presenter.screens.main_container.screens.works.WorksViewModel
 import space.dlsunity.simple_crm.presenter.screens.main_container.screens.works.viewmodels.CreateWorkCardViewModel
@@ -62,7 +62,7 @@ val presentationModule = module {
     }
 
     viewModel {
-        ListsViewModel()
+        PlaningViewModel()
     }
 
     viewModel {

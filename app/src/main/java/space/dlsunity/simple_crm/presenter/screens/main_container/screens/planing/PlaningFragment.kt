@@ -1,4 +1,4 @@
-package space.dlsunity.simple_crm.presenter.screens.main_container.screens.lists
+package space.dlsunity.simple_crm.presenter.screens.main_container.screens.planing
 
 import android.os.Bundle
 import android.util.Log
@@ -13,10 +13,10 @@ import space.dlsunity.simple_crm.presenter.screens.main_container.MainContainerF
 import space.dlsunity.simple_crm.presenter.screens.main_container.MainContainerViewModel
 import space.dlsunity.simple_crm.utils.extensions.collectWhenStarted
 
-class ListsFragment : BaseMvvmFragment<ListsViewModel>(R.layout.lists_fragment) {
+class PlaningFragment : BaseMvvmFragment<PlaningViewModel>(R.layout.planing_fragment) {
 
     private val mainContainerViewModel: MainContainerViewModel by sharedViewModel()
-    override val viewModel: ListsViewModel by sharedViewModel()
+    override val viewModel: PlaningViewModel by sharedViewModel()
     private val binding: ListsFragmentBinding by viewBinding()
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
