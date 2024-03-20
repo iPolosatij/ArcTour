@@ -10,7 +10,7 @@ android {
     compileSdk 34
 
     defaultConfig {
-        applicationId "space.dlsunity.arctour"
+        applicationId "space.dlsunity.simple_crm"
         minSdk 26
         targetSdk 34
         versionCode 1
@@ -51,7 +51,7 @@ android {
     kapt {
         useBuildCache = false
     }
-    namespace 'space.dlsunity.arctour'
+    namespace 'space.dlsunity.simple_crm'
 
 }
 

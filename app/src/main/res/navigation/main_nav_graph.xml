@@ -7,7 +7,7 @@
 
     <fragment
         android:id="@+id/startFragment"
-        android:name="space.dlsunity.arctour.presenter.screens.start_screens.StartFragment"
+        android:name="space.dlsunity.simple_crm.presenter.screens.start_screens.StartFragment"
         android:label="StartFragment"
         tools:layout="@layout/start_fragment">
 
@@ -28,7 +28,7 @@
 
     <fragment
         android:id="@+id/welcomeFragment"
-        android:name="space.dlsunity.arctour.presenter.screens.start_screens.WelcomeFragment"
+        android:name="space.dlsunity.simple_crm.presenter.screens.start_screens.WelcomeFragment"
         android:label="WelcomeFragment"
         tools:layout="@layout/welcome_fragment">
 
@@ -47,7 +47,7 @@
 
     <fragment
         android:id="@+id/mainContainerFragment"
-        android:name="space.dlsunity.arctour.presenter.screens.main_container.MainContainerFragment"
+        android:name="space.dlsunity.simple_crm.presenter.screens.main_container.MainContainerFragment"
         android:label="MainContainer"
         tools:layout="@layout/main_container_fragment">
 
@@ -66,7 +66,7 @@
 
     <fragment
         android:id="@+id/createWorkCard"
-        android:name="space.dlsunity.arctour.presenter.screens.main_container.screens.works.screens.CreateWorkCardFragment"
+        android:name="space.dlsunity.simple_crm.presenter.screens.main_container.screens.works.screens.CreateWorkCardFragment"
         android:label="CreateWorkCard"
         tools:layout="@layout/create_work_card_fragment">
     </fragment>

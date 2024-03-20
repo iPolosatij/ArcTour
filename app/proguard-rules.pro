@@ -22,7 +22,7 @@
 -keep class io.codetail.animation.arcanimator.** { *; }
 
 #app
--keep public class space.dlsunity.arctour.App
+-keep public class space.dlsunity.simple_crm.App
 
 # smack
 -keepattributes Signature
@@ -31,8 +31,8 @@
 -keep interface org.jivesoftware.smack.** { *; }
 -keep interface org.jivesoftware.smackx.** { *; }
 
--keep class space.dlsunity.arctour.api.http.HttpPublicRequestTools
--keep class space.dlsunity.arctour.util.glide.** { *; }
+-keep class space.dlsunity.simple_crm.api.http.HttpPublicRequestTools
+-keep class space.dlsunity.simple_crm.util.glide.** { *; }
 
 # webrtc
 -keep class org.webrtc.** { *; }
