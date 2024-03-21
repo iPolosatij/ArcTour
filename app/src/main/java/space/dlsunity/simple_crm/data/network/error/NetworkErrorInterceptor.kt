@@ -3,7 +3,6 @@ package space.dlsunity.simple_crm.data.network.error
 import android.util.Log
 import okhttp3.Interceptor
 import okhttp3.Response
-import org.jivesoftware.smack.XMPPException
 import space.dlsunity.simple_crm.data.network.cache.ApplicationCacheStorage
 import space.dlsunity.simple_crm.domain.model.exception.NetworkException
 import java.net.ConnectException
@@ -43,8 +42,6 @@ internal class NetworkErrorInterceptor(
             throw NetworkException.NoInternetAccess()
         } catch (ex: UnknownHostException) {
             throw NetworkException.NoInternetAccess()
-        }catch (ex: XMPPException) {
-            throw NetworkException.XMPPException(ex.toString())
         } catch (ex: TimeoutException) {
             throw NetworkException.TimeoutError()
         } catch (ex: SocketTimeoutException) {

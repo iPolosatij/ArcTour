@@ -3,6 +3,8 @@ package space.dlsunity.simple_crm.presenter.screens.main_container.screens.works
 import android.os.Bundle
 import android.util.Log
 import android.view.View
+import androidx.navigation.NavDirections
+import androidx.navigation.fragment.findNavController
 import by.kirich1409.viewbindingdelegate.viewBinding
 import org.koin.androidx.viewmodel.ext.android.sharedViewModel
 import space.dlsunity.simple_crm.R
@@ -10,8 +12,10 @@ import space.dlsunity.simple_crm.databinding.CreateWorkCardFragmentBinding
 import space.dlsunity.simple_crm.presenter.base.mvvm.BaseMvvmFragment
 import space.dlsunity.simple_crm.presenter.screens.errors.ErrorModel
 import space.dlsunity.simple_crm.presenter.screens.main_container.MainContainerViewModel
+import space.dlsunity.simple_crm.presenter.screens.main_container.screens.works.screens.destinations.CreateWorkDestination
 import space.dlsunity.simple_crm.presenter.screens.main_container.screens.works.viewmodels.CreateWorkCardViewModel
 import space.dlsunity.simple_crm.utils.extensions.collectWhenStarted
+import space.dlsunity.simple_crm.utils.navigation.navigateSafe
 
 class CreateWorkCardFragment: BaseMvvmFragment<CreateWorkCardViewModel>(R.layout.create_work_card_fragment) {
 
@@ -28,7 +32,9 @@ class CreateWorkCardFragment: BaseMvvmFragment<CreateWorkCardViewModel>(R.layout
 
     private fun setUpBinding() {
         binding.apply {
-
+            closeDetail.setOnClickListener {
+                viewModel.toMain()
+            }
         }
     }
 
@@ -41,6 +47,7 @@ class CreateWorkCardFragment: BaseMvvmFragment<CreateWorkCardViewModel>(R.layout
     private fun observeVM() {
         viewModel.apply {
             error.collectWhenStarted(viewLifecycleOwner, ::handlerError)
+            destination.collectWhenStarted(viewLifecycleOwner, ::handlerDestination)
         }
     }
 
@@ -55,6 +62,13 @@ class CreateWorkCardFragment: BaseMvvmFragment<CreateWorkCardViewModel>(R.layout
                 }
             }
         }
+    }
+
+    private fun handlerDestination(destination:CreateWorkDestination){
+        val action: NavDirections =  when(destination){
+           is CreateWorkDestination.ToMain -> CreateWorkCardFragmentDirections.toMainFromCreateWorkCard(tab = destination.tab)
+        }
+        action?.let { findNavController().navigateSafe(it) }
     }
 
     private fun handlerError(ex: ErrorModel) {

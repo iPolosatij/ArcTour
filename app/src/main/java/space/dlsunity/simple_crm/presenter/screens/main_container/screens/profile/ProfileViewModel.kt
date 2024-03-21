@@ -10,7 +10,6 @@ import kotlinx.coroutines.flow.SharedFlow
 import kotlinx.coroutines.flow.asSharedFlow
 import kotlinx.coroutines.flow.filterNotNull
 import kotlinx.coroutines.launch
-import org.jivesoftware.smackx.vcardtemp.packet.VCard
 import space.dlsunity.simple_crm.back4app.manager.Back4AppAuthorisationManager
 import space.dlsunity.simple_crm.back4app.state.AuthorisationState
 import space.dlsunity.simple_crm.data.room.data.UserEntity
@@ -22,8 +21,6 @@ import space.dlsunity.simple_crm.utils.auxiliary.Event
 class ProfileViewModel(
     private val deleteUsersUseCase: DeleteAllUsersUseCase
 ): BaseViewModel() {
-
-    var vCard: VCard? = null
 
     private val _needSaveUser: MutableLiveData<Event<Boolean>> = MutableLiveData<Event<Boolean>>()
     val needSaveUser: LiveData<Event<Boolean>>

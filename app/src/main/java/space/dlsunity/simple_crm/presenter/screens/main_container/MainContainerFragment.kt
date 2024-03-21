@@ -8,6 +8,7 @@ import androidx.activity.OnBackPressedCallback
 import androidx.core.view.get
 import androidx.navigation.NavDirections
 import androidx.navigation.fragment.findNavController
+import androidx.navigation.fragment.navArgs
 import by.kirich1409.viewbindingdelegate.viewBinding
 import org.koin.androidx.viewmodel.ext.android.sharedViewModel
 import space.dlsunity.simple_crm.R
@@ -30,6 +31,12 @@ class MainContainerFragment :
     override val viewModel: MainContainerViewModel by sharedViewModel()
 
     private val binding: MainContainerFragmentBinding by viewBinding()
+
+    private val args: MainContainerFragmentArgs by navArgs()
+
+    private val tab: Int by lazy {
+        args.tab
+    }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -65,7 +72,13 @@ class MainContainerFragment :
                 viewModel.setScreen(it.itemId)
                 true
             }
-            bottomNavMenu.selectedItemId = R.id.item4
+            when(tab){
+                1->bottomNavMenu.selectedItemId = R.id.item1
+                2->bottomNavMenu.selectedItemId = R.id.item2
+                3->bottomNavMenu.selectedItemId = R.id.item3
+                4->bottomNavMenu.selectedItemId = R.id.item4
+            }
+
         }
     }
 

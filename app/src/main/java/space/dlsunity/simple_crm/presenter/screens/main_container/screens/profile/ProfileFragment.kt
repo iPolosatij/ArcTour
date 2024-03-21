@@ -13,7 +13,6 @@ import space.dlsunity.simple_crm.presenter.screens.errors.ErrorModel
 import space.dlsunity.simple_crm.presenter.screens.main_container.MainContainerFragment
 import space.dlsunity.simple_crm.presenter.screens.main_container.MainContainerViewModel
 import space.dlsunity.simple_crm.utils.extensions.collectWhenStarted
-import space.dlsunity.simple_crm.utils.extensions.toByteArray
 
 class ProfileFragment : BaseMvvmFragment<ProfileViewModel>(R.layout.profile_fragment) {
 
@@ -106,7 +105,6 @@ class ProfileFragment : BaseMvvmFragment<ProfileViewModel>(R.layout.profile_frag
                 it.getFirstOrNull()?.let { bitmap ->
                     changedAvatar = false
                     photoMain = bitmap
-                    viewModel.vCard?.avatar = bitmap.toByteArray()
                     viewModel.needSaveUser()
                     saveUser()
                     setScreen(R.id.profile)

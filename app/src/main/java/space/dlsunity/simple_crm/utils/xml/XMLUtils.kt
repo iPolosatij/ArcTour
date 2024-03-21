@@ -1,7 +1,5 @@
 package space.dlsunity.simple_crm.utils.xml
 
-import android.util.Log
-
 object XMLUtils {
     const val ARCHIVED = "archived"
     const val MESSAGE = "message"
@@ -71,14 +69,5 @@ object XMLUtils {
             outArray.add(cr)
         }
         return String(outArray.toCharArray())
-    }
-
-    fun xmlExtract(smackMessage: org.jivesoftware.smack.packet.Message) {
-        smackMessage.toXML(null).let { xml->
-            if (xml.isNotEmpty() && xml.isNotBlank()){
-                // Log.d("XMLUtils ---> ",XMLUtils.extractElementFromXml("archived", "id", xml.toString()))
-                Log.d("XML ---> ",xml.toString())
-            }
-        }
     }
 }

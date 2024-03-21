@@ -51,6 +51,10 @@
         android:label="MainContainer"
         tools:layout="@layout/main_container_fragment">
 
+        <argument
+            android:name="tab"
+            app:argType="integer"/>
+
         <action
             android:id="@+id/log_out"
             app:destination="@id/welcomeFragment"
@@ -60,7 +64,7 @@
         <action
             android:id="@+id/create_work"
             app:destination="@id/createWorkCard"
-            app:popUpTo="@id/startFragment"
+            app:popUpTo="@id/mainContainerFragment"
             app:popUpToInclusive="true"/>
     </fragment>
 
@@ -69,5 +73,11 @@
         android:name="space.dlsunity.simple_crm.presenter.screens.main_container.screens.works.screens.CreateWorkCardFragment"
         android:label="CreateWorkCard"
         tools:layout="@layout/create_work_card_fragment">
+
+        <action
+            android:id="@+id/toMainFromCreateWorkCard"
+            app:destination="@id/mainContainerFragment"
+            app:popUpTo="@id/createWorkCard"
+            app:popUpToInclusive="true"/>
     </fragment>
 </navigation>

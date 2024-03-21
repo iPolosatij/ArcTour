@@ -39,7 +39,7 @@ class WelcomeFragment :
 
     override fun handlerDestination(destination: AppDestination) {
         val action: NavDirections? = when (destination) {
-            AppDestination.ToMain -> WelcomeFragmentDirections.toMain()
+            AppDestination.ToMain -> WelcomeFragmentDirections.toMain(tab = 4)
             else -> null
         }
         action?.let { findNavController().navigateSafe(it) }
