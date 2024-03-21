@@ -38,7 +38,8 @@ class StartViewModel(): BaseViewModel() {
                 if(delayCount > 0) delayCount -= 10
                 for (i in 1..2) {
                     delay(delayCount)
-                    _changer.emit(i)
+                    if (delayCount < 100 && i == 1) _changer.emit(i)
+                    if (delayCount > 100) _changer.emit(i)
                 }
             }
         }
