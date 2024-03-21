@@ -39,21 +39,11 @@ class StartFragment: NavMvvmFragment<AppDestination, StartViewModel>(R.layout.st
 
     @SuppressLint("UseCompatLoadingForDrawables")
     private fun changeLogo(change: Int){
-        when (change){
-            1 -> {
-                binding.imageView.setImageDrawable(requireContext().getDrawable(R.drawable.white_logo))
-            }
-            2 -> {
-                binding.imageView.setImageDrawable(requireContext().getDrawable(R.drawable.blue_logo))
-            }
-            3 -> {
-                binding.imageView.setImageDrawable(requireContext().getDrawable(R.drawable.green_logo))
-            }
-            4 -> {
-                binding.imageView.setImageDrawable(requireContext().getDrawable(R.drawable.red_logo))
-            }
+        if (change == 1) {
+            binding.imageView.setImageDrawable(requireContext().getDrawable(R.drawable.white_logo))
+        } else {
+            binding.imageView.setImageDrawable(requireContext().getDrawable(R.drawable.background_shape_trans))
         }
-
     }
 
     override fun handlerDestination(destination: AppDestination) {

@@ -30,12 +30,16 @@ class StartViewModel(): BaseViewModel() {
         navigateToWelcome()
     }
 
+    private var delayCount = 180L
+
     fun startChange(){
         CoroutineScope(Dispatchers.Default).launch {
-        while (active)
-            for(i in 1..4){
-                delay(200)
-                _changer.emit(i)
+            while (active) {
+                if(delayCount > 0) delayCount -= 10
+                for (i in 1..2) {
+                    delay(delayCount)
+                    _changer.emit(i)
+                }
             }
         }
     }

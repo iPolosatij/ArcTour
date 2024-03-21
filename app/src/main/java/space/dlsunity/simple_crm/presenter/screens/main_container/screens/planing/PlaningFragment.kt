@@ -6,7 +6,7 @@ import android.view.View
 import by.kirich1409.viewbindingdelegate.viewBinding
 import org.koin.androidx.viewmodel.ext.android.sharedViewModel
 import space.dlsunity.simple_crm.R
-import space.dlsunity.simple_crm.databinding.ListsFragmentBinding
+import space.dlsunity.simple_crm.databinding.PlaningFragmentBinding
 import space.dlsunity.simple_crm.presenter.base.mvvm.BaseMvvmFragment
 import space.dlsunity.simple_crm.presenter.screens.errors.ErrorModel
 import space.dlsunity.simple_crm.presenter.screens.main_container.MainContainerFragment
@@ -17,7 +17,7 @@ class PlaningFragment : BaseMvvmFragment<PlaningViewModel>(R.layout.planing_frag
 
     private val mainContainerViewModel: MainContainerViewModel by sharedViewModel()
     override val viewModel: PlaningViewModel by sharedViewModel()
-    private val binding: ListsFragmentBinding by viewBinding()
+    private val binding: PlaningFragmentBinding by viewBinding()
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
