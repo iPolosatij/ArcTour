@@ -10,7 +10,7 @@ data class UiKitObjectDto(
     val itemType: String = UI_KIT_OBJECT_DTO,
     val objectType: ObjectType,
     var title: String? = null,
-    val listFields: List<Item> = listOf()
+    val listFields: ArrayList<Item> = arrayListOf()
 ): Item {
     override fun toJsonString(): String {
         return Converters().fromUiKitObjectDto(this)

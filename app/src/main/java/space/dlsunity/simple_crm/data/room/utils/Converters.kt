@@ -5,6 +5,7 @@ import kotlinx.serialization.decodeFromString
 import kotlinx.serialization.encodeToString
 import kotlinx.serialization.json.Json
 import space.dlsunity.simple_crm.back4app.data.Field
+import space.dlsunity.simple_crm.presenter.screens.main_container.screens.works.screens.dto.ItemCreateWorkCardDto
 import space.dlsunity.simple_crm.presenter.ui_kit.containers.UiKitObjectDto
 import space.dlsunity.simple_crm.presenter.ui_kit.dto.UiKitCheckBoxFieldDto
 import space.dlsunity.simple_crm.presenter.ui_kit.dto.UiKitEditedDateDto
@@ -76,6 +77,11 @@ class Converters {
     fun fromUiKitObjectDto(value : UiKitObjectDto) = Json.encodeToString(value)
     @TypeConverter
     fun toUiKitObjectDto(value: String) = Json.decodeFromString<UiKitObjectDto>(value)
+
+    @TypeConverter
+    fun fromCreateWorkItem(value : ItemCreateWorkCardDto) = Json.encodeToString(value)
+    @TypeConverter
+    fun toCreateWorkItem(value: String) = Json.decodeFromString<ItemCreateWorkCardDto>(value)
 
     @TypeConverter
     fun fromObjectGroupType(value : ObjectGroupType) = Json.encodeToString(value)
